@@ -1,17 +1,17 @@
 # beach_casts.R
-# Read in and analyse Carlin's beach cast data
-# AJ Smit
-# 11 May 2018
+# Graphs for beach cast project
+# Carlin Landsberg
+# 10 June 2018
 
-# NOTES: I had to edit "project_data.csv" because there were unnecessary spaces in there.
-# Please pay attention to detail during data entry!
-# Getting the data into the right format that's conducive to analysis was not straight forward (see below);
-# to endure forward compatibility with this script, please retain the same data format when the data are
-# recorded in the field, and when data are entered (and pay attention to detail and avoid extra spaces!).
+# Load libraries ----------------------------------------------------------
 
 library(tidyverse)
 
-casts.in <- read.csv2("project_data.csv") # `read_csv2` gives unexpected results
+# Load data ---------------------------------------------------------------
+
+casts.in <- read.csv2("project_data_working_copy.csv")
+
+# Set data up correctly for analyses --------------------------------------
 
 # Parse the data into the right format
 casts <- casts.in %>%
@@ -23,7 +23,9 @@ casts <- casts.in %>%
   as_tibble() # because I like tibbles
 casts
 
-# A quick, very basic data summary
+# Summarise data ----------------------------------------------------------
+
+# basic data summary
 casts.summary <- casts %>%
   group_by(date) %>%
   summarise(n_casts = n(),
@@ -33,5 +35,47 @@ casts.summary <- casts %>%
             sd_st_length = sd(stipe_length, na.rm = TRUE),
             mean_fr_length = mean(frond_length, na.rm = TRUE),
             sd_fr_length = sd(frond_length, na.rm = TRUE))
+casts.summary
+
+# Graphical visulaisations ------------------------------------------------
+
+plot1 <- ggplot(casts.summary, aes(x = as.factor(date), y = n_casts)) +
+  geom_bar(stat = "identity")
+plot1
+# A lot of variation seen. Total number of kelp fluctuates each week
+
+mean_stipe <- ggplot(casts.summary, aes(x = as.factor(date), y = mean_st_length)) +
+  geom_bar(stat = "identity") +
+  geom_errorbar(aes(ymin = mean_st_length - sd_st_length,
+                    ymax = mean_st_length + sd_st_length, width = 0.2))
+mean_stipe
+# mean stipe lengths vary weekly, larger kelps dislodged due to strong wave action?
+# OR very small kelps dislodged due to stronger wave action? -- refer to de Bettignies 2015
+
+mean_frond <- ggplot(casts.summary, aes(x = as.factor(date), y = mean_fr_length)) +
+  geom_bar(stat = "identity") +
+  geom_errorbar(aes(ymin = mean_fr_length - sd_fr_length,
+                    ymax = mean_fr_length + sd_fr_length, width = 0.2))
+mean_frond
+# the same pattern applies to frond length. can we find ratio for stipe length:frond
+# possibly compare to Jesse's data to determine where population comes from 
+
+mean_diam <- ggplot(casts.summary, aes(x = as.factor(date), y = mean_diam)) +
+  geom_bar(stat = "identity") +
+  geom_errorbar(aes(ymin = mean_diam - sd_diam,
+                    ymax = mean_diam + sd_diam, width = 0.2))
+mean_diam
+# larger diameter of holdfast dislodged by stronger wave action
+# larger diameters usually associated with aggregates
+# therefore, assume that when aggregates (large holdfast diameters) wash up, wave action must've been strong
 
 
+# for all these plots there is an NA at the end??? is this because of the spaces?
+
+# Still to do or try out --------------------------------------------------
+
+# How to plot y/n (binary) for number of holdfasts present? 
+# How to plot number of 'children' at each date OR 
+# how many parents have children (and how many) at each date
+
+# statistics
