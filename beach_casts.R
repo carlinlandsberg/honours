@@ -172,4 +172,4 @@ kruskalmc(holdfast_diameter ~ as.factor(date), data = casts)
 kruskalmc(stipe_length ~ as.factor(date), data = casts)
 
 # frond length post-hoc
-kruskalmc(frond_length ~ as.factor(date), data = casts)
+kruskalmc(frond_length ~ as.factor(date), data = casts)  
