@@ -100,6 +100,7 @@ ggplot(casts, aes(x = stipe_length, y = frond_length)) +
   geom_point() +
   geom_smooth(method = "lm")
 
+
 # plot for parents with children
 # average number of aggregates per holdfast
 # proportion of total number per week with holdfasts and then...
