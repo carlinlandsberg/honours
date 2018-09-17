@@ -6,6 +6,8 @@
 # Load libraries ----------------------------------------------------------
 
 library(tidyverse)
+library(ggpubr)
+library(pgirmess)
 
 # Load data ---------------------------------------------------------------
 
@@ -37,7 +39,7 @@ casts.summary <- casts %>%
             sd_fr_length = sd(frond_length, na.rm = TRUE))
 casts.summary
 
-# Graphical visulaisations ------------------------------------------------
+# Graphical visualisations (1) ------------------------------------------------
 
 plot1 <- ggplot(casts.summary, aes(x = as.factor(date), y = n_casts)) +
   geom_bar(stat = "identity")
@@ -79,3 +81,96 @@ mean_diam
 # how many parents have children (and how many) at each date
 
 # statistics
+
+# Graphical visualisations (2) --------------------------------------------
+
+# holdfast presence or absence
+ggplot(casts, aes(x = holdfast)) +
+  geom_histogram(stat = "count")
+# this is just holdfast presence or absence in total.
+# so all aggregates sharing a holdfast are included
+
+# Number of aggregates per week
+ggplot(casts, aes(x = as.factor(date), y = child)) +
+  geom_bar(stat = "identity")
+# Total number of aggregates per week
+
+# stipe vs frond
+ggplot(casts, aes(x = stipe_length, y = frond_length)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+
+
+# plot for parents with children
+# average number of aggregates per holdfast
+# proportion of total number per week with holdfasts and then...
+  # what proportion of these have aggregates?
+
+# boxplots
+# check normality 
+# so either anova or kruskall-wallis
+
+# Boxplots ----------------------------------------------------------------
+
+# Holdfast diameter
+ggplot(data = casts, aes(x = as.factor(date), y = holdfast_diameter)) +
+  geom_boxplot(aes(fill = as.factor(date)))
+
+# Stipe length
+ggplot(data = casts, aes(x = as.factor(date), y = stipe_length)) +
+  geom_boxplot(aes(fill = as.factor(date)))
+  
+# Frond length
+ggplot(data = casts, aes(x = as.factor(date), y = frond_length)) +
+  geom_boxplot(aes(fill = as.factor(date)))
+
+# Check normality ---------------------------------------------------------
+
+shapiro.test(casts$holdfast_diameter)
+  # not normal
+shapiro.test(casts$stipe_length)
+  # not normal
+shapiro.test(casts$frond_length)
+  # not normal
+
+# casts %>% 
+#   group_by(date) %>% 
+#   summarise(hf_norm = as.numeric(shapiro.test(holdfast_diameter)[2]),
+#             hf_var = var(holdfast_diameter)) 
+  # Error in summarise_impl(.data, dots) : 
+  #   Evaluation error: sample size must be between 3 and 5000.
+
+# Kruskall-wallis ---------------------------------------------------------
+
+# holdfast
+hf_kw <- kruskal.test(holdfast_diameter ~ as.factor(date), data = casts)
+  # Kruskal-Wallis rank sum test
+  # 
+  # data:  holdfast_diameter by as.factor(date)
+  # Kruskal-Wallis chi-squared = 8.5487, df = 6, p-value = 0.2006
+    # p > 0.05, variance is not significant
+
+# stipe length
+st_kw <- kruskal.test(stipe_length ~ as.factor(date), data = casts)
+  # Kruskal-Wallis rank sum test
+  # 
+  # data:  stipe_length by as.factor(date)
+  # Kruskal-Wallis chi-squared = 24.437, df = 9, p-value = 0.003661
+    # p < 0.05, significant variance
+
+# frond length
+fr_kw <- kruskal.test(frond_length ~ as.factor(date), data = casts)
+  # Kruskal-Wallis rank sum test
+  # 
+  # data:  frond_length by as.factor(date)
+  # Kruskal-Wallis chi-squared = 22.355, df = 9, p-value = 0.007819
+    # p > 0.05, significant variance
+
+# holdfast diameter post-hoc
+kruskalmc(holdfast_diameter ~ as.factor(date), data = casts)
+
+# stipe length post-hoc
+kruskalmc(stipe_length ~ as.factor(date), data = casts)
+
+# frond length post-hoc
+kruskalmc(frond_length ~ as.factor(date), data = casts)  
