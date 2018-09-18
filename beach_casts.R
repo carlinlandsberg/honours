@@ -8,6 +8,7 @@
 library(tidyverse)
 library(ggpubr)
 library(pgirmess)
+library(circular)
 
 # Load data ---------------------------------------------------------------
 
@@ -404,4 +405,63 @@ old_hs <- ggplot(wave_old_summary, aes(x = as.factor(Date), y = mean_hs)) +
   labs(x = "Year", y = "Mean HS", title = "Mean HS 1979 - 2010") +
   theme_classic()
 old_hs
-  
+
+# Time series -------------------------------------------------------------
+
+daily_2018 <- wave_2018_1 %>% 
+  group_by(Time, HMO) %>% 
+  summarise(tp_circ = mean.circular(circular(TP)),
+            tcf_circ = mean.circular(circular(TCF)),
+            hs_circ = mean.circular(circular(HS))) %>% 
+  mutate(year = "2018")
+daily_2018
+
+rm <- daily_2018[, -1:-2]
+final_rm <- rm[, -4]
+
+try <- as.tibble(paste(daily_2018$year, daily_2018$Time, daily_2018$HMO, sep = "-"))
+try
+
+combined_2018 <- cbind(final_rm, try)
+combined_2018
+
+sep_2018 <- combined_2018 %>% 
+  separate(value, c("year", "month", "day"), "-")
+
+time_2018 <- combined_2018[-c(1:82),]
+
+# circular function: smaller gap between degrees (wave data is in degrees) large gap in numerical gap.
+# eg large numerical gap between 365 and 2, but the gap is small between 365 degrees and 2 degrees
+
+tp_time <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+#  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "TP (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+#  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+tp_time
+
+ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *0.5, name = "Total number of casts")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  labs(x = "Date", y = "TP (s)", title = "") +
+  theme_classic()
+
+ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *0.5, name = "Total number of casts")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  labs(x = "Date", y = "TCF (s)", title = "") +
+  theme_classic()
+
+ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *0.5, name = "Total number of casts")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  labs(x = "Date", y = "HS", title = "") +
+  theme_classic()
