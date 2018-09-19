@@ -12,7 +12,7 @@ library(circular)
 
 # Load data ---------------------------------------------------------------
 
-casts.in <- read.csv2("project_data_working_copy.csv")
+casts.in <- read.csv2("data/project_data_working_copy.csv")
 
 # Set data up correctly for analyses --------------------------------------
 
@@ -442,26 +442,143 @@ tp_time <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
   theme_classic()
 tp_time
 
-ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+tcf_time <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "TCF (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+tcf_time
+
+hs_time <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "HS", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+hs_time
+
+# total number of casts over time series
+ncasts_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
   geom_line() +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *0.5, name = "Total number of casts")) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
   labs(x = "Date", y = "TP (s)", title = "") +
   theme_classic()
+ncasts_tp
 
-ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+ncasts_tcf <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
   geom_line() +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *0.5, name = "Total number of casts")) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
   labs(x = "Date", y = "TCF (s)", title = "") +
   theme_classic()
+ncasts_tcf
 
-ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+ncasts_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
   geom_line() +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *0.5, name = "Total number of casts")) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
   labs(x = "Date", y = "HS", title = "") +
   theme_classic()
+ncasts_hs
+
+# mean diameter of holdfast over time series
+diam_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
+  
+  labs(x = "Date", y = "TP (s)", title = "") +
+  theme_classic()
+diam_tp
+
+diam_tcf <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
+  labs(x = "Date", y = "TCF (s)", title = "") +
+  theme_classic()
+diam_tcf
+
+diam_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
+  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "HS", title = "") +
+  theme_classic()
+diam_hs
+
+# mean stipe length over time series
+stipe_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), na.rm = TRUE) +
+  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "TP (s)", title = "") +
+  theme_classic()
+stipe_tp
+
+stipe_tcf <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), na.rm = TRUE) +
+  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "TCF (s)", title = "") +
+  theme_classic()
+stipe_tcf
+
+stipe_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), na.rm = TRUE) +
+  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "HS", title = "") +
+  theme_classic()
+stipe_hs
+
+# mean frond length over time series
+frond_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), na.rm = TRUE) +
+  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "TP (s)", title = "") +
+  theme_classic()
+frond_tp
+
+frond_tcf <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), na.rm = TRUE) +
+  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "TCF (s)", title = "") +
+  theme_classic()
+frond_tcf
+
+frond_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), na.rm = TRUE) +
+  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "HS", title = "") +
+  theme_classic()
+frond_hs
