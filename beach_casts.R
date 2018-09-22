@@ -270,6 +270,11 @@ plot_hs
   # note, some columns have identical values throughout. not plotted
 
 # Now filtering out only 2018 (sampling took place from March 2018-September 2018)
+
+wave_2018_1 <- wave_all %>% 
+  filter(Date == "2018") %>% 
+  group_by(Time)
+
 wave_2018 <- wave_all %>% 
   filter(Date == "2018") %>% 
   group_by(Time) %>% 
@@ -467,7 +472,7 @@ ncasts_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) 
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "TP (s)", title = "") +
+  labs(x = "Date", y = "Peak period (s)", title = "") +
   theme_classic()
 ncasts_tp
 
@@ -487,7 +492,7 @@ ncasts_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) 
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "HS", title = "") +
+  labs(x = "Date", y = "Significant wave height (m)", title = "") +
   theme_classic()
 ncasts_hs
 
@@ -497,8 +502,7 @@ diam_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
-  
-  labs(x = "Date", y = "TP (s)", title = "") +
+  labs(x = "Date", y = "Peak period (s)", title = "") +
   theme_classic()
 diam_tp
 
@@ -517,7 +521,7 @@ diam_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
   geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "HS", title = "") +
+  labs(x = "Date", y = "Significant wave height (m)", title = "") +
   theme_classic()
 diam_hs
 
@@ -528,7 +532,7 @@ stipe_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), na.rm = TRUE) +
   geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "TP (s)", title = "") +
+  labs(x = "Date", y = "Peak period (s)", title = "") +
   theme_classic()
 stipe_tp
 
@@ -548,7 +552,7 @@ stipe_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), na.rm = TRUE) +
   geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "HS", title = "") +
+  labs(x = "Date", y = "Significant wave height (m)", title = "") +
   theme_classic()
 stipe_hs
 
@@ -559,7 +563,7 @@ frond_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), na.rm = TRUE) +
   geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "TP (s)", title = "") +
+  labs(x = "Date", y = "Peak period (s)", title = "") +
   theme_classic()
 frond_tp
 
@@ -579,6 +583,7 @@ frond_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), na.rm = TRUE) +
   geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "HS", title = "") +
+  labs(x = "Date", y = "Significant wave height (m)", title = "") +
   theme_classic()
 frond_hs
+
