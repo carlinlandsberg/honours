@@ -1,0 +1,88 @@
+---
+title: "Beach casts - Honours"
+author: "Carlin Landsberg"
+date: "7/3/2018"
+output: 
+  pdf_document: 
+    latex_engine: xelatex
+monofont: PT Mono
+mainfont: Arial
+fontsize: 11pt  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+Beach-cast kelp is known to be of high importance in ecosystems such as sandy beach ecosystems where they provide a source of nutrients and refuge for organisms living in these ecosystems. This beach-cast kelp is also harvested in some areas and thus have commercial importance and as a result, monitoring of these systems with input of kelp wrack is important.
+
+The amount of wrack washing up on beaches depends on how productive areas adjacent or close to these beaches are. It can thus be assumed that beaches near areas with high production of macroalgae, such as kelps forests, will receive large amounts of wrack inputs (Barreiro et al., 2011). These masses of kelp originating from offshore kelp beds (Kirkman & Kendrick 1997) become dislodged and deposited on beaches often as a result of strong wave action. Water flow is an important factor of kelp growth (Bekkby et al., 2014), however it is a common notion that harsh hydrodynamic environments lead to wave-driven dislodgement of kelp (de Bettignies et al., 2015) where this dislodgement or breakage leads to mortality of the individual (Thomsen et al., 2004). 
+
+Due to the fluctuation of winds and currents over a range of spatial and temporal scales, it is difficult to measure and quantify wracks (Kirkman & Kendrick 1997). Wrack input on beaches are a result of complex interactions among physical factors that all play a role in the amount of wrack washed up on beaches (Barreiro et al., 2011). Thus, according to Klosinski (2015), few efforts have been made to quantify the variability in the deposition of wrack on beaches. 
+
+Beach-cast kelp distribution is patchy in nature and this, along with amount of beach-cast kelp fluctuates seasonally and is highly variable over time scales (Kirkman & Kendrick 1997). Thus, this variability in wrack input on sandy beaches may be as a result of interactions between factors such as wave exposure and seasonality (Barreiro et al., 2011).
+
+The intention of this study is to quantify the deposition of kelp on beaches over late summer and through winter, taking into account varying wave parameters at this time. Thus, the aim is to determine the number and size of kelp washing up, presence of holdfast (i.e. point of breakage of kelp and size of dislodged holdfasts) and presence of aggregates (i.e. individuals sharing a holdfast). 
+
+It is important to establish how the amount of kelp washing up varies over time, and specifically over a seasonal scale and how the morphologies of these individuals differ over the seasons (e.g. different sizes of kelp washing up in different seasons) and the fluctuating wave parameters that occur over various timescales. From these observations, we can infer how properties such as size (length), holdfast size and presence of aggregates sharing a holdfast may play a role in overcoming stressors in their environment such as wave-driven breakage and dislodgement. 
+
+Over the sampling period, we expect to see a higher number of kelp washing up on the beach, possibly due to stronger wave action in winter months dislodging more individuals. We also expect to see larger kelp washing up on the beach due to strong waves dislodging even larger individuals (However, something to consider is that smaller kelp may withstand wave stress, so could much smaller kelp indicate stringer wave action? – see de Bettignies et al. (2015)). We expect to see an increased number of holdfasts washing up inferring that individuals are completely dislodged (i.e. "uprooted") due to stronger wave action in winter months instead of breaking off above the holdfast as a result of weaker wave action during summer.
+
+In addition to this, we may also compare morphological properties of deposited kelp to known morphological properties of kelps populations along the coast to infer, along with wave and ocean current data, where the deposited kelp originates from and where along the coast it was deposited. 
+
+## Other things to think about/ might want to add:
+* What is kelp/ecklonia? – the study species observed in this study
+    + Where it occurs (i.e. where along the coast is it most prominent, where are kelp beds located)
+    + Features/characteristics (Fronds, primary blade, stipe, holdfast, aggregates)
+    + How they grow and use water flow for this growth
+* Modes of mortality of kelp (e.g. herbivory, age, etc.)
+    + In this case, we are looking specifically at wave-driven dislodgement and where breakage occurs; broken at stipe or fully dislodged with holdfast.
+*	After mortality, kelp is transported by waves
+    +	Mostly becomes kelp rafts (to open ocean) – relate to buoyancy?
+    +	Others deposited onto adjacent ecosystems (e.g. Sandy beaches)
+*	What are the specific wave parameters contributing to mortality and transport of kelp?
+    + E.g. peak period, significant wave height, etc. (See paper Christo sent)
+* Do wave these parameters play an equal role in kelp mortality? (redundancy analysis?)
+* How do they end up on beaches and this beach specifically? Or, why did we not see many on this beach? (Look at exposure at Muizenberg beach?)
+*	Ways kelp try and overcome this wave dislodgement
+    + Size (larger or smaller)
+    + Aggregates
+    + Overall, increasing drag
+* Only ecklonia observed, why are there not as many laminaria washing up? (differences in morphology and depths they grow in)
+
+
+# Method and materials
+This study was conducted at Muizenberg Beach (3406′24.2′′S 1828′29.3′′E) in an area where kelp wrack is not cleared by the City of Cape Town (CoCT) beach cleaning teams. This site has no adjacent kelps beds to the beach but the area experiences large amounts of beach-cast kelp  on a regular basis.
+
+Along the beach, a 10 m wide section was measured using a 10 m long rope held perpendicular to the edge of the low tide line. Two people, each holding one end of the rope, then proceeded to walk along the transect of ~250 m across the beach parallel to the low tide line.
+
+**insert figure 1**
+
+Along this transect, every kelp that was found within 10 m from the low tide edge was counted and various morphological charateristics were measured and recorded. These morphological characteristics included holdfast presence or absence, diameter of holdfast, stipe length, and longest frond length. Additionally, each kelp was numbered and if more than one individual was present, on the same holdfast, it was recorded with an associated number. For example, if three individuals share a holdfast, it was recorded as 1.1, 1.2, and 1.3 These clusters of individuals will hereafter be referred to as aggregates.  Stipe and frond length were measured and recorded for each kelp individual in the aggregate, provided the stipe length was at least 10cm long.
+
+Since wave climate may vary seasonally,his method was repeated weekly from 24 March, which is late summer, throughout the winter until August/ September. This allowed temporal comparison of  morphological characteristics amongst beach-cast kelp over a varying wave climate. The SWAN (simulating waves nearshore) model was chosen to simulate wave parameters for the study site. 
+
+##**Statistical analysis**
+##*Wave climate* 
+We described the measured kelp variables as a function of the various wave parameters (i.e. direction, frequency, intensity, significant height) using a redundancy analysis in order to determine which wave parameters are the biggest factors in the mode of kelp mortality and how the kelp washes up in this specific area.
+
+##*Kelp morphology*
+Additionally, we related the morphometric properties of the beach-cast kelp that we have observed to that of kelp previously collected in situ off the east side of the peninsula using a visual representation. 
+
+Furthermore, we used a 3-D hydrodynamic numerical model to simulate releasing of particles from various kelp beds along the coast to determine the probability that individuals from a population will be distributed onto the Muizenberg beach. 
+
+# References 
+
+1.	Bekkby, T., Rinde, E., Gundersen, H., Norderhaug, K., Gitmark, J. and Christie, H. (2014). Length, strength and water flow: relative importance of wave and current exposure on morphology in kelp Laminaria hyperborea. Marine Ecology Progress Series, 506, pp.61-70.
+
+2.	de Bettignies, T., Wernberg, T., Lavery, P., Vanderklift, M., Gunson, J., Symonds, G. and Collier, N. (2015). Phenological decoupling of mortality from wave forcing in kelp beds. Ecology, 96(3), pp.850-861.
+
+3.	Kirkman, H. and Kendrick, G. (1997). Ecological significance and commercial harvesting of drifting and beach-cast macro-algae and seagrasses in Australia: a review. Journal of Applied Phycology, 9, pp.311-326.
+
+4.	Klosinski, J. (2015). Deposition, Persistence, and Utilization of Kelp Wrack Along the Central California Coast. Masters. California State University, Monterey Bay.
+
+5.	Thomsen, M., Wernberg, T. and Kendrick, G. (2004). The effect of thallus size, life stage, aggregation, wave exposure and substratum conditions on the forces required to break or dislodge the small kelp Ecklonia radiata. Botanica Marina, 47(6).
+
+
+
