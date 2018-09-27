@@ -67,11 +67,6 @@ Since wave climate may vary seasonally,his method was repeated weekly from 24 Ma
 ##*Wave climate* 
 We described the measured kelp variables as a function of the various wave parameters (i.e. direction, frequency, intensity, significant height) using a redundancy analysis in order to determine which wave parameters are the biggest factors in the mode of kelp mortality and how the kelp washes up in this specific area.
 
-##*Kelp morphology*
-Additionally, we related the morphometric properties of the beach-cast kelp that we have observed to that of kelp previously collected in situ off the east side of the peninsula using a visual representation. 
-
-Furthermore, we used a 3-D hydrodynamic numerical model to simulate releasing of particles from various kelp beds along the coast to determine the probability that individuals from a population will be distributed onto the Muizenberg beach. 
-
 # References 
 
 1.	Bekkby, T., Rinde, E., Gundersen, H., Norderhaug, K., Gitmark, J. and Christie, H. (2014). Length, strength and water flow: relative importance of wave and current exposure on morphology in kelp Laminaria hyperborea. Marine Ecology Progress Series, 506, pp.61-70.
@@ -85,4 +80,9 @@ Furthermore, we used a 3-D hydrodynamic numerical model to simulate releasing of
 5.	Thomsen, M., Wernberg, T. and Kendrick, G. (2004). The effect of thallus size, life stage, aggregation, wave exposure and substratum conditions on the forces required to break or dislodge the small kelp Ecklonia radiata. Botanica Marina, 47(6).
 
 
-
+## notes from Ross
+kelp distribution
+role in subtidal system and sandy beach
+transport
+inverts
+mechanisms of breakage

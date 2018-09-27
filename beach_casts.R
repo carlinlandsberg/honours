@@ -101,7 +101,7 @@ ggplot(casts, aes(x = holdfast)) +
 
 # Number of aggregates per week
 child_plot <- ggplot(casts, aes(x = as.factor(date), y = child)) +
-  geom_bar(stat = "identity") +
+  geom_bar(stat = "identity", na.rm = TRUE) +
   labs(x = "Date", y = "Number of aggregates", title = "Number of aggregates per week") +
   theme_classic()
 child_plot
@@ -162,26 +162,26 @@ shapiro.test(casts$frond_length)
 
 # holdfast
 hf_kw <- kruskal.test(holdfast_diameter ~ as.factor(date), data = casts)
-  # Kruskal-Wallis rank sum test
-  # 
-  # data:  holdfast_diameter by as.factor(date)
-  # Kruskal-Wallis chi-squared = 8.5487, df = 6, p-value = 0.2006
-    # p > 0.05, variance is not significant
+# Kruskal-Wallis rank sum test
+# 
+# data:  holdfast_diameter by as.factor(date)
+# Kruskal-Wallis chi-squared = 46.195, df = 9, p-value = 5.54e-07
+    # p < 0.05, variance is significant
 
 # stipe length
 st_kw <- kruskal.test(stipe_length ~ as.factor(date), data = casts)
-  # Kruskal-Wallis rank sum test
-  # 
-  # data:  stipe_length by as.factor(date)
-  # Kruskal-Wallis chi-squared = 24.437, df = 9, p-value = 0.003661
+# Kruskal-Wallis rank sum test
+# 
+# data:  stipe_length by as.factor(date)
+# Kruskal-Wallis chi-squared = 39.109, df = 16, p-value = 0.001049
     # p < 0.05, significant variance
 
 # frond length
 fr_kw <- kruskal.test(frond_length ~ as.factor(date), data = casts)
-  # Kruskal-Wallis rank sum test
-  # 
-  # data:  frond_length by as.factor(date)
-  # Kruskal-Wallis chi-squared = 22.355, df = 9, p-value = 0.007819
+# Kruskal-Wallis rank sum test
+# 
+# data:  frond_length by as.factor(date)
+# Kruskal-Wallis chi-squared = 44.278, df = 16, p-value = 0.0001789
     # p > 0.05, significant variance
 
 # holdfast diameter post-hoc
@@ -502,6 +502,7 @@ diam_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
+  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
   labs(x = "Date", y = "Peak period (s)", title = "") +
   theme_classic()
 diam_tp
@@ -511,6 +512,7 @@ diam_tcf <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) 
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
+  
   labs(x = "Date", y = "TCF (s)", title = "") +
   theme_classic()
 diam_tcf
@@ -587,3 +589,216 @@ frond_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
   theme_classic()
 frond_hs
 
+ncasts_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "Peak period (s)", title = "") +
+  theme_classic()
+ncasts_tp
+
+wave_16_17_18 <- wave_all %>% 
+  filter(Date %in% c("2016", "2017", "2018")) %>% 
+  group_by(Time)
+wave_16_17_18
+
+daily_16_17_18 <- wave_16_17_18 %>% 
+  group_by(Date, Time, HMO) %>% 
+  summarise(tp_circ = mean.circular(circular(TP)),
+            tcf_circ = mean.circular(circular(TCF)),
+            hs_circ = mean.circular(circular(HS))) %>% 
+  mutate(year = "2018")
+daily_16_17_18
+
+rm_1 <- daily_16_17_18[, -1:-2]
+final_rm_1 <- rm_1[, -4]
+
+try_1 <- as.tibble(paste(daily_16_17_18$Date, daily_16_17_18$Time, daily_16_17_18$HMO, sep = "-"))
+try_1
+
+combined_16_17_18 <- cbind(final_rm_1, try_1)
+combined_16_17_18
+
+sep_16_17_18 <- combined_16_17_18 %>% 
+  separate(value, c("year", "month", "day"), "-")
+sep_16_17_18
+
+tp_16_17_18 <- ggplot(combined_16_17_18, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line(aes(group = as.Date(value))) +
+  labs(x = "Date", y = "TP (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+tp_16_17_18
+
+tcf_time <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "TCF (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+tcf_time
+
+hs_time <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "HS", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+hs_time
+wave_16 <- wave_all %>% 
+  filter(Date == "2016") %>% 
+  group_by(Time)
+wave_16
+
+# Looking at the past 2 years ---------------------------------------------
+
+daily_16 <- wave_16 %>% 
+  group_by(Date, Time, HMO) %>% 
+  summarise(tp_circ = mean.circular(circular(TP)),
+            tcf_circ = mean.circular(circular(TCF)),
+            hs_circ = mean.circular(circular(HS))) %>% 
+  mutate(year = "2016")
+daily_16
+
+rm_2 <- daily_16[, -1:-3]
+# final_rm_2 <- rm_2[, -4]
+
+try_2 <- as.tibble(paste(daily_16$Date, daily_16$Time, daily_16$HMO, sep = "-"))
+try_2
+
+combined_16 <- cbind(rm_2, try_2)
+combined_16
+
+sep_16 <- combined_16 %>% 
+  separate(value, c("year", "month", "day"), "-")
+sep_16
+
+time_16 <- combined_16[-c(1:83),]
+time_16_1 <- time_16[-c(246:366),]
+time_16_2 <- time_16_1[-c(246:328),]
+
+wave_17 <- wave_all %>% 
+  filter(Date == "2017") %>% 
+  group_by(Time)
+wave_17
+
+daily_17 <- wave_17 %>% 
+  group_by(Date, Time, HMO) %>% 
+  summarise(tp_circ = mean.circular(circular(TP)),
+            tcf_circ = mean.circular(circular(TCF)),
+            hs_circ = mean.circular(circular(HS))) %>% 
+  mutate(year = "2017")
+daily_17
+
+rm_3 <- daily_17[, -1:-3]
+# final_rm_3 <- rm_3[, -4]
+
+try_3 <- as.tibble(paste(daily_17$Date, daily_17$Time, daily_17$HMO, sep = "-"))
+try_3
+
+combined_17 <- cbind(rm_3, try_3)
+combined_17
+
+sep_17 <- combined_17 %>% 
+  separate(value, c("year", "month", "day"), "-")
+sep_17
+
+time_17 <- combined_17[-c(1:82),]
+time_17_1 <- time_17[-c(245:365),]
+
+daily_18 <- wave_2018_1 %>% 
+  group_by(Time, HMO) %>% 
+  summarise(tp_circ = mean.circular(circular(TP)),
+            tcf_circ = mean.circular(circular(TCF)),
+            hs_circ = mean.circular(circular(HS))) %>% 
+  mutate(year = "2018")
+daily_18
+
+rm_4 <- daily_18[, -1:-2]
+# final_rm <- rm[, -4]
+
+try_4 <- as.tibble(paste(daily_18$year, daily_18$Time, daily_18$HMO, sep = "-"))
+try_4
+
+combined_18 <- cbind(rm_4, try_4)
+combined_18
+
+time_18 <- combined_18[-c(1:82),]
+
+merge_try <- rbind(combined_16, combined_17, combined_18)
+
+tp_16_17 <- ggplot(merge_try, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line(aes(colour = year)) +
+  labs(x = "Date", y = "TP (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+tp_16_17
+
+hs_2016 <- ggplot(time_16_1, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "HS (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+hs_2016
+
+hs_2017 <- ggplot(time_17_1, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "HS (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+hs_2017
+
+hs_2018 <- ggplot(time_18, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "HS (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+hs_2018
+
+ggarrange(hs_2016, hs_2017, hs_2018, nrow = 3, ncol = 1)
+
+# Still to look at --------------------------------------------------------
+
+# Dates with more than usual (total) kelp 
+mean(casts.summary$n_casts)
+  # 2018-03-24 - 52
+  # 2018-04-14 - 42
+  # 2018-05-19 - 14
+  # 2018-05-26 - 14
+  # 2018-08-04 - 22
+
+# Dates with large number of aggregates
+  # 2018-03-24 - 13
+  # 2018-04-14 - 18
+  # 2018-08-04 - 19
+
+# Dates with more holdfasts
+  # 2018-03-24 - 12
+  # 2018-04-14 - 12
+
+# Dates with largest total size
+add_len <- as.tibble(casts$stipe_length + casts$frond_length)
+
+total_casts <- cbind(casts, add_len)
+
+add_len_1 <- as.tibble(casts.summary$mean_st_length + casts.summary$mean_fr_length)
+total_casts_1 <- cbind(casts.summary, add_len_1)
+
+  # 2018-03-24 - 343.96520  - 52
+  # 2018-05-05 - 483.11111  - 9
+  # 2018-04-28 - 325.00000  - 1
+  # 2018-05-26 - 302.50758  - 14
