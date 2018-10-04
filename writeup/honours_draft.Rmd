@@ -16,11 +16,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction
 
-Kelp beds dominate approximately 25% of the world???s rocky shore ecosystems. Along the South African coast, kelp beds occur extensively on the south-western/western Cape coasts. These kelp beds play a large role in the functioning of kelp forest ecosystems and the ecosystems adjacent to them. It is well known that kelp beds play a role in trophic structuring of systems as they are a source of energy to the aforementioned systems. 
+Kelp beds dominate approximately 25% of the world's rocky shore ecosystems. Along the South African coast, kelp beds occur extensively on the south-western/western Cape coasts. These kelp beds play a large role in the functioning of kelp forest ecosystems and the ecosystems adjacent to them. It is well known that kelp beds play a role in trophic structuring of systems as they are a source of energy to the aforementioned systems. 
 
 **simple kelp diagram**
 
-(Denny et al. 1997) Kelps have the general morphology of a holdfast, stipe and fronds, forming the thallus. The holdfast acts as the anchor or ???root??? attaching the thallus to a substrate. The stipe is narrow and hollow reaching up to ??? in length. The stipe broadens toward the top forming a pneumatocyst, a gas-filled chamber, which adds buoyancy to the top of the kelp such that the mass of fronds/blades floats at the surface of the water to aid photosynthesis. It has also been observed that multiple kelp individuals share a single holdfast and these assemblages are known as aggregates. Previous studies have shown that these aggregations may be useful in overcoming stress brought about by strong wave action by increasing drag. 
+(Denny et al. 1997) Kelps have the general morphology of a holdfast, stipe and fronds, forming the thallus. The holdfast acts as the anchor or 'root' attaching the thallus to a substrate. The stipe is narrow and hollow reaching up to ??? in length. The stipe broadens toward the top forming a pneumatocyst, a gas-filled chamber, which adds buoyancy to the top of the kelp such that the mass of fronds/blades floats at the surface of the water to aid photosynthesis. It has also been observed that multiple kelp individuals share a single holdfast and these assemblages are known as aggregates. Previous studies have shown that these aggregations may be useful in overcoming stress brought about by strong wave action by increasing drag. 
 
 Waterflow is an important factor in growth of kelp as it may indirectly affect factors such as light levels, photosynthesis and nutrient uptake and settlement and recruitment, among others. Kelp mortality is brought about by grazing, old age, epiphytism, and commercial harvesting. However, in this case, we will be focussing on breakage and dislodgement as a mode of kelp mortality which is as a direct result of strong wave action or waterflow. 
 
@@ -55,7 +55,7 @@ Over the sampling period, we expect to see a higher number of kelp washing up on
 
 
 # Method and materials
-This study was conducted at Muizenberg Beach (3406???24.2??????S 1828???29.3??????E) in an area where kelp wrack is not cleared by the City of Cape Town (CoCT) beach cleaning teams. This site has no adjacent kelps beds to the beach but the area experiences large amounts of beach-cast kelp  on a regular basis.
+This study was conducted at Muizenberg Beach (3406'24.2''S 1828'29.3''E) in an area where kelp wrack is not cleared by the City of Cape Town (CoCT) beach cleaning teams. This site has no adjacent kelps beds to the beach but the area experiences large amounts of beach-cast kelp  on a regular basis.
 
 Along the beach, a 10 m wide section was measured using a 10 m long rope held perpendicular to the edge of the low tide line. Two people, each holding one end of the rope, then proceeded to walk along the transect of ~250 m across the beach parallel to the low tide line.
 
