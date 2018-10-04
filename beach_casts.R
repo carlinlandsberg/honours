@@ -9,6 +9,7 @@ library(tidyverse)
 library(ggpubr)
 library(pgirmess)
 library(circular)
+library(zoo)
 
 # Load data ---------------------------------------------------------------
 
@@ -193,7 +194,7 @@ kruskalmc(stipe_length ~ as.factor(date), data = casts)
 # frond length post-hoc
 kruskalmc(frond_length ~ as.factor(date), data = casts)  
 
-# wave data ---------------------------------------------------------------
+# load wave data ---------------------------------------------------------------
 
 # 2005 - 2018 data
 wave_all_1 <- read_table2("ChristoRautenbach_NCEP_180904/FB3_all_wav.txt", 
@@ -225,6 +226,9 @@ wave_all_summary_1 <- wave_all %>%
 
 # remove last row
 wave_all_summary <- wave_all_summary_1[-c(15),]
+
+
+# Wave data summary plots (2005 - 2018) -------------------------------------------------
 
 # plots for wave data from 2005 - 2018 (mean of each parameter)
 plot_h1f <- ggplot(wave_all_summary, aes(x = as.factor(Date), y = mean_h1f)) +
@@ -268,6 +272,8 @@ plot_hs <- ggplot(wave_all_summary, aes(x = as.factor(Date), y = mean_hs)) +
 plot_hs
 
   # note, some columns have identical values throughout. not plotted
+
+# Wave data visualisations 2018 -------------------------------------------
 
 # Now filtering out only 2018 (sampling took place from March 2018-September 2018)
 
@@ -339,6 +345,8 @@ hs_2018 <- ggplot(wave_2018, aes(x = as.factor(Time), y = mean_hs)) +
   theme_classic()
 hs_2018
 
+# Wave data 1979-2010 -----------------------------------------------------
+
 # 1979 - 2010
 old_wave_1 <- read_table2("ChristoRautenbach_NCEP_180904/FB3_rean_all_wav.txt", 
                                 skip = 7)
@@ -369,7 +377,6 @@ wave_old_summary_1 <- old_wave %>%
 
 # remove last row
 wave_old_summary <- wave_old_summary_1[-c(33),]
-
 # plots for wave data from 1979 - 2010 (mean of each parameter)
 old_h1f <- ggplot(wave_old_summary, aes(x = as.factor(Date), y = mean_h1f)) +
   geom_bar(stat = "identity") +
@@ -378,6 +385,8 @@ old_h1f <- ggplot(wave_old_summary, aes(x = as.factor(Date), y = mean_h1f)) +
   labs(x = "Year", y = "Mean H1F", title = "Mean H1F 1979 - 2010") +
   theme_classic()
 old_h1f
+
+# wave data summary plots 1979-2010 ---------------------------------------
 
 old_tp <- ggplot(wave_old_summary, aes(x = as.factor(Date), y = mean_tp)) +
   geom_bar(stat = "identity") +
@@ -411,7 +420,7 @@ old_hs <- ggplot(wave_old_summary, aes(x = as.factor(Date), y = mean_hs)) +
   theme_classic()
 old_hs
 
-# Time series -------------------------------------------------------------
+# Time series 2018 -------------------------------------------------------------
 
 daily_2018 <- wave_2018_1 %>% 
   group_by(Time, HMO) %>% 
@@ -599,6 +608,8 @@ ncasts_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) 
   theme_classic()
 ncasts_tp
 
+# some extra stuff... -----------------------------------------------------
+
 wave_16_17_18 <- wave_all %>% 
   filter(Date %in% c("2016", "2017", "2018")) %>% 
   group_by(Time)
@@ -679,9 +690,12 @@ sep_16 <- combined_16 %>%
   separate(value, c("year", "month", "day"), "-")
 sep_16
 
-time_16 <- combined_16[-c(1:83),]
-time_16_1 <- time_16[-c(246:366),]
-time_16_2 <- time_16_1[-c(246:328),]
+# time_16 <- combined_16[-c(1:83),]
+# time_16_1 <- time_16[-c(246:366),]
+# time_16_2 <- time_16_1[-c(246:328),]
+
+ttime_16 <- combined_16[-c(213:366),]
+ttime_16_1 <- ttime_16[-c(1:83),]
 
 wave_17 <- wave_all %>% 
   filter(Date == "2017") %>% 
@@ -709,8 +723,8 @@ sep_17 <- combined_17 %>%
   separate(value, c("year", "month", "day"), "-")
 sep_17
 
-time_17 <- combined_17[-c(1:82),]
-time_17_1 <- time_17[-c(245:365),]
+time_17 <- combined_17[-c(212:365),]
+time_17_1 <- time_17[-c(1:82),]
 
 daily_18 <- wave_2018_1 %>% 
   group_by(Time, HMO) %>% 
@@ -742,7 +756,7 @@ tp_16_17 <- ggplot(merge_try, aes(x = as.Date(value), y = hs_circ, group = 1)) +
   theme_classic()
 tp_16_17
 
-hs_2016 <- ggplot(time_16_1, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+hs_2016 <- ggplot(ttime_16_1, aes(x = as.Date(value), y = hs_circ, group = 1)) +
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   labs(x = "Date", y = "HS (s)", title = "") +
@@ -771,7 +785,70 @@ hs_2018
 
 ggarrange(hs_2016, hs_2017, hs_2018, nrow = 3, ncol = 1)
 
+tp_2016 <- ggplot(ttime_16_1, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "TP (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+tp_2016
+
+tp_2017 <- ggplot(time_17_1, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "TP (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+tp_2017
+
+tp_2018 <- ggplot(time_18, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "TP (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+tp_2018
+
+ggarrange(tp_2016, tp_2017, tp_2018, nrow = 3, ncol = 1)
+
+tcf_2016 <- ggplot(ttime_16_1, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "TCF (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+tcf_2016
+
+tcf_2017 <- ggplot(time_17_1, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "TCF (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+tcf_2017
+
+tcf_2018 <- ggplot(time_18, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "TCF (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+tcf_2018
+
+ggarrange(tcf_2016, tcf_2017, tcf_2018, nrow = 3, ncol = 1)
+
 # Still to look at --------------------------------------------------------
+
+# cut data into 4 seasons dec-fec etc
+# fr each season do anova for seasons
+# Boxplots for summary stats for each seasons 
+# add vert lines for where seasons satrt and end
 
 # Dates with more than usual (total) kelp 
 mean(casts.summary$n_casts)
@@ -802,3 +879,10 @@ total_casts_1 <- cbind(casts.summary, add_len_1)
   # 2018-05-05 - 483.11111  - 9
   # 2018-04-28 - 325.00000  - 1
   # 2018-05-26 - 302.50758  - 14
+
+# Separating dates into seasons -------------------------------------------
+
+yq <- as.yearqtr(as.yearmon(combined_16$value, "%Y-%m-%d") + 1/12)
+combined_16$Season <- factor(format(yq, "%q"), levels = 1:4, 
+                    labels = c("summer", "autumn", "winter", "spring"))
+combin

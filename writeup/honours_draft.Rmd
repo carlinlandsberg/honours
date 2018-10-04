@@ -7,7 +7,7 @@ output:
     latex_engine: xelatex
 monofont: PT Mono
 mainfont: Arial
-fontsize: 11pt  
+fontsize: 12pt  
 ---
 
 ```{r setup, include=FALSE}
@@ -15,9 +15,22 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introduction
-Beach-cast kelp is known to be of high importance in ecosystems such as sandy beach ecosystems where they provide a source of nutrients and refuge for organisms living in these ecosystems. This beach-cast kelp is also harvested in some areas and thus have commercial importance and as a result, monitoring of these systems with input of kelp wrack is important.
 
-The amount of wrack washing up on beaches depends on how productive areas adjacent or close to these beaches are. It can thus be assumed that beaches near areas with high production of macroalgae, such as kelps forests, will receive large amounts of wrack inputs (Barreiro et al., 2011). These masses of kelp originating from offshore kelp beds (Kirkman & Kendrick 1997) become dislodged and deposited on beaches often as a result of strong wave action. Water flow is an important factor of kelp growth (Bekkby et al., 2014), however it is a common notion that harsh hydrodynamic environments lead to wave-driven dislodgement of kelp (de Bettignies et al., 2015) where this dislodgement or breakage leads to mortality of the individual (Thomsen et al., 2004). 
+Kelp beds dominate approximately 25% of the world???s rocky shore ecosystems. Along the South African coast, kelp beds occur extensively on the south-western/western Cape coasts. These kelp beds play a large role in the functioning of kelp forest ecosystems and the ecosystems adjacent to them. It is well known that kelp beds play a role in trophic structuring of systems as they are a source of energy to the aforementioned systems. 
+
+**simple kelp diagram**
+
+(Denny et al. 1997) Kelps have the general morphology of a holdfast, stipe and fronds, forming the thallus. The holdfast acts as the anchor or ???root??? attaching the thallus to a substrate. The stipe is narrow and hollow reaching up to ??? in length. The stipe broadens toward the top forming a pneumatocyst, a gas-filled chamber, which adds buoyancy to the top of the kelp such that the mass of fronds/blades floats at the surface of the water to aid photosynthesis. It has also been observed that multiple kelp individuals share a single holdfast and these assemblages are known as aggregates. Previous studies have shown that these aggregations may be useful in overcoming stress brought about by strong wave action by increasing drag. 
+
+Waterflow is an important factor in growth of kelp as it may indirectly affect factors such as light levels, photosynthesis and nutrient uptake and settlement and recruitment, among others. Kelp mortality is brought about by grazing, old age, epiphytism, and commercial harvesting. However, in this case, we will be focussing on breakage and dislodgement as a mode of kelp mortality which is as a direct result of strong wave action or waterflow. 
+
+Wave-driven mortality occurs either when breakage occurs at the stipe-holdfast junction or where the entire individual is dislodged from the holdfast. It can thus be inferred that various wave parameters, possibly in concert, would result in either of the two wave-driven modes of mortality. 
+
+Upon all the aforementioned mortality events, the kelp that has been broken or dislodged are then transported to adjacent ecosystems that use kelp detritus as a food or energy source. Majority of these are transported to the deep sea as conglomerations known as kelp rafts and another proportion is transported and deposited onto sandy beach ecosystems. The kelp that has been washed up onto sandy shores, usually permanently deposited by tidal action, is known commonly as beach-cast kelp or kelp wracks.
+
+Beach-cast kelp is known to be of high importance in sandy beach ecosystems where they provide a source of nutrients and refuge for organisms living in these ecosystems. Beach-cast kelp is also harvested in some areas and thus have socioeconomic importance and as a result, monitoring of these systems with input of kelp wrack is important.
+
+The amount of wrack washing up on beaches depends on how productive areas adjacent or close to these beaches are. It can thus be assumed that beaches near areas with high production of macroalgae, such as kelps forests, will receive large amounts of wrack inputs (Barreiro et al., 2011). **These masses of kelp originating from offshore kelp beds (Kirkman & Kendrick 1997) become dislodged and deposited on beaches often as a result of strong wave action. Water flow is an important factor of kelp growth (Bekkby et al., 2014), however it is a common notion that harsh hydrodynamic environments lead to wave-driven dislodgement of kelp (de Bettignies et al., 2015) where this dislodgement or breakage leads to mortality of the individual (Thomsen et al., 2004).** 
 
 Due to the fluctuation of winds and currents over a range of spatial and temporal scales, it is difficult to measure and quantify wracks (Kirkman & Kendrick 1997). Wrack input on beaches are a result of complex interactions among physical factors that all play a role in the amount of wrack washed up on beaches (Barreiro et al., 2011). Thus, according to Klosinski (2015), few efforts have been made to quantify the variability in the deposition of wrack on beaches. 
 
@@ -27,20 +40,9 @@ The intention of this study is to quantify the deposition of kelp on beaches ove
 
 It is important to establish how the amount of kelp washing up varies over time, and specifically over a seasonal scale and how the morphologies of these individuals differ over the seasons (e.g. different sizes of kelp washing up in different seasons) and the fluctuating wave parameters that occur over various timescales. From these observations, we can infer how properties such as size (length), holdfast size and presence of aggregates sharing a holdfast may play a role in overcoming stressors in their environment such as wave-driven breakage and dislodgement. 
 
-Over the sampling period, we expect to see a higher number of kelp washing up on the beach, possibly due to stronger wave action in winter months dislodging more individuals. We also expect to see larger kelp washing up on the beach due to strong waves dislodging even larger individuals (However, something to consider is that smaller kelp may withstand wave stress, so could much smaller kelp indicate stringer wave action? – see de Bettignies et al. (2015)). We expect to see an increased number of holdfasts washing up inferring that individuals are completely dislodged (i.e. "uprooted") due to stronger wave action in winter months instead of breaking off above the holdfast as a result of weaker wave action during summer.
-
-In addition to this, we may also compare morphological properties of deposited kelp to known morphological properties of kelps populations along the coast to infer, along with wave and ocean current data, where the deposited kelp originates from and where along the coast it was deposited. 
+Over the sampling period, we expect to see a higher number of kelp washing up on the beach, possibly due to stronger wave action in winter months dislodging more individuals. We also expect to see larger kelp washing up on the beach due to strong waves dislodging even larger individuals (However, something to consider is that smaller kelp may withstand wave stress, so could much smaller kelp indicate stringer wave action? ??? see de Bettignies et al. (2015)). We expect to see an increased number of holdfasts washing up inferring that individuals are completely dislodged (i.e. "uprooted") due to stronger wave action in winter months instead of breaking off above the holdfast as a result of weaker wave action during summer.
 
 ## Other things to think about/ might want to add:
-* What is kelp/ecklonia? – the study species observed in this study
-    + Where it occurs (i.e. where along the coast is it most prominent, where are kelp beds located)
-    + Features/characteristics (Fronds, primary blade, stipe, holdfast, aggregates)
-    + How they grow and use water flow for this growth
-* Modes of mortality of kelp (e.g. herbivory, age, etc.)
-    + In this case, we are looking specifically at wave-driven dislodgement and where breakage occurs; broken at stipe or fully dislodged with holdfast.
-*	After mortality, kelp is transported by waves
-    +	Mostly becomes kelp rafts (to open ocean) – relate to buoyancy?
-    +	Others deposited onto adjacent ecosystems (e.g. Sandy beaches)
 *	What are the specific wave parameters contributing to mortality and transport of kelp?
     + E.g. peak period, significant wave height, etc. (See paper Christo sent)
 * Do wave these parameters play an equal role in kelp mortality? (redundancy analysis?)
@@ -53,11 +55,11 @@ In addition to this, we may also compare morphological properties of deposited k
 
 
 # Method and materials
-This study was conducted at Muizenberg Beach (3406′24.2′′S 1828′29.3′′E) in an area where kelp wrack is not cleared by the City of Cape Town (CoCT) beach cleaning teams. This site has no adjacent kelps beds to the beach but the area experiences large amounts of beach-cast kelp  on a regular basis.
+This study was conducted at Muizenberg Beach (3406???24.2??????S 1828???29.3??????E) in an area where kelp wrack is not cleared by the City of Cape Town (CoCT) beach cleaning teams. This site has no adjacent kelps beds to the beach but the area experiences large amounts of beach-cast kelp  on a regular basis.
 
 Along the beach, a 10 m wide section was measured using a 10 m long rope held perpendicular to the edge of the low tide line. Two people, each holding one end of the rope, then proceeded to walk along the transect of ~250 m across the beach parallel to the low tide line.
 
-**insert figure 1**
+**insert figure of method set-up**
 
 Along this transect, every kelp that was found within 10 m from the low tide edge was counted and various morphological charateristics were measured and recorded. These morphological characteristics included holdfast presence or absence, diameter of holdfast, stipe length, and longest frond length. Additionally, each kelp was numbered and if more than one individual was present, on the same holdfast, it was recorded with an associated number. For example, if three individuals share a holdfast, it was recorded as 1.1, 1.2, and 1.3 These clusters of individuals will hereafter be referred to as aggregates.  Stipe and frond length were measured and recorded for each kelp individual in the aggregate, provided the stipe length was at least 10cm long.
 
