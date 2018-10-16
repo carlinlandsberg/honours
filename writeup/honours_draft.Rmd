@@ -2,8 +2,13 @@
 title: "Beach casts - Honours"
 author: "Carlin Landsberg"
 date: "7/3/2018"
+header-includes: #allows you to add in your own Latex packages
+- \usepackage{float} #use the 'float' package
+- \floatplacement{figure}{H} #make every figure with caption = h
 output: 
-  pdf_document: 
+  pdf_document:
+    fig_cap: yes
+    keep_tex: yes
     latex_engine: xelatex
 monofont: PT Mono
 mainfont: Arial
@@ -11,14 +16,20 @@ fontsize: 12pt
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, fig.pos = "h")
 ```
 
 # Introduction
 
 Kelp beds dominate approximately 25% of the world's rocky shore ecosystems. Along the South African coast, kelp beds occur extensively on the south-western/western Cape coasts. These kelp beds play a large role in the functioning of kelp forest ecosystems and the ecosystems adjacent to them. It is well known that kelp beds play a role in trophic structuring of systems as they are a source of energy to the aforementioned systems. 
 
-**simple kelp diagram**
+```{r echo=FALSE, fig.cap="General morphology of kelp.", fig.height=20, fig.width=2.5}
+library(png)
+library(grid)
+library(knitr)
+img <- readPNG("kelp.png")
+ grid.raster(img)
+```
 
 (Denny et al. 1997) Kelps have the general morphology of a holdfast, stipe and fronds, forming the thallus. The holdfast acts as the anchor or 'root' attaching the thallus to a substrate. The stipe is narrow and hollow reaching up to ??? in length. The stipe broadens toward the top forming a pneumatocyst, a gas-filled chamber, which adds buoyancy to the top of the kelp such that the mass of fronds/blades floats at the surface of the water to aid photosynthesis. It has also been observed that multiple kelp individuals share a single holdfast and these assemblages are known as aggregates. Previous studies have shown that these aggregations may be useful in overcoming stress brought about by strong wave action by increasing drag. 
 
@@ -42,32 +53,41 @@ It is important to establish how the amount of kelp washing up varies over time,
 
 Over the sampling period, we expect to see a higher number of kelp washing up on the beach, possibly due to stronger wave action in winter months dislodging more individuals. We also expect to see larger kelp washing up on the beach due to strong waves dislodging even larger individuals (However, something to consider is that smaller kelp may withstand wave stress, so could much smaller kelp indicate stringer wave action? ??? see de Bettignies et al. (2015)). We expect to see an increased number of holdfasts washing up inferring that individuals are completely dislodged (i.e. "uprooted") due to stronger wave action in winter months instead of breaking off above the holdfast as a result of weaker wave action during summer.
 
-## Other things to think about/ might want to add:
-*	What are the specific wave parameters contributing to mortality and transport of kelp?
-    + E.g. peak period, significant wave height, etc. (See paper Christo sent)
-* Do wave these parameters play an equal role in kelp mortality? (redundancy analysis?)
-* How do they end up on beaches and this beach specifically? Or, why did we not see many on this beach? (Look at exposure at Muizenberg beach?)
-*	Ways kelp try and overcome this wave dislodgement
-    + Size (larger or smaller)
-    + Aggregates
-    + Overall, increasing drag
-* Only ecklonia observed, why are there not as many laminaria washing up? (differences in morphology and depths they grow in)
-
-
 # Method and materials
-This study was conducted at Muizenberg Beach (3406'24.2''S 1828'29.3''E) in an area where kelp wrack is not cleared by the City of Cape Town (CoCT) beach cleaning teams. This site has no adjacent kelps beds to the beach but the area experiences large amounts of beach-cast kelp  on a regular basis.
 
-Along the beach, a 10 m wide section was measured using a 10 m long rope held perpendicular to the edge of the low tide line. Two people, each holding one end of the rope, then proceeded to walk along the transect of ~250 m across the beach parallel to the low tide line.
+## Study site
+This study was conducted at Muizenberg Beach (3406'24.2''S 1828'29.3''E) in an area where kelp wrack is not cleared by the City of Cape Town (CoCT) beach cleaning teams. This site has no adjacent kelps beds to the beach but the area has been known to experience large amounts of beach-cast kelp on a regular basis.
 
-**insert figure of method set-up**
+Along the beach, a 10 m wide section was measured using a 10 m long rope held perpendicular to the edge of the low tide line. Two people, each holding one end of the rope, then proceeded to walk along the transect of ~250 m across the beach parallel to the low tide line. The set up of the study area is illustrated in figure 2 below.
 
-Along this transect, every kelp that was found within 10 m from the low tide edge was counted and various morphological charateristics were measured and recorded. These morphological characteristics included holdfast presence or absence, diameter of holdfast, stipe length, and longest frond length. Additionally, each kelp was numbered and if more than one individual was present, on the same holdfast, it was recorded with an associated number. For example, if three individuals share a holdfast, it was recorded as 1.1, 1.2, and 1.3 These clusters of individuals will hereafter be referred to as aggregates.  Stipe and frond length were measured and recorded for each kelp individual in the aggregate, provided the stipe length was at least 10cm long.
+```{r echo=FALSE, fig.cap="Set-up of area sampled at Muizenberg Beach.", fig.height=40, fig.width=5}
+library(png)
+library(grid)
+library(knitr)
+img2 <- readPNG("set-up.png")
+ grid.raster(img2)
+```
 
-Since wave climate may vary seasonally,his method was repeated weekly from 24 March, which is late summer, throughout the winter until August/ September. This allowed temporal comparison of  morphological characteristics amongst beach-cast kelp over a varying wave climate. The SWAN (simulating waves nearshore) model was chosen to simulate wave parameters for the study site. 
+## Beach-cast recordings
 
-##**Statistical analysis**
-##*Wave climate* 
-We described the measured kelp variables as a function of the various wave parameters (i.e. direction, frequency, intensity, significant height) using a redundancy analysis in order to determine which wave parameters are the biggest factors in the mode of kelp mortality and how the kelp washes up in this specific area.
+Along this transect, every kelp that was found within 10 m from the low tide edge was counted and various morphological charateristics were measured and recorded. These morphological characteristics included holdfast presence or absence, diameter of holdfast, stipe length, and longest frond length. Additionally, each kelp was numbered and if more than one individual was present on the same holdfast (i.e. aggregates), it was recorded with an associated number. For example, if three individuals share a holdfast, it was recorded as 1.1, 1.2, and 1.3. Stipe and frond length were measured and recorded for each kelp individual in the aggregate, provided the stipe length was at least 10cm long.
+
+Since wave climate may have varied seasonally, this method was repeated weekly over the period from 2018-03-24 until 2018-09-30. We separated seasons as December -- February being summer, March -- May as autumn, June -- August as winter, and September -- November being spring. Thus, our study period took place from autumn until the begining of spring. Consequently, no samples were collected in summer months. This study period extending across several seasons allowed for temporal comparison of  morphological characteristics amongst beach-cast kelp over a varying wave climate.
+
+## Wave climate
+
+Wave data at a latitude 34.50000 and a longitude of 18.50000 was obtained from Christo Rautenbach of the South African Weather Service (SAWS). These ocean wave predictions of the National Centers for Environmental Prediction (NCEP) were made using the wave model WaveWatch III. We obtained data from 2005-02-01 to 2018-08-01. Over this time, data was present daily at a three hour resolution. Speciifc wave parameters were measured, namely, H1F?, peak period in seconds, TZ?, TCF?, TBF?, mean direction in degrees TNorth, directional spreading in degrees, significant wave height in meters, and maximum wave height in meters. However, data were missing for several parameters and thus further analyses were run on only peak period (s), TCF?, and significant wave height (m). 
+
+## Statistical analysis
+
+### _Time series_
+All exploratory and statistical analyses were performed in RStudio version 1.1.442 (17 October 2018; http://www.rstudio.com/). The data and comprehensive script used for setting up the data correctly, data analyses, and production of figures are to be found at https://github.com/carlinlandsberg/honours.
+
+Due to the nature of the resolution of the wave data, the data had to be converted to circular data in order to have one data reading per day instead of in three hour intervals. Hereafter, we ran a time series looking specifically at the study period of 2018-03-24 to 2018-09-30. We plotted wave peak period (s), wave frequency (TCF, *not sure about this*), and significant wave height (m) for each day within the sudy period. Following this, we overlayed the beach-cast data that was collected. Therefore, total number of casts, mean holdfast diameter, and mean stipe and frond length were plotted on days of data collection (i.e. weekly) over the total time series.
+
+### _Yearly seasonal comparison_
+In addition to the time series, we explored the previous two years, namely, 2016 and 2017 in an attempt to determine if any significant seasonal changes in wave climate exists in 2018 in comparison to 2016 and 2017. Over these three years, dates corresponding with that of the study period in 2018 were separated into their respective seasons as previously discussed. A single factor ANOVA was then performed to statistically determine if significant differences exist among seasons each year. Hereafter, a Tukey HSD post-hoc test was performed to determine where these significant differences exist. 
+
 
 # References 
 
@@ -82,9 +102,20 @@ We described the measured kelp variables as a function of the various wave param
 5.	Thomsen, M., Wernberg, T. and Kendrick, G. (2004). The effect of thallus size, life stage, aggregation, wave exposure and substratum conditions on the forces required to break or dislodge the small kelp Ecklonia radiata. Botanica Marina, 47(6).
 
 
+## Other things to think about/ might want to add:
+*	What are the specific wave parameters contributing to mortality and transport of kelp?
+    + E.g. peak period, significant wave height, etc. (See paper Christo sent)
+* Do wave these parameters play an equal role in kelp mortality? (redundancy analysis?)
+* How do they end up on beaches and this beach specifically? Or, why did we not see many on this beach? (Look at exposure at Muizenberg beach?)
+*	Ways kelp try and overcome this wave dislodgement
+    + Size (larger or smaller)
+    + Aggregates
+    + Overall, increasing drag
+* Only ecklonia observed, why are there not as many laminaria washing up? (differences in morphology and depths they grow in)
+
 ## notes from Ross
-kelp distribution
-role in subtidal system and sandy beach
-transport
-inverts
-mechanisms of breakage
+* kelp distribution
+* role in subtidal system and sandy beach
+* transport
+* inverts
+* mechanisms of breakage
