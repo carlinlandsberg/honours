@@ -3,12 +3,12 @@ title: "Beach casts - Honours"
 author: "Carlin Landsberg"
 date: "7/3/2018"
 output:
-  html_document:
-    df_print: paged
   pdf_document:
     fig_cap: yes
     keep_tex: yes
     latex_engine: xelatex
+  html_document:
+    df_print: paged
   word_document: default
 mainfont: Arial
 monofont: PT Mono
