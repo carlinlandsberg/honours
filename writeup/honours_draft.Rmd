@@ -68,7 +68,45 @@ We hypothesize that over the sampling period, we expect to see a higher number o
 
 ## Study site
 
-This study was conducted at Muizenberg Beach (3406'24.2''S 1828'29.3''E) in an area where kelp wrack is not cleared by the City of Cape Town (CoCT) beach cleaning teams. This site has no adjacent kelps beds to the beach but the area has been known to experience large amounts of beach-cast kelp on a regular basis.
+```{r include=FALSE}
+library(readr)
+library(tidyverse)
+library(dplyr)
+library(ggmap)
+library(ggpubr)
+library(scales)
+library(ggsn)
+
+sa_map <- ggplot() +
+  borders(fill = "grey70", colour = "black") +
+  coord_equal(xlim = c(12, 36), ylim = c(-36, -22), expand = 0) +
+  geom_point(aes(x = 18.5, y = -34), shape = 1, size = 5, colour = "red") +
+  theme(axis.text.x = element_blank(), axis.text.y = element_blank(),
+       axis.ticks = element_blank(), axis.title.x = element_blank(),
+        axis.title.y = element_blank(), panel.background = element_blank())
+
+muiz_map <- ggplot() +
+  borders(fill = "grey70", colour = "black") +
+  coord_equal(xlim = c(18, 19.5), ylim = c(-34.5, -33.5), expand = 0) +
+  geom_point(aes(x = 18.508, y = -34.1), colour = "red", size = 3) +
+  annotate("text", label = "Muizenberg beach", 
+           x = 18.652, y = -34.12, size = 3)
+
+final_map <- muiz_map +
+  annotation_custom(grob = ggplotGrob(sa_map),
+                    xmin = 19, xmax = 19.45,
+                    ymin = -34, ymax = -33.5) +
+  theme_bw()
+```
+
+```{r echo=FALSE, fig.cap="Site map showing the location of the study site, Muizenberg beach.", message=FALSE, warning=FALSE, fig.width=6, fig.height=7}
+
+final_map
+
+```
+
+
+As per figure 2, this study was conducted at Muizenberg Beach (3406'24.2''S 1828'29.3''E) in an area where kelp wrack is not cleared by the City of Cape Town (CoCT) beach cleaning teams. This site has no adjacent kelps beds to the beach but the area has been known to experience large amounts of beach-cast kelp on a regular basis.
 
 Along the beach, a 10 m wide section was measured using a 10 m long rope held perpendicular to the edge of the low tide line. Two people, each holding one end of the rope, then proceeded to walk along the transect of ~250 m across the beach parallel to the low tide line. The set up of the study area is illustrated in figure 2 below.
 
