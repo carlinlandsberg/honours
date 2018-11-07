@@ -1,0 +1,699 @@
+---
+title: "Beach casts - Honours"
+author: "Carlin Landsberg"
+date: "7/3/2018"
+output:
+  pdf_document:
+    fig_cap: yes
+    keep_tex: yes
+    latex_engine: xelatex
+  html_document:
+    df_print: paged
+  word_document: default
+mainfont: Arial
+monofont: PT Mono
+header-includes:
+- \usepackage{float}
+- \floatplacement{figure}{H}
+fontsize: 12pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.pos = "h")
+```
+
+# Introduction
+
+## Ecology and morphology of kelp
+
+Kelp beds dominate a significant amount of the world's rocky shore ecosystems (Steneck et al. 2002). Along the South African coast, kelp beds occur extensively on Western Cape peninsula coasts (Field et al. 1977, Velimirov et al. 1977). These kelp beds play a large role in the functioning of their immediate ecosystems and the ecosystems adjacent to them. It is well known that kelp beds play a role in trophic structuring of systems as they are a source of energy to the aforementioned systems (Field et al. 1977, Koop et al. 1982, Koop and Griffiths 1982, Robertson and Hanson 1982).
+
+```{r echo=FALSE, fig.cap="General morphology of kelp.", fig.height=20, fig.width=2.5}
+library(png)
+library(grid)
+library(knitr)
+img <- readPNG("kelp.png")
+ grid.raster(img)
+```
+
+Figure 1 shows that kelps, such as _Ecklonia maxima_, have the morphology consisting of a holdfast, stipe and fronds/blades, forming the thallus. The holdfast acts as the anchor or 'root' attaching the thallus to a substrate. The stipe is narrow and hollow reaching up to 15m in length (Stegenga et al. 1997). The stipe broadens toward the top forming a pneumatocyst, a gas-filled chamber, which then flatten into a primary blade with secondary blades or fronds branching off from this. The pneumatocyst adds buoyancy to the top of the kelp such that the mass of fronds/blades floats at the surface of the water during low tide to aid photosynthesis (Denny et al. 1997). It has also been observed that multiple kelp individuals share a single holdfast and these assemblages are known as aggregates. Previous studies have shown that these aggregations may be useful in overcoming stress brought about by strong wave action (Thomsen et al. 2004, Wernberg 2005). 
+
+## The role of waterflow in kelp growth and mortality
+
+Waterflow is an important factor in growth of kelp as it may indirectly affect factors such as light levels, photosynthesis and nutrient uptake (Wheeler 1988) and settlement and recruitment (Vadas et al. 1990). Kelp mortality is brought about by grazing, old age, epiphytism, and commercial harvesting. However, in this case, we will be focussing on breakage and dislodgement as a mode of kelp mortality where breakage refers to the breaking of the stipe at any point and dislodgement is when the entire kelp is "uprooted" with the holdfast still connected to the stipe. Both of these modes of detatchment is as a direct result of strong wave action or waterflow (Denny et al. 1997, Bekkby et al. 2014, de Bettignies et al. 2015). 
+
+Wave-driven mortality occurs either when breakage occurs at the stipe-holdfast junction or where the entire individual is dislodged from the holdfast (de Bettignies et al. 2015). It can thus be inferred that various wave parameters, possibly in concert, would result in either of the two wave-driven modes of mortality. Furthermore, it can also be suggested that presence of aggregates aid in preventing this mortality as the holdfast supporting multiple individuals are generally large in size and are thus not easily stirred by wave action.
+
+Upon all the aforementioned mortality events, the kelp that has been broken or dislodged are then transported to adjacent ecosystems that use kelp detritus as a food or energy source (Bustamante and Branch 1996, Soares et al. 1997). A large number of these are transported to the deep sea as masses known as kelp rafts (Smith 2002) and another proportion is transported and deposited onto sandy beach ecosystems. The kelp that has been washed up onto sandy shores, usually permanently deposited by tidal action, is known commonly as beach-cast kelp or kelp wracks (Jones et al. 2004, Orr et al. 2005, Dugan et al. 2011).
+
+## Beach-cast kelp
+
+Beach-cast kelp is known to be of high importance in sandy beach ecosystems where they provide a source of nutrients and refuge for organisms living in these ecosystems (Bustamante et al. 1995, Jones et al. 2004, Dugan et al. 2011). Beach-cast kelp is also harvested in some areas and may be used in a number of economic-driven fields. For example, beach-cast kelp may be used in the production of alginate and agar, in agricultural materials such as cattle feed and fertliser, and in aquaculture as it may be used as feed for abalone hatcheries. Therefore, beach-cast kelp have socioeconomic importance (Kirkman and Kendrick 1997) and as a result, monitoring of these systems with input of kelp wrack is important.
+
+The amount of wrack washing up on beaches depends on how productive areas adjacent or close to these beaches are. It can thus be assumed that beaches near areas with high production of macroalgae, such as kelps forests, will receive large amounts of wrack inputs (Barreiro et al. 2011). 
+
+Due to the fluctuation of winds and currents over a range of spatial and temporal scales, it is difficult to measure and quantify wracks (Kirkman and Kendrick 1997). Wrack input on beaches are a result of complex interactions among physical factors that all play a role in the amount of wrack washed up on beaches (Barreiro et al. 2011). Thus, according to Klosinski (2015), few efforts have been made to quantify the variability in the deposition of wrack on beaches. 
+
+Beach-cast kelp distribution is generally stochastic in nature and this, along with amount of beach-cast kelp fluctuates seasonally and is highly variable over time scales (Kirkman and Kendrick 1997). Thus, this variability in wrack input on sandy beaches may be as a result of interactions between factors such as wave exposure and seasonality (Barreiro et al. 2011).
+
+## Research aims and objectives
+
+The intention of this study is to quantify the deposition of kelp on beaches over a seasonal scale spanning across autumn, winter, and a portion of spring. Over this period, varying wave parameters will be taken into account as it can be possibly be inferred that wave action differs significantly seasonlly. Thus, the aim is to observe the number and size of kelp washing up, presence of holdfast (i.e. point of breakage of kelp and size of dislodged holdfasts), and presence of aggregates (i.e. individuals sharing a holdfast) weekly across the aforementioned seasons in order to determine if significant differences occur and why and/or when they occur. 
+
+This will be done by establishing how the amount of kelp washing up varies over time, and specifically over a seasonal scale and how the morphologies of these individuals differ over the seasons (e.g. different sizes of kelp washing up in different seasons) and the fluctuating wave parameters that occur over various timescales. From these observations, we can infer how properties such as size (length), holdfast size and presence of aggregates sharing a holdfast may play a role in overcoming stressors in their environment such as wave-driven breakage and dislodgement. 
+
+We hypothesize that over the sampling period, we expect to see a higher number of kelp washing up on the beach, possibly due to stronger wave action in winter months dislodging more individuals. We also expect to see larger kelp washing up on the beach due to strong waves dislodging even larger individuals (However, something to consider is that smaller kelp may withstand wave stress, so could much smaller kelp indicate stronger wave action? See de Bettignies et al. (2015)). We expect to see an increased number of holdfasts washing up inferring that individuals are completely dislodged (i.e. "uprooted") due to stronger wave action in winter months instead of breaking off above the holdfast as a result of weaker wave action during summer.
+
+# Method and materials
+
+## Study site
+
+```{r include=FALSE}
+library(readr)
+library(tidyverse)
+library(dplyr)
+library(ggmap)
+library(ggpubr)
+library(scales)
+library(ggsn)
+
+sa_map <- ggplot() +
+  borders(fill = "grey70", colour = "black") +
+  coord_equal(xlim = c(12, 36), ylim = c(-36, -22), expand = 0) +
+  geom_point(aes(x = 18.5, y = -34), shape = 1, size = 5, colour = "red") +
+  theme(axis.text.x = element_blank(), axis.text.y = element_blank(),
+       axis.ticks = element_blank(), axis.title.x = element_blank(),
+        axis.title.y = element_blank(), panel.background = element_blank())
+
+muiz_map <- ggplot() +
+  borders(fill = "grey70", colour = "black") +
+  coord_equal(xlim = c(18, 19.5), ylim = c(-34.5, -33.5), expand = 0) +
+  geom_point(aes(x = 18.508, y = -34.1), colour = "red", size = 3) +
+  annotate("text", label = "Muizenberg beach", 
+           x = 18.652, y = -34.12, size = 3)
+
+final_map <- muiz_map +
+  annotation_custom(grob = ggplotGrob(sa_map),
+                    xmin = 19, xmax = 19.45,
+                    ymin = -34, ymax = -33.5) +
+  theme_bw()
+```
+
+```{r echo=FALSE, fig.cap="Site map showing the location of the study site, Muizenberg beach.", message=FALSE, warning=FALSE, fig.width=6, fig.height=7}
+
+final_map
+
+```
+
+
+As per figure 2, this study was conducted at Muizenberg Beach (3406'24.2''S 1828'29.3''E) in an area where kelp wrack is not cleared by the City of Cape Town (CoCT) beach cleaning teams. This site has no adjacent kelps beds to the beach but the area has been known to experience large amounts of beach-cast kelp on a regular basis.
+
+Along the beach, a 10 m wide section was measured using a 10 m long rope held perpendicular to the edge of the low tide line. Two people, each holding one end of the rope, then proceeded to walk along the transect of ~250 m across the beach parallel to the low tide line. The set up of the study area is illustrated in figure 2 below.
+
+```{r echo=FALSE, fig.cap="Set-up of area sampled at Muizenberg Beach.", fig.height=40, fig.width=5}
+library(png)
+library(grid)
+library(knitr)
+img2 <- readPNG("set-up.png")
+ grid.raster(img2)
+```
+
+## Beach-cast recordings
+
+Along this transect, every kelp that was found within 10 m from the low tide edge was counted and various morphological charateristics were measured and recorded. These morphological characteristics included holdfast presence or absence, diameter of holdfast, stipe length, and longest frond length. Additionally, each kelp was numbered and if more than one individual was present on the same holdfast (i.e. aggregates), it was recorded with an associated number. For example, if three individuals share a holdfast, it was recorded as 1.1, 1.2, and 1.3. Stipe and frond length were measured and recorded for each kelp individual in the aggregate, provided the stipe length was at least 10cm long as these may be juveniles.
+
+Since wave climate may have varied seasonally, this method was repeated weekly over the period from 2018-03-24 until 2018-09-30. We separated seasons as December -- February being summer, March -- May as autumn, June -- August as winter, and September -- November being spring. Thus, our study period took place from autumn until the begining of spring. Consequently, no samples were collected in summer months. This study period extending across several seasons allowed for temporal comparison of  morphological characteristics amongst beach-cast kelp over a varying wave climate.
+
+## Wave climate
+
+Wave data at a latitude 34.50000 and a longitude of 18.50000 was obtained from Christo Rautenbach of the South African Weather Service (SAWS). These ocean wave predictions of the National Centers for Environmental Prediction (NCEP) were made using the wave model WaveWatch III. We obtained data from 2005-02-01 to 2018-08-01. Over this time, data was present daily at a three hour resolution. Speciifc wave parameters were measured, namely, H1F?, peak period in seconds, TZ?, TCF?, TBF?, mean direction in degrees TNorth, directional spreading in degrees, significant wave height in meters, and maximum wave height in meters. However, data were missing for several parameters and thus further analyses were run on only peak period (s), TCF?, and significant wave height (m). 
+
+## Statistical analysis
+
+### _Time series_
+All exploratory and statistical analyses were performed in RStudio version 1.1.442 (17 October 2018; http://www.rstudio.com/). The data and comprehensive script used for setting up the data correctly, data analyses, and production of figures are to be found at https://github.com/carlinlandsberg/honours.
+
+Due to the nature of the resolution of the wave data, the data had to be converted to circular data in order to have one data reading per day instead of in three hour intervals. Hereafter, we ran a time series looking specifically at the study period of 2018-03-24 to 2018-09-30. We plotted wave peak period (s), wave frequency (TCF, *not sure about this*), and significant wave height (m) for each day within the sudy period. Following this, we overlayed the beach-cast data that was collected. Therefore, total number of casts, mean holdfast diameter, and mean stipe and frond length were plotted on days of data collection (i.e. weekly) over the total time series.
+
+### _Yearly seasonal comparison_
+In addition to the time series, we explored the previous two years, namely, 2016 and 2017 in an attempt to determine if any significant seasonal changes in wave climate exists in 2018 in comparison to 2016 and 2017. Over these three years, dates corresponding with that of the study period in 2018 were separated into their respective seasons as previously discussed. A single factor ANOVA was then performed to statistically determine if significant differences exist among seasons each year. Hereafter, a Tukey HSD post-hoc test was performed to determine where these significant differences exist. 
+
+\newpage 
+# Results
+
+```{r include=FALSE}
+library(tidyverse)
+library(ggpubr)
+library(pgirmess)
+library(circular)
+library(zoo)
+
+casts.in <- read.csv2("/Users/ianlandsberg/Desktop/Working/_honours/data/project_data_working_copy.csv")
+
+casts <- casts.in %>%
+  mutate(date = as.Date(date, "%d-%b-%y")) %>%
+  mutate(holdfast_diameter = as.numeric(holdfast_diameter)) %>%
+  separate(number, into = c("parent", "child"), fill = "right") %>%
+  mutate(stipe_length = as.character(stipe_length)) %>% 
+  mutate(stipe_length = as.numeric(replace(stipe_length, stipe_length %in% c("<10"), 5))) %>%
+  as_tibble()
+
+casts.summary <- casts %>%
+  group_by(date) %>%
+  summarise(n_casts = n(),
+            mean_diam = mean(holdfast_diameter, na.rm = TRUE),
+            sd_diam = sd(holdfast_diameter, na.rm = TRUE),
+            mean_st_length = mean(stipe_length, na.rm = TRUE),
+            sd_st_length = sd(stipe_length, na.rm = TRUE),
+            mean_fr_length = mean(frond_length, na.rm = TRUE),
+            sd_fr_length = sd(frond_length, na.rm = TRUE))
+```
+
+```{r include=FALSE}
+wave_all_1 <- read_table2("/Users/ianlandsberg/Desktop/Working/_honours/ChristoRautenbach_NCEP_180904/FB3_all_wav.txt", 
+                           skip = 6)
+
+wave_all <- wave_all_1[-c(1, 2),]
+
+wave_2018_1 <- wave_all %>% 
+  filter(Date == "2018") %>% 
+  group_by(Time)
+
+wave_2018 <- wave_all %>% 
+  filter(Date == "2018") %>% 
+  group_by(Time) %>% 
+  summarise(mean_h1f = mean(as.numeric(H1F, na.rm = TRUE)),
+            sd_h1f = sd(as.numeric(H1F, na.rm = TRUE)),
+            mean_tp = mean(as.numeric(TP, na.rm = TRUE)),
+            sd_tp = sd(as.numeric(TP, na.rm = TRUE)),
+            mean_tz = mean(as.numeric(TZ, na.rm = TRUE)),
+            sd_tz = sd(as.numeric(TZ, na.rm = TRUE)),
+            mean_tcf = mean(as.numeric(TCF, na.rm = TRUE)),
+            sd_tcf = sd(as.numeric(TCF, na.rm = TRUE)),
+            mean_tbf = mean(as.numeric(TBF, na.rm = TRUE)),
+            sd_tbf = sd(as.numeric(TBF, na.rm = TRUE)),
+            mean_dir = mean(as.numeric(DIR, na.rm = TRUE)),
+            sd_dir = sd(as.numeric(DIR, na.rm = TRUE)),
+            mean_spr = mean(as.numeric(SPR, na.rm = TRUE)),
+            sd_spr = sd(as.numeric(SPR, na.rm = TRUE)),
+            mean_hs = mean(as.numeric(HS, na.rm = TRUE)),
+            sd_hs = sd(as.numeric(HS, na.rm = TRUE)),
+            mean_hmax = mean(as.numeric(HMAX, na.rm = TRUE)),
+            sd_hmax = sd(as.numeric(HMAX, na.rm = TRUE)))
+```
+
+```{r include=FALSE}
+daily_2018 <- wave_2018_1 %>% 
+  group_by(Time, HMO) %>% 
+  summarise(tp_circ = mean.circular(circular(TP)),
+            tcf_circ = mean.circular(circular(TCF)),
+            hs_circ = mean.circular(circular(HS))) %>% 
+  mutate(year = "2018")
+
+rm <- daily_2018[, -1:-2]
+final_rm <- rm[, -4]
+
+try <- as.tibble(paste(daily_2018$year, daily_2018$Time, daily_2018$HMO, sep = "-"))
+
+combined_2018 <- cbind(final_rm, try)
+
+sep_2018 <- combined_2018 %>% 
+  separate(value, c("year", "month", "day"), "-")
+
+time_2018 <- combined_2018[-c(1:82),]
+
+# circular function: smaller gap between degrees (wave data is in degrees) large gap in numerical gap.
+# eg large numerical gap between 365 and 2, but the gap is small between 365 degrees and 2 degrees
+
+# total number of casts over time series
+ncasts_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = n_casts)) +
+  labs(x = "Date", y = "Peak period (s)", title = "") +
+  theme_bw()
+
+ncasts_tcf <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = n_casts)) +
+  labs(x = "Date", y = "TCF (s)", title = "") +
+  theme_bw()
+
+ncasts_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = n_casts)) +
+  labs(x = "Date", y = "Significant wave height (m)", title = "") +
+  theme_bw()
+
+# mean diameter of holdfast over time series
+diam_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date),
+                                         y = 0, yend = mean_diam)) +
+  labs(x = "Date", y = "Peak period (s)", title = "") +
+  theme_bw()
+
+diam_tcf <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = mean_diam)) +
+  labs(x = "Date", y = "TCF (s)", title = "") +
+  theme_bw()
+
+diam_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = mean_diam)) +
+  labs(x = "Date", y = "Significant wave height (m)", title = "") +
+  theme_bw()
+
+# mean stipe length over time series
+stipe_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length),
+             na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = mean_st_length)) +
+  labs(x = "Date", y = "Peak period (s)", title = "") +
+  theme_bw()
+
+stipe_tcf <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), 
+             na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = mean_st_length)) +
+  labs(x = "Date", y = "TCF (s)", title = "") +
+  theme_bw()
+
+stipe_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), 
+             na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = mean_st_length)) +
+  labs(x = "Date", y = "Significant wave height (m)", title = "") +
+  theme_bw()
+
+# mean frond length over time series
+frond_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), 
+             na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = mean_fr_length)) +
+  labs(x = "Date", y = "Peak period (s)", title = "") +
+  theme_bw()
+
+frond_tcf <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), 
+             na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = mean_fr_length)) +
+  labs(x = "Date", y = "TCF (s)", title = "") +
+  theme_bw()
+
+frond_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), 
+             na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = mean_fr_length)) +
+  labs(x = "Date", y = "Significant wave height (m)", title = "") +
+  theme_bw()
+```
+
+```{r echo=FALSE, fig.cap="Time series of peak period (s) over the study period with corresponding weekly beach-cast recordings. **A** shows the total number of casts, **B** is the mean holdfast diameter, **C** is mean stipe length, and **D** is mean frond length.", message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+ggarrange(ncasts_tp, diam_tp, stipe_tp, frond_tp,
+          labels = c("A", "B", "C", "D"))
+```
+
+As suggested in figure 3, no clear pattern exists between peaks and dips in peak wave period. Beach-cast observations and the accompanying morphometric measurments appear to fluctuate in random fashion over the study period.
+
+```{r echo=FALSE, fig.cap="Time series of TCF? over the study period with corresponding weekly beach-cast recordings. **A** shows the total number of casts, **B** is the mean holdfast diameter, **C** is mean stipe length, and **D** is mean frond length.", message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+ggarrange(ncasts_tcf, diam_tcf, stipe_tcf, frond_tcf,
+          labels = c("A", "B", "C", "D"))
+```
+
+A similar random pattern is observed in figure 4 when looking at TCF? (frequency?) over the study period. 
+
+```{r echo=FALSE, fig.cap="Time series of significant wave height (m) over the study period with corresponding weekly beach-cast recordings. **A** shows the total number of casts, **B** is the mean holdfast diameter, **C** is mean stipe length, and **D** is mean frond length.", message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+ggarrange(ncasts_hs, diam_hs, stipe_hs, frond_hs,
+          labels = c("A", "B", "C", "D"))
+```
+
+Lastly, in figure 5, no clear pattern is observed as also suggested in figure 3 and figure 4. 
+
+Our hypotheses suggest that, simply put, where peaks in wave parameters occur we would expect a surplus of casts and larger morphological properties. However, figures 3, 4, and 5 do not supoort this notion and therefore, it can be suggested that overall, the number of casts and morphological properties of casts seem as if they are not dictated by the various wave parameters included in this analysis. 
+
+```{r include=FALSE}
+wave_16_17_18 <- wave_all %>% 
+  filter(Date %in% c("2016", "2017", "2018")) %>% 
+  group_by(Time)
+
+daily_16_17_18 <- wave_16_17_18 %>% 
+  group_by(Date, Time, HMO) %>% 
+  summarise(tp_circ = mean.circular(circular(TP)),
+            tcf_circ = mean.circular(circular(TCF)),
+            hs_circ = mean.circular(circular(HS))) %>% 
+  mutate(year = "2018")
+
+rm_1 <- daily_16_17_18[, -1:-2]
+final_rm_1 <- rm_1[, -4]
+
+try_1 <- as.tibble(paste(daily_16_17_18$Date, daily_16_17_18$Time, daily_16_17_18$HMO, sep = "-"))
+
+combined_16_17_18 <- cbind(final_rm_1, try_1)
+
+sep_16_17_18 <- combined_16_17_18 %>% 
+  separate(value, c("year", "month", "day"), "-")
+
+wave_16 <- wave_all %>% 
+  filter(Date == "2016") %>% 
+  group_by(Time)
+
+daily_16 <- wave_16 %>% 
+  group_by(Date, Time, HMO) %>% 
+  summarise(tp_circ = mean.circular(circular(TP)),
+            tcf_circ = mean.circular(circular(TCF)),
+            hs_circ = mean.circular(circular(HS))) %>% 
+  mutate(year = "2016")
+
+rm_2 <- daily_16[, -1:-3]
+
+try_2 <- as.tibble(paste(daily_16$Date, daily_16$Time, daily_16$HMO, sep = "-"))
+
+combined_16 <- cbind(rm_2, try_2)
+
+sep_16 <- combined_16 %>% 
+  separate(value, c("year", "month", "day"), "-")
+
+ttime_16 <- combined_16[-c(213:366),]
+ttime_16_1 <- ttime_16[-c(1:83),]
+
+wave_17 <- wave_all %>% 
+  filter(Date == "2017") %>% 
+  group_by(Time)
+
+daily_17 <- wave_17 %>% 
+  group_by(Date, Time, HMO) %>% 
+  summarise(tp_circ = mean.circular(circular(TP)),
+            tcf_circ = mean.circular(circular(TCF)),
+            hs_circ = mean.circular(circular(HS))) %>% 
+  mutate(year = "2017")
+
+rm_3 <- daily_17[, -1:-3]
+
+try_3 <- as.tibble(paste(daily_17$Date, daily_17$Time, daily_17$HMO, sep = "-"))
+
+combined_17 <- cbind(rm_3, try_3)
+
+sep_17 <- combined_17 %>% 
+  separate(value, c("year", "month", "day"), "-")
+
+time_17 <- combined_17[-c(212:365),]
+time_17_1 <- time_17[-c(1:82),]
+
+daily_18 <- wave_2018_1 %>% 
+  group_by(Time, HMO) %>% 
+  summarise(tp_circ = mean.circular(circular(TP)),
+            tcf_circ = mean.circular(circular(TCF)),
+            hs_circ = mean.circular(circular(HS))) %>% 
+  mutate(year = "2018")
+
+rm_4 <- daily_18[, -1:-2]
+
+try_4 <- as.tibble(paste(daily_18$year, daily_18$Time, daily_18$HMO, sep = "-"))
+
+combined_18 <- cbind(rm_4, try_4)
+
+time_18 <- combined_18[-c(1:82),]
+
+merge_try <- rbind(combined_16, combined_17, combined_18)
+```
+
+```{r include=FALSE}
+seasons_16_17_18 <- sep_16_17_18 %>% 
+  mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
+                       ifelse(month %in% c("03", "04", "05"), "Autumn",
+                              ifelse(month %in% c("06", "07", "08"), "Winter",
+                                     ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
+
+seasons_16 <- sep_16 %>% 
+  mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
+                         ifelse(month %in% c("03", "04", "05"), "Autumn",
+                                ifelse(month %in% c("06", "07", "08"), "Winter",
+                                       ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
+
+season_16_rm <- as.data.frame(seasons_16[, -1:-6])
+
+sea_16_rm <- season_16_rm %>% 
+  select(season = `seasons_16[, -1:-6]`)
+
+sea_16 <- as.data.frame(sea_16_rm[-c(213:366),])
+sea_16_1 <- sea_16[-c(1:83),]
+
+season_16_1 <- cbind(ttime_16_1, sea_16_1)
+
+seasons_17 <- sep_17 %>%
+  mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
+                         ifelse(month %in% c("03", "04", "05"), "Autumn",
+                                ifelse(month %in% c("06", "07", "08"), "Winter",
+                                       ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
+
+season_17_rm <- as.data.frame(seasons_17[, -1:-6])
+
+sea_17_rm <- season_17_rm %>% 
+  select(season = `seasons_17[, -1:-6]`)
+
+sea_17 <- as.data.frame(sea_17_rm[-c(212:365),])
+sea_17_1 <- sea_17[-c(1:82),]
+
+season_17_1 <- cbind(time_17_1, sea_17_1)
+
+seasons_18 <- sep_2018 %>% 
+  mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
+                         ifelse(month %in% c("03", "04", "05"), "Autumn",
+                                ifelse(month %in% c("06", "07", "08"), "Winter",
+                                       ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
+
+season_18_rm <- as.data.frame(seasons_18[, -1:-6])
+
+sea_18_rm <- season_18_rm %>% 
+  select(season = `seasons_18[, -1:-6]`)
+
+sea_18 <- sea_18_rm[-c(1:82),]
+
+season_18 <- cbind(time_18, sea_18)
+```
+
+```{r include=FALSE}
+hs_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "Date", y = "HS (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~sea_16_1) +
+  theme_bw()
+
+hs_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "Date", y = "HS (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ sea_17_1) +
+  theme_bw()
+
+hs_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "Date", y = "HS (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ sea_18) +
+  theme_bw()
+
+# ggarrange(hs_season_2016, hs_season_2017, hs_season_2018, nrow = 3, ncol = 1)
+
+tp_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "Date", y = "TP (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ sea_16_1) +
+  theme_bw()
+
+tp_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "Date", y = "TP (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ sea_17_1) +
+  theme_bw()
+
+tp_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "Date", y = "TP (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) + 
+  facet_wrap(~ sea_18) +
+  theme_bw()
+
+# ggarrange(tp_season_2016, tp_season_2017, tp_season_2018, nrow = 3, ncol = 1)
+
+tcf_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = tcf_circ, 
+                                           group = 1)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "Date", y = "TCF (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ sea_16_1) +
+  theme_bw()
+
+tcf_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = tcf_circ, 
+                                           group = 1)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "Date", y = "TCF (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ sea_17_1) +
+  theme_bw()
+
+tcf_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "Date", y = "TCF (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ sea_18) +
+  theme_bw()
+
+# ggarrange(tcf_season_2016, tcf_season_2017, tcf_season_2018, nrow = 3, ncol = 1)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of peak period (s) across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**)."}
+ggarrange(tp_season_2016, tp_season_2017, tp_season_2018, 
+          nrow = 3, ncol = 1,
+          labels = c("A", "B", "C", "D"))
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison TCF? across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**)."}
+ggarrange(tcf_season_2016, tcf_season_2017, tcf_season_2018, 
+          nrow = 3, ncol = 1,
+          labels = c("A", "B", "C", "D"))
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of significnat wave height (m) across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**)."}
+ggarrange(hs_season_2016, hs_season_2017, hs_season_2018, 
+          nrow = 3, ncol = 1,
+          labels = c("A", "B", "C", "D"))
+```
+
+ANOVA and Tukey HSD post-hoc still to be done once I have received all the wave data. The results from these statistical tests will be used to explain figure 6, 7, and 8.
+
+# Discussion
+
+The aim of this study was to determine if, when and how beach-cast kelp differs in composition over months spanning across seasons. Our results, however, do not concur with our expected outcomes and thus our hypotheses can be discounted. Our results showed that weekly kelp depositions varied and this is because initailly, a large number of kelp was deposited onto he beach and hereafter, much fewer kelp were observed on the beach. This result was not only insignifcant but was the opposite of our expected outcome as very few and in several cases, no kelp was observed even in the peak of winter (usually August). 
+
+A reason for this could be due to the first flush theory. This theory states that throughout autumn, kelp forests are under stress by the forces brought about waves acting on them. After being exposed to these forced for an extended period of time, the kelp eventually break off or dislodge at an event when wave action may be more pronounced. As a result, a large number of kelp are then transported from their source population and are deposited onto beaches or drift into the deep ocean. 
+
+This first flush theory goes against our initial theory of seasonal-linked kelp deposits. Another theory that exists is that of constant flushing where kelp deposits onto beached are constant in quantity and temporally.
+
+total length of kelp - drag
+
+holdfast - stronger attachment
+
+aggregates - also stronger attachment? bc bugger holdfast too
+
+
+
+# References 
+
+1. Barreiro F, Gómez M, Lastra M, López J, De la Huz R. 2011. Annual cycle of wrack supply to sandy beaches: effect of the physical environment. _Marine Ecology Progress Series_ 433: 65--74.
+
+2.	Bekkby T, Rinde E, Gundersen H, Norderhaug K, Gitmark J, Christie H. 2014. Length, strength and water flow: relative importance of wave and current exposure on morphology in kelp _Laminaria hyperborea_. _Marine Ecology Progress Series_ 506: 61--70.
+
+3.	de Bettignies T, Wernberg T, Lavery P, Vanderklift M, Gunson J, Symonds G, Collier N. 2015. Phenological decoupling of mortality from wave forcing in kelp beds. _Ecology_ 96: 850--861.
+
+4. Bustamante RH, Branch GM, Eekhout S. 1995. Maintenance of an exceptional intertidal grazer biomass in South Africa: subsidy by subtidal kelps. _Ecology_ 76: 2314--2329.
+
+5. Bustamante RH, Branch GM. 1996. The dependence of intertidal consumers on kelp-derived organic matter on the west coast of South Africa. _Journal of Experimental Marine Biology and Ecology_ 196: 1--28.
+
+6. Denny M, Cowen B. 1997. Flow and flexibility. II. The roles of size and shape in determining wave forces on the bull kelp _Nereocystis luetkeana_. _Journal of Experimental Biology_ 200: 3165--3183.
+
+7. Dugan JE, Hubbard DM, Page HM, Schimel JP. 2011. Marine macrophyte wrack inputs and dissolved nutrients in beach sands. _Estuaries and Coasts_ 34: 839--850.
+
+8. Field J, Griffiths C, Linley E, Carter R, Zoutendyk P. 1977. Upwelling in a nearshore marine ecosystem and its biological implications. _Estuarine and Coastal Marine Science_ 11: 133--150.
+
+9. Jones A, Gladstone W, Hacking N. 2004. Sandy-beach ecosystems and climate change: potential ecological consequences and management implications. In Coast to Coast Conference, Hobart, Tasmania, CRC.
+
+10.	Kirkman H, Kendrick G. 1997. Ecological significance and commercial harvesting of drifting and beach-cast macro-algae and seagrasses in Australia: a review. _Journal of Applied Phycology_ 9: 311--326.
+
+11.	Klosinski J. 2015. Deposition, persistence, and utilization of kelp wrack along the central California coast. Masters. California State University, Monterey Bay.
+
+12. Koop K, Griffiths CL. 1982 The relative significance of bacteria, meio- and macrofauna on an exposed sandy beach. _Marine Biology_ 66: 295--300.
+
+13. Koop K, Newell RC, Lucas MI. 1982. Biodegradation and carbon flow based on kelp (Ecklonia maxima) debris in a sandy beach microcosm. _Marine Ecology Progress Series_ 7: 315--326.
+
+14. Orr M, Zimmer M, Jelinski DE, Mews M. 2005. Wrack deposition on different beach types: spatial and temporal variation in the pattern of subsidy. _Ecology_ 86: 1496--1507.
+
+15. Robertson AI, Hansen JA. 1982. Decomposing Seaweeds: A nuisance or a vital link in coastal food chains? CSIRO Marine Laboratories Research Report 75--83.
+
+16. Soares AG, Schlacher TA, McLachlan A. 1997. Carbon and nitrogen exchange between sandy beach clams (_Donax serra_) and kelp beds in the Benguela coastal upwelling region. _Marine Biology_ 127: 657--664.
+
+17. Stegenga H, Bolton JJ, Anderson RJ. 1997. Seaweeds of the South African west coast. _Contrib. Bolus Herb_ 18: 3--637.
+
+18. Steneck R, Graham M, Bourque B, Corbett D, Erlandson J, Estes J, Tegner M. 2002. Kelp forest ecosystems: biodiversity, stability, resilience and future. _Environmental Conservation_ 29: 436 -- 459.
+
+19.	Thomsen M, Wernberg T, Kendrick G. 2004. The effect of thallus size, life stage, aggregation, wave exposure and substratum conditions on the forces required to break or dislodge the small kelp _Ecklonia radiata_. _Botanica Marina_ 47: 454--460.
+
+20. Vadas RL, Wright WA, Miller SL. 1990. Recruitment of _Ascophyllum nodosum_: wave action as a source of mortality. _Marine Ecology Progress Series_ 61: 263-−272
+
+21. Velimirov B, Field J, Griffiths C, Zoutendyk P. 1977. The ecology of kelp bed communities in the Benguela upwelling system. _Helgoländer Wissenschaftliche Meeresuntersuchungen_ 30: 495--518.
+
+22. Wernberg T. 2005. Holdfast aggregation in relation to morphology, age, attachment and drag for the kelp _Ecklonia radiata_. _Aquatic Botany_ 82: 168--180.
+
+23. Wheeler WN. 1988. Algal productivity and hydrodynamics -- a synthesis. _Progress in Phycological Research_ 6: 23--58.
+
+## Other things to think about/ might want to add:
+*	What are the specific wave parameters contributing to mortality and transport of kelp?
+    + E.g. peak period, significant wave height, etc. (See paper Christo sent)
+* Do wave these parameters play an equal role in kelp mortality? (redundancy analysis?)
+* How do they end up on beaches and this beach specifically? Or, why did we not see many on this beach? (Look at exposure at Muizenberg beach?)
+*	Ways kelp try and overcome this wave dislodgement
+    + Size (larger or smaller)
+    + Aggregates
+    + Overall, increasing drag
+* Only ecklonia observed, why are there not as many laminaria washing up? (differences in morphology and depths they grow in)
+
