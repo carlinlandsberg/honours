@@ -24,9 +24,7 @@ knitr::opts_chunk$set(echo = TRUE, fig.pos = "h")
 
 # Introduction
 
-## Ecology and morphology of kelp
-
-Kelp beds dominate a significant amount of the world's rocky shore ecosystems (Steneck et al. 2002). Along the South African coast, kelp beds occur extensively on Western Cape peninsula coasts (Field et al. 1977, Velimirov et al. 1977). These kelp beds play a large role in the functioning of their immediate ecosystems and the ecosystems adjacent to them. It is well known that kelp beds play a role in trophic structuring of systems as they are a source of energy to the aforementioned systems (Field et al. 1977, Koop et al. 1982, Koop and Griffiths 1982, Robertson and Hanson 1982).
+Kelp beds dominate a significant amount of the world's rocky shore ecosystems (Steneck et al. 2002). In South Africa, kelp beds occur extensively along the Western Cape, from De Hoop to Port Nolloth (Bolton et al., 2012, Field et al. 1977, Velimirov et al. 1977). These kelp beds play a large role in the functioning of their immediate ecosystems and the ecosystems adjacent to them. It is well known that kelp beds play a role in trophic structuring of habitats as they are a source of energy to the aforementioned systems (Field et al. 1977, Koop et al. 1982, Koop and Griffiths 1982, Robertson and Hanson 1982).
 
 ```{r echo=FALSE, fig.cap="General morphology of kelp.", fig.height=20, fig.width=2.5}
 library(png)
@@ -38,29 +36,17 @@ img <- readPNG("kelp.png")
 
 Figure 1 shows that kelps, such as _Ecklonia maxima_, have the morphology consisting of a holdfast, stipe and fronds/blades, forming the thallus. The holdfast acts as the anchor or 'root' attaching the thallus to a substrate. The stipe is narrow and hollow reaching up to 15m in length (Stegenga et al. 1997). The stipe broadens toward the top forming a pneumatocyst, a gas-filled chamber, which then flatten into a primary blade with secondary blades or fronds branching off from this. The pneumatocyst adds buoyancy to the top of the kelp such that the mass of fronds/blades floats at the surface of the water during low tide to aid photosynthesis (Denny et al. 1997). It has also been observed that multiple kelp individuals share a single holdfast and these assemblages are known as aggregates. Previous studies have shown that these aggregations may be useful in overcoming stress brought about by strong wave action (Thomsen et al. 2004, Wernberg 2005). 
 
-## The role of waterflow in kelp growth and mortality
+Waterflow is an important factor influencing the growth of kelp as it may indirectly affect factors such as light levels, photosynthesis, and nutrient delivery and uptake (Wheeler 1988), as well as affecting the settlement and recruitment of gametes and spores (Vadas et al. 1990). Kelp mortality is brought about by grazing, excessive epiphytism, old age, commercial harvesting, and by breakage and dislodgement due to wave and swell activity and strong water flow (Denny et al. 1997, Bekkby et al. 2014, de Bettignies et al. 2015). Here we use the term 'breakage' to refer to the breaking of the stipe at any point above the holdfast, with the holdfast remaining attached *in situ*, while 'dislodgement' implies the loss of an entire kelp when the whole plant is 'uprooted' with the holdfast still connected to the stipe. Because wave-driven mortality occurs as a result of hydrodynamic forces acting upon the kelp thallus, it can be inferred that various wave parameters, possibly in concert, would result in either of the two wave-driven modes of mortality. Furthermore, it can also be suggested that presence of aggregates aid in preventing this mortality as the holdfast supporting multiple individuals are generally large in size and are thus not easily stirred by wave action.
 
-Waterflow is an important factor in growth of kelp as it may indirectly affect factors such as light levels, photosynthesis and nutrient uptake (Wheeler 1988) and settlement and recruitment (Vadas et al. 1990). Kelp mortality is brought about by grazing, old age, epiphytism, and commercial harvesting. However, in this case, we will be focussing on breakage and dislodgement as a mode of kelp mortality where breakage refers to the breaking of the stipe at any point and dislodgement is when the entire kelp is "uprooted" with the holdfast still connected to the stipe. Both of these modes of detatchment is as a direct result of strong wave action or waterflow (Denny et al. 1997, Bekkby et al. 2014, de Bettignies et al. 2015). 
+The end result of the aforementioned mortality events is the transport of the broken and dislodged plants to adjacent ecosystems (on-shore and off-shore). Some of the material is broken up and decomposed to particulate organic matter and is available as a food or energy source to intertidal organisms and zooplankton (Bustamante and Branch 1996, Dyer 2018, Soares et al. 1997). Another fraction of the detrital kelp is transported to the deep sea as masses known as kelp rafts (Smith 2002), and the balance washes up on sandy and rocky intertidal shores. The kelp that washes up onto sandy shores, usually permanently deposited by tidal action, is known commonly as beach-cast kelp or kelp wracks (Jones et al. 2004, Orr et al. 2005, Dugan et al. 2011). It is this beach cast kelp that is the subject of this paper.
 
-Wave-driven mortality occurs either when breakage occurs at the stipe-holdfast junction or where the entire individual is dislodged from the holdfast (de Bettignies et al. 2015). It can thus be inferred that various wave parameters, possibly in concert, would result in either of the two wave-driven modes of mortality. Furthermore, it can also be suggested that presence of aggregates aid in preventing this mortality as the holdfast supporting multiple individuals are generally large in size and are thus not easily stirred by wave action.
+Beach-cast kelp is of high importance in sandy beach ecosystems where they provide a source of nutrients and refuge for organisms living in these ecosystems (Bustamante et al. 1995, Jones et al. 2004, Dugan et al. 2011). Some of this material is also collected in for use in a number of economic-driven endeavours, such as in the production of alginate, or as feeds/fertilisers in the agricultural and aquacultural sectors. Therefore, beach-cast kelp have socioeconomic importance (Kirkman and Kendrick 1997) and as a result, monitoring of ecosystems that receive input of kelp wrack is important.
 
-Upon all the aforementioned mortality events, the kelp that has been broken or dislodged are then transported to adjacent ecosystems that use kelp detritus as a food or energy source (Bustamante and Branch 1996, Soares et al. 1997). A large number of these are transported to the deep sea as masses known as kelp rafts (Smith 2002) and another proportion is transported and deposited onto sandy beach ecosystems. The kelp that has been washed up onto sandy shores, usually permanently deposited by tidal action, is known commonly as beach-cast kelp or kelp wracks (Jones et al. 2004, Orr et al. 2005, Dugan et al. 2011).
+The amount of wrack washing up on beaches depends on how productive areas adjacent or close to these beaches are. It can thus be assumed that beaches near areas with high production of macroalgae, such as kelps forests, will receive large amounts of wrack inputs (Barreiro et al. 2011). In this project, we propose that the amounts of kelp washing up on the shores also highlight the intensity and characteristics of the hydrodynamic forces that are responsible for causing the breakage and dislodgement of kelp from the habitats where they are produced. Since wrack input on beaches is a result of interactions among physical factors (of the hydrodynamic regime) and the morphometric properties of kelp (*e.g.* stipe and frond length, stipe thickness, size of the holdfast), measuring the morphometic properties of beach-cast kelp and interpreting these data within a framework of knowledge of the wave environment derived from climatologies and time series of hindcast modelled wave parameters, will provide us with an insight into how the nearshore hydrodynamics shape kelp population dynamics. This information will contribute towards quantify the variability in the deposition of wrack on beaches, which is generally still unknown (Klosinski 2015).
 
-## Beach-cast kelp
+<!-- Beach-cast kelp distribution is generally stochastic in nature and this, along with amount of beach-cast kelp, fluctuates seasonally and is highly variable over time scales (Kirkman and Kendrick 1997). Thus, this variability in wrack input on sandy beaches may be as a result of interactions between factors such as wave exposure and seasonality (Barreiro et al. 2011). -->
 
-Beach-cast kelp is known to be of high importance in sandy beach ecosystems where they provide a source of nutrients and refuge for organisms living in these ecosystems (Bustamante et al. 1995, Jones et al. 2004, Dugan et al. 2011). Beach-cast kelp is also harvested in some areas and may be used in a number of economic-driven fields. For example, beach-cast kelp may be used in the production of alginate and agar, in agricultural materials such as cattle feed and fertliser, and in aquaculture as it may be used as feed for abalone hatcheries. Therefore, beach-cast kelp have socioeconomic importance (Kirkman and Kendrick 1997) and as a result, monitoring of these systems with input of kelp wrack is important.
-
-The amount of wrack washing up on beaches depends on how productive areas adjacent or close to these beaches are. It can thus be assumed that beaches near areas with high production of macroalgae, such as kelps forests, will receive large amounts of wrack inputs (Barreiro et al. 2011). 
-
-Due to the fluctuation of winds and currents over a range of spatial and temporal scales, it is difficult to measure and quantify wracks (Kirkman and Kendrick 1997). Wrack input on beaches are a result of complex interactions among physical factors that all play a role in the amount of wrack washed up on beaches (Barreiro et al. 2011). Thus, according to Klosinski (2015), few efforts have been made to quantify the variability in the deposition of wrack on beaches. 
-
-Beach-cast kelp distribution is generally stochastic in nature and this, along with amount of beach-cast kelp fluctuates seasonally and is highly variable over time scales (Kirkman and Kendrick 1997). Thus, this variability in wrack input on sandy beaches may be as a result of interactions between factors such as wave exposure and seasonality (Barreiro et al. 2011).
-
-## Research aims and objectives
-
-The intention of this study is to quantify the deposition of kelp on beaches over a seasonal scale spanning across autumn, winter, and a portion of spring. Over this period, varying wave parameters will be taken into account as it can be possibly be inferred that wave action differs significantly seasonlly. Thus, the aim is to observe the number and size of kelp washing up, presence of holdfast (i.e. point of breakage of kelp and size of dislodged holdfasts), and presence of aggregates (i.e. individuals sharing a holdfast) weekly across the aforementioned seasons in order to determine if significant differences occur and why and/or when they occur. 
-
-This will be done by establishing how the amount of kelp washing up varies over time, and specifically over a seasonal scale and how the morphologies of these individuals differ over the seasons (e.g. different sizes of kelp washing up in different seasons) and the fluctuating wave parameters that occur over various timescales. From these observations, we can infer how properties such as size (length), holdfast size and presence of aggregates sharing a holdfast may play a role in overcoming stressors in their environment such as wave-driven breakage and dislodgement. 
+The intention of this study is to quantify the deposition of kelp on beaches over a seasonal scale spanning from Austral late summer until the onset of spring. Over this period, the changing nature of the wave climate as it progresses to higher levels of wave and swell energy in winter will be recorded. These data will then be related to weekly measurments of beach cast kelp, together with the kelps' morphometric properties. From these observations we will infer how morphometric properties of the kelps such as size (length), holdfast size, and presence of aggregates sharing a holdfast may play a role in overcoming stressors in their environment such as wave-driven breakage and dislodgement.
 
 We hypothesize that over the sampling period, we expect to see a higher number of kelp washing up on the beach, possibly due to stronger wave action in winter months dislodging more individuals. We also expect to see larger kelp washing up on the beach due to strong waves dislodging even larger individuals (However, something to consider is that smaller kelp may withstand wave stress, so could much smaller kelp indicate stronger wave action? See de Bettignies et al. (2015)). We expect to see an increased number of holdfasts washing up inferring that individuals are completely dislodged (i.e. "uprooted") due to stronger wave action in winter months instead of breaking off above the holdfast as a result of weaker wave action during summer.
 
@@ -106,9 +92,9 @@ final_map
 ```
 
 
-As per figure 2, this study was conducted at Muizenberg Beach (3406'24.2''S 1828'29.3''E) in an area where kelp wrack is not cleared by the City of Cape Town (CoCT) beach cleaning teams. This site has no adjacent kelps beds to the beach but the area has been known to experience large amounts of beach-cast kelp on a regular basis.
+The study was conducted at Muizenberg Beach (3406'24.2''S 1828'29.3''E) in an area where kelp wrack is not cleared by the City of Cape Town (CoCT) beach cleaning teams (Figure 2). This site has no adjacent kelps beds to the beach but the area has been known to experience large amounts of beach-cast kelp on a regular basis.
 
-Along the beach, a 10 m wide section was measured using a 10 m long rope held perpendicular to the edge of the low tide line. Two people, each holding one end of the rope, then proceeded to walk along the transect of ~250 m across the beach parallel to the low tide line. The set up of the study area is illustrated in figure 2 below.
+A 10 m wide section along the beach was measured using a 10 m long rope held perpendicular to the edge of the low tide line. Two people, each holding one end of the rope, then proceeded to walk along the strip for a distance of 250 m along the beach parallel to the low tide line (Figure 3).
 
 ```{r echo=FALSE, fig.cap="Set-up of area sampled at Muizenberg Beach.", fig.height=40, fig.width=5}
 library(png)
@@ -120,23 +106,23 @@ img2 <- readPNG("set-up.png")
 
 ## Beach-cast recordings
 
-Along this transect, every kelp that was found within 10 m from the low tide edge was counted and various morphological charateristics were measured and recorded. These morphological characteristics included holdfast presence or absence, diameter of holdfast, stipe length, and longest frond length. Additionally, each kelp was numbered and if more than one individual was present on the same holdfast (i.e. aggregates), it was recorded with an associated number. For example, if three individuals share a holdfast, it was recorded as 1.1, 1.2, and 1.3. Stipe and frond length were measured and recorded for each kelp individual in the aggregate, provided the stipe length was at least 10cm long as these may be juveniles.
+Every kelp that was found within this 250 m long × 10 m wide strip was counted and various morphological charateristics were measured and recorded. These morphological characteristics included holdfast presence or absence, diameter of holdfast, stipe length, and longest frond length. Additionally, each kelp was numbered and if more than one individual was present on the same holdfast (*i.e.* aggregates) and recorded with an associated number. For example, if three individuals share a holdfast, it was recorded as 1.1, 1.2, and 1.3. Stipe and frond length were measured and recorded for each kelp individual in the aggregate, provided the stipe length was at least 10cm long.
 
-Since wave climate may have varied seasonally, this method was repeated weekly over the period from 2018-03-24 until 2018-09-30. We separated seasons as December -- February being summer, March -- May as autumn, June -- August as winter, and September -- November being spring. Thus, our study period took place from autumn until the begining of spring. Consequently, no samples were collected in summer months. This study period extending across several seasons allowed for temporal comparison of  morphological characteristics amongst beach-cast kelp over a varying wave climate.
+Since wave climate may have varied seasonally, this method was repeated weekly over the period from 2018-03-24 to 2018-09-30. We separated seasons as summer (December-February), autumn (March-May), winter (June-August), and spring (September-November). Thus, our study period took place from autumn until the begining of spring. Consequently, no samples were collected in summer months. This study period extending across several seasons allowed for temporal comparison of  morphological characteristics amongst beach-cast kelp over a varying wave climate.
 
 ## Wave climate
 
-Wave data at a latitude 34.50000 and a longitude of 18.50000 was obtained from Christo Rautenbach of the South African Weather Service (SAWS). These ocean wave predictions of the National Centers for Environmental Prediction (NCEP) were made using the wave model WaveWatch III. We obtained data from 2005-02-01 to 2018-08-01. Over this time, data was present daily at a three hour resolution. Speciifc wave parameters were measured, namely, H1F?, peak period in seconds, TZ?, TCF?, TBF?, mean direction in degrees TNorth, directional spreading in degrees, significant wave height in meters, and maximum wave height in meters. However, data were missing for several parameters and thus further analyses were run on only peak period (s), TCF?, and significant wave height (m). 
+Wave data at a latitude 34.50000°S and a longitude of 18.50000°E were obtained from Dr. Christo Rautenbach of the South African Weather Service (SAWS). These ocean wave hindcasts were derived from the National Centers for Environmental Prediction (NCEP) wind/wave data (refs.) feeding into the WaveWatch III wave model (refs.). We obtained data from 2005-02-01 to 2018-08-01. Over this time, data were present daily at a three-hourly resolution. Specific wave parameters were measured, namely, H1F?, peak period in seconds, TZ?, TCF?, TBF?, mean direction, directional spreading, significant wave height, and maximum wave height. However, data were missing for several parameters and thus further analyses were run on only peak period (s), TCF?, and significant wave height (m).
 
 ## Statistical analysis
 
 ### _Time series_
-All exploratory and statistical analyses were performed in RStudio version 1.1.442 (17 October 2018; http://www.rstudio.com/). The data and comprehensive script used for setting up the data correctly, data analyses, and production of figures are to be found at https://github.com/carlinlandsberg/honours.
+All exploratory and statistical analyses were performed in R 3.5.1 (R Core Team 2018). The data and comprehensive script used for setting up the data correctly, data analyses, and production of figures are to be found at https://github.com/carlinlandsberg/honours.
 
-Due to the nature of the resolution of the wave data, the data had to be converted to circular data in order to have one data reading per day instead of in three hour intervals. Hereafter, we ran a time series looking specifically at the study period of 2018-03-24 to 2018-09-30. We plotted wave peak period (s), wave frequency (TCF, *not sure about this*), and significant wave height (m) for each day within the sudy period. Following this, we overlayed the beach-cast data that was collected. Therefore, total number of casts, mean holdfast diameter, and mean stipe and frond length were plotted on days of data collection (i.e. weekly) over the total time series.
+Due to the nature of the resolution of the wave data, the data had to be converted to circular data in order to have one data reading per day instead of in three hour intervals. Hereafter, we ran a time series looking specifically at the study period of 2018-03-24 to 2018-09-30. We plotted wave peak period, wave frequency (TCF, *not sure about this*), and significant wave height for each day within the sudy period. Following this, we overlayed the beach-cast data that were collected, namely, the total number of casts, mean holdfast diameter, and mean stipe and frond length were plotted on days of data collection (_i.e._ weekly) over the total time series.
 
 ### _Yearly seasonal comparison_
-In addition to the time series, we explored the previous two years, namely, 2016 and 2017 in an attempt to determine if any significant seasonal changes in wave climate exists in 2018 in comparison to 2016 and 2017. Over these three years, dates corresponding with that of the study period in 2018 were separated into their respective seasons as previously discussed. A single factor ANOVA was then performed to statistically determine if significant differences exist among seasons each year. Hereafter, a Tukey HSD post-hoc test was performed to determine where these significant differences exist. 
+In addition to the time series, we explored the previous two years, namely, 2016 and 2017 in an attempt to determine if any significant seasonal changes in wave climate exists in 2018 in comparison to 2016 and 2017. Over these three years, dates corresponding with that of the study period in 2018 were separated into their respective seasons as previously discussed. A single factor ANOVA was then performed to statistically determine if significant differences exist among seasons each year. Hereafter, a Tukey HSD _post-hoc_ test was performed to determine where these significant differences exist. 
 
 \newpage 
 # Results
@@ -148,7 +134,7 @@ library(pgirmess)
 library(circular)
 library(zoo)
 
-casts.in <- read.csv2("/Users/ianlandsberg/Desktop/Working/_honours/data/project_data_working_copy.csv")
+casts.in <- read.csv2("../data/project_data_working_copy.csv") ## use relative file paths, which is what RStudio projects allows! Else I cannot run the script on my comnputer!!!
 
 casts <- casts.in %>%
   mutate(date = as.Date(date, "%d-%b-%y")) %>%
@@ -171,7 +157,7 @@ casts.summary <- casts %>%
 
 ```{r include=FALSE}
 wave_all_1 <- read_table2("/Users/ianlandsberg/Desktop/Working/_honours/ChristoRautenbach_NCEP_180904/FB3_all_wav.txt", 
-                           skip = 6)
+                           skip = 6) 
 
 wave_all <- wave_all_1[-c(1, 2),]
 
@@ -361,14 +347,14 @@ ggarrange(ncasts_tp, diam_tp, stipe_tp, frond_tp,
           labels = c("A", "B", "C", "D"))
 ```
 
-As suggested in figure 3, no clear pattern exists between peaks and dips in peak wave period. Beach-cast observations and the accompanying morphometric measurments appear to fluctuate in random fashion over the study period.
+No clear pattern exists between peaks and dips in peak wave period (Figure 4). Beach-cast observations and the accompanying morphometric measurments appear to fluctuate in random fashion over the study period.
 
 ```{r echo=FALSE, fig.cap="Time series of TCF? over the study period with corresponding weekly beach-cast recordings. **A** shows the total number of casts, **B** is the mean holdfast diameter, **C** is mean stipe length, and **D** is mean frond length.", message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
 ggarrange(ncasts_tcf, diam_tcf, stipe_tcf, frond_tcf,
           labels = c("A", "B", "C", "D"))
 ```
 
-A similar random pattern is observed in figure 4 when looking at TCF? (frequency?) over the study period. 
+A similar seemingly random pattern is observed in Figure 5 when looking at TCF? (frequency?) over the study period.
 
 ```{r echo=FALSE, fig.cap="Time series of significant wave height (m) over the study period with corresponding weekly beach-cast recordings. **A** shows the total number of casts, **B** is the mean holdfast diameter, **C** is mean stipe length, and **D** is mean frond length.", message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
 ggarrange(ncasts_hs, diam_hs, stipe_hs, frond_hs,
@@ -667,6 +653,9 @@ aggregates - also stronger attachment? bc bugger holdfast too
 13. Koop K, Newell RC, Lucas MI. 1982. Biodegradation and carbon flow based on kelp (Ecklonia maxima) debris in a sandy beach microcosm. _Marine Ecology Progress Series_ 7: 315--326.
 
 14. Orr M, Zimmer M, Jelinski DE, Mews M. 2005. Wrack deposition on different beach types: spatial and temporal variation in the pattern of subsidy. _Ecology_ 86: 1496--1507.
+
+R Core Team (2018). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna,
+  Austria. URL https://www.R-project.org/.
 
 15. Robertson AI, Hansen JA. 1982. Decomposing Seaweeds: A nuisance or a vital link in coastal food chains? CSIRO Marine Laboratories Research Report 75--83.
 
