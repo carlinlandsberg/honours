@@ -201,3 +201,4 @@ fwrite(ww, file = "NCEP/NCEP_dat.csv")
 # Read the file -----------------------------------------------------------
 
 dat <- read.csv("NCEP/NCEP_dat.csv")
+dat$time <- ymd_hms(dat$time) # requires lubridate
