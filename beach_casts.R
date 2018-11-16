@@ -10,6 +10,7 @@ library(ggpubr)
 library(pgirmess)
 library(circular)
 library(zoo)
+library(dplyr)
 
 # Load data ---------------------------------------------------------------
 
@@ -200,47 +201,60 @@ kruskalmc(frond_length ~ as.factor(date), data = casts)
 # load wave data ---------------------------------------------------------------
 
 # 2005 - 2018 data
-wave_all_1 <- read_table2("ChristoRautenbach_NCEP_180904/FB3_all_wav.txt", 
-                           skip = 6)
-wave_all <- wave_all_1[-c(1, 2),]
+# wave_all_1 <- read_csv("NCEP/NCEP_dat.csv", 
+#                        col_types = cols(dp = col_character(), 
+#                                         hs = col_character(), tp = col_character(), 
+#                                         u = col_character(), v = col_character()))
+
+wave_all_1 <- read_csv("NCEP/NCEP_dat.csv")
+
+wave_all <- separate(wave_all_1, time, into = c("date", "time"), sep = " ")
+
+# wave_all_1$date <- sapply(strsplit(wave_all_1$time, " "), "[", 1)
+# wave_all_1$time <- sapply(strsplit(as.numeric(wave_all_1$time), " "), "[", 2)
+# 
+# wave_date <- as.data.frame(as.Date(wave_all_1$time)) 
+# colnames(wave_date) <- c("date")
+# 
+# wave_time <- as.tibble(format(as.POSIXct(wave_all_1$time)))
+# colnames(wave_time) <- c("time")
+
+# eg <- cbind(wave_all_1, wave_date, wave_time)
+# 
+# wave_all <- eg[, -1]
+
+sep_wave_all <- wave_all %>% 
+  separate(date, c("year", "month", "day"), "-")
 
 # basic summary for wave data
 
-wave_all_summary_1 <- wave_all %>%
-  group_by(Date) %>%
-  summarise(mean_h1f = mean(as.numeric(H1F, na.rm = TRUE)),
-            sd_h1f = sd(as.numeric(H1F, na.rm = TRUE)),
-            mean_tp = mean(as.numeric(TP, na.rm = TRUE)),
-            sd_tp = sd(as.numeric(TP, na.rm = TRUE)),
-            mean_tz = mean(as.numeric(TZ, na.rm = TRUE)),
-            sd_tz = sd(as.numeric(TZ, na.rm = TRUE)),
-            mean_tcf = mean(as.numeric(TCF, na.rm = TRUE)),
-            sd_tcf = sd(as.numeric(TCF, na.rm = TRUE)),
-            mean_tbf = mean(as.numeric(TBF, na.rm = TRUE)),
-            sd_tbf = sd(as.numeric(TBF, na.rm = TRUE)),
-            mean_dir = mean(as.numeric(DIR, na.rm = TRUE)),
-            sd_dir = sd(as.numeric(DIR, na.rm = TRUE)),
-            mean_spr = mean(as.numeric(SPR, na.rm = TRUE)),
-            sd_spr = sd(as.numeric(SPR, na.rm = TRUE)),
-            mean_hs = mean(as.numeric(HS, na.rm = TRUE)),
-            sd_hs = sd(as.numeric(HS, na.rm = TRUE)),
-            mean_hmax = mean(as.numeric(HMAX, na.rm = TRUE)),
-            sd_hmax = sd(as.numeric(HMAX, na.rm = TRUE)))
-
-# remove last row
-wave_all_summary <- wave_all_summary_1[-c(15),]
+wave_all_summary <- sep_wave_all %>%
+  group_by(year) %>% 
+  summarise(mean_hs = mean(as.numeric(hs, na.rm = TRUE)),
+            sd_hs = sd(as.numeric(hs, na.rm = TRUE)),
+            mean_tp = mean(as.numeric(tp, na.rm = TRUE)),
+            sd_tp = sd(as.numeric(tp, na.rm = TRUE)),
+            mean_dp = mean(as.numeric(dp, na.rm = TRUE)),
+            sd_dp = sd(as.numeric(dp, na.rm = TRUE)),
+            mean_u = mean(as.numeric(u, na.rm = TRUE)),
+            sd_u = sd(as.numeric(u, na.rm = TRUE)),
+            mean_v = mean(as.numeric(v, na.rm = TRUE)),
+            sd_v = sd(as.numeric(v, na.rm = TRUE)))
 
 
-# Wave data summary plots (2005 - 2018) -------------------------------------------------
+# Wave data summary plots (2012 - 2018) -------------------------------------------------
+
+# COME BACK TO THESE ------------------------------------------------------
+
 
 # plots for wave data from 2005 - 2018 (mean of each parameter)
-plot_h1f <- ggplot(wave_all_summary, aes(x = as.factor(Date), y = mean_h1f)) +
+plot_hs <- ggplot(wave_all_summary, aes(x = as.factor(date), y = mean_hs)) +
   geom_bar(stat = "identity") +
-  geom_errorbar(aes(ymin = mean_h1f - sd_h1f,
-                    ymax = mean_h1f + sd_h1f, width = 0.2)) +
-  labs(x = "Year", y = "Mean H1F", title = "Mean H1F 2005 - 2018") +
+  geom_errorbar(aes(ymin = mean_hs - sd_hs,
+                    ymax = mean_hs + sd_hs, width = 0.2)) +
+  labs(x = "Year", y = "Mean hs", title = "Mean hs 2012 - 2018") +
   theme_classic()
-plot_h1f
+plot_hs
 
 plot_tp <- ggplot(wave_all_summary, aes(x = as.factor(Date), y = mean_tp)) +
   geom_bar(stat = "identity") +
@@ -279,44 +293,38 @@ plot_hs
 # Wave data visualisations 2018 -------------------------------------------
 
 # Now filtering out only 2018 (sampling took place from March 2018-September 2018)
+sep_wave_all <- wave_all %>% 
+  separate(date, c("year", "month", "day"), "-")
 
-wave_2018_1 <- wave_all %>% 
-  filter(Date == "2018") %>% 
-  group_by(Time)
+wave_2018_1 <- sep_wave_all %>% 
+  filter(year == "2018") %>% 
+  group_by(month)
 
-wave_2018 <- wave_all %>% 
-  filter(Date == "2018") %>% 
-  group_by(Time) %>% 
-  summarise(mean_h1f = mean(as.numeric(H1F, na.rm = TRUE)),
-            sd_h1f = sd(as.numeric(H1F, na.rm = TRUE)),
-            mean_tp = mean(as.numeric(TP, na.rm = TRUE)),
-            sd_tp = sd(as.numeric(TP, na.rm = TRUE)),
-            mean_tz = mean(as.numeric(TZ, na.rm = TRUE)),
-            sd_tz = sd(as.numeric(TZ, na.rm = TRUE)),
-            mean_tcf = mean(as.numeric(TCF, na.rm = TRUE)),
-            sd_tcf = sd(as.numeric(TCF, na.rm = TRUE)),
-            mean_tbf = mean(as.numeric(TBF, na.rm = TRUE)),
-            sd_tbf = sd(as.numeric(TBF, na.rm = TRUE)),
-            mean_dir = mean(as.numeric(DIR, na.rm = TRUE)),
-            sd_dir = sd(as.numeric(DIR, na.rm = TRUE)),
-            mean_spr = mean(as.numeric(SPR, na.rm = TRUE)),
-            sd_spr = sd(as.numeric(SPR, na.rm = TRUE)),
-            mean_hs = mean(as.numeric(HS, na.rm = TRUE)),
-            sd_hs = sd(as.numeric(HS, na.rm = TRUE)),
-            mean_hmax = mean(as.numeric(HMAX, na.rm = TRUE)),
-            sd_hmax = sd(as.numeric(HMAX, na.rm = TRUE)))
+wave_2018 <- sep_wave_all %>%
+  filter(year == "2018") %>% 
+  group_by(month) %>% 
+  summarise(mean_hs = mean(as.numeric(hs, na.rm = TRUE)),
+            sd_hs = sd(as.numeric(hs, na.rm = TRUE)),
+            mean_tp = mean(as.numeric(tp, na.rm = TRUE)),
+            sd_tp = sd(as.numeric(tp, na.rm = TRUE)),
+            mean_dp = mean(as.numeric(dp, na.rm = TRUE)),
+            sd_dp = sd(as.numeric(dp, na.rm = TRUE)),
+            mean_u = mean(as.numeric(u, na.rm = TRUE)),
+            sd_u = sd(as.numeric(u, na.rm = TRUE)),
+            mean_v = mean(as.numeric(v, na.rm = TRUE)),
+            sd_v = sd(as.numeric(v, na.rm = TRUE)))
 wave_2018
 
 # Plots for parameters only 2018
-h1f_2018 <- ggplot(wave_2018, aes(x = as.factor(Time), y = mean_h1f)) +
+hs_2018 <- ggplot(wave_2018, aes(x = as.factor(month), y = mean_hs)) +
   geom_bar(stat = "identity") +
-  geom_errorbar(aes(ymin = mean_h1f - sd_h1f,
-                    ymax = mean_h1f + sd_h1f, width = 0.2)) +
-  labs(x = "Month", y = "Mean H1F", title = "Mean H1F 2018") +
+  geom_errorbar(aes(ymin = mean_hs - sd_hs,
+                    ymax = mean_hs + sd_hs, width = 0.2)) +
+  labs(x = "Month", y = "Mean hs", title = "Mean hs 2018") +
   theme_classic()
-h1f_2018
+hs_2018
 
-tp_2018 <- ggplot(wave_2018, aes(x = as.factor(Time), y = mean_tp)) +
+tp_2018 <- ggplot(wave_2018, aes(x = as.factor(month), y = mean_tp)) +
   geom_bar(stat = "identity") +
   geom_errorbar(aes(ymin = mean_tp - sd_tp,
                     ymax = mean_tp + sd_tp, width = 0.2)) +
@@ -324,29 +332,29 @@ tp_2018 <- ggplot(wave_2018, aes(x = as.factor(Time), y = mean_tp)) +
   theme_classic()
 tp_2018
 
-tz_2018 <- ggplot(wave_2018, aes(x = as.factor(Time), y = mean_tz)) +
+dp_2018 <- ggplot(wave_2018, aes(x = as.factor(month), y = mean_dp)) +
   geom_bar(stat = "identity") +
-  geom_errorbar(aes(ymin = mean_tz - sd_tz,
-                    ymax = mean_tz + sd_tz, width = 0.2)) +
-  labs(x = "Month", y = "Mean TZ", title = "Mean TZ 2018") +
+  geom_errorbar(aes(ymin = mean_dp - sd_dp,
+                    ymax = mean_dp + sd_dp, width = 0.2)) +
+  labs(x = "Month", y = "Mean dp", title = "Mean dp 2018") +
   theme_classic()
-tz_2018
+dp_2018
 
-tcf_2018 <- ggplot(wave_2018, aes(x = as.factor(Time), y = mean_tcf)) +
+u_2018 <- ggplot(wave_2018, aes(x = as.factor(month), y = mean_u)) +
   geom_bar(stat = "identity") +
-  geom_errorbar(aes(ymin = mean_tcf - sd_tcf,
-                    ymax = mean_tcf + sd_tcf, width = 0.2)) +
-  labs(x = "Month", y = "Mean TCF", title = "Mean TCF 2018") +
+  geom_errorbar(aes(ymin = mean_u - sd_u,
+                    ymax = mean_u + sd_u, width = 0.2)) +
+  labs(x = "Month", y = "Mean u", title = "Mean u 2018") +
   theme_classic()
-tcf_2018
+u_2018
 
-hs_2018 <- ggplot(wave_2018, aes(x = as.factor(Time), y = mean_hs)) +
+v_2018 <- ggplot(wave_2018, aes(x = as.factor(month), y = mean_v)) +
   geom_bar(stat = "identity") +
-  geom_errorbar(aes(ymin = mean_hs - sd_hs,
-                    ymax = mean_hs + sd_hs, width = 0.2)) +
-  labs(x = "Month", y = "Mean HS", title = "Mean HS 2018") +
+  geom_errorbar(aes(ymin = mean_v - sd_v,
+                    ymax = mean_v + sd_v, width = 0.2)) +
+  labs(x = "Month", y = "Mean v", title = "Mean v 2018") +
   theme_classic()
-hs_2018
+v_2018
 
 # Wave data 1979-2010 -----------------------------------------------------
 
@@ -426,80 +434,88 @@ old_hs
 # Time series 2018 -------------------------------------------------------------
 
 daily_2018 <- wave_2018_1 %>% 
-  group_by(Time, HMO) %>% 
-  summarise(tp_circ = mean.circular(circular(TP)),
-            tcf_circ = mean.circular(circular(TCF)),
-            hs_circ = mean.circular(circular(HS))) %>% 
+  group_by(month, day) %>% 
+  summarise(hs_circ = mean.circular(circular(hs)),
+            tp_circ = mean.circular(circular(tp)),
+            dp_circ = mean.circular(circular(dp)),
+            u_circ = mean.circular(circular(u)),
+            v_circ = mean.circular(circular(v))) %>% 
   mutate(year = "2018")
 daily_2018
 
 rm <- daily_2018[, -1:-2]
-final_rm <- rm[, -4]
+final_rm <- rm[, -6]
 
-try <- as.tibble(paste(daily_2018$year, daily_2018$Time, daily_2018$HMO, sep = "-"))
+try <- as.tibble(paste(daily_2018$year, daily_2018$month, daily_2018$day, sep = "-"))
 try
 
-combined_2018 <- cbind(final_rm, try)
-combined_2018
+time_2018 <- cbind(try, final_rm)
+time_2018
 
-sep_2018 <- combined_2018 %>% 
+sep_2018 <- time_2018 %>% 
   separate(value, c("year", "month", "day"), "-")
 
-time_2018 <- combined_2018[-c(1:82),]
+# time_2018 <- combined_2018[-c(1:82),]
 
 # circular function: smaller gap between degrees (wave data is in degrees) large gap in numerical gap.
 # eg large numerical gap between 365 and 2, but the gap is small between 365 degrees and 2 degrees
 
-tp_time <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+hs_time <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ), group = 1) +
 #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
-  labs(x = "Date", y = "TP (s)", title = "") +
+  labs(x = "Date", y = "HS (m)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
 #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_classic()
-tp_time
-
-tcf_time <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
-  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
-  geom_line() +
-  labs(x = "Date", y = "TCF (s)", title = "") +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
-  theme_classic()
-tcf_time
-
-hs_time <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
-  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
-  geom_line() +
-  labs(x = "Date", y = "HS", title = "") +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
-  theme_classic()
 hs_time
 
+# ncasts_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+#   geom_line() +
+#   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+#   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
+#   geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+#   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+#                                          y = 0, yend = n_casts)) +
+#   labs(x = "Date", y = "Peak period (s)", title = "") +
+#   theme_bw()
+
+tp_time <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "TP (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+tp_time
+
+dp_time <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "DP", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+dp_time
+
+u_time <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "U", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+u_time
+
+v_time <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  labs(x = "Date", y = "V", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_classic()
+v_time
+
 # total number of casts over time series
-ncasts_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
-  geom_line() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
-  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
-  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = n_casts)) +
-#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "Peak period (s)", title = "") +
-  theme_bw()
-ncasts_tp
-
-ncasts_tcf <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
-  geom_line() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
-  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
-  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = n_casts)) +
-#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "TCF (s)", title = "") +
-  theme_bw()
-ncasts_tcf
-
 ncasts_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
   geom_line() +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
@@ -507,140 +523,255 @@ ncasts_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) 
   geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = n_casts)) +
 #  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "Significant wave height (m)", title = "") +
+  labs(x = "Date", y = "hs (m)", title = "") +
   theme_bw()
 ncasts_hs
-
-# mean diameter of holdfast over time series
-diam_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
-  geom_line() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter")) +
-  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
-  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_diam)) +
-#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "Peak period (s)", title = "") +
-  theme_bw()
-diam_tp
-
-diam_tcf <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
-  geom_line() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter")) +
-  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
-  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_diam)) +
-  labs(x = "Date", y = "TCF (s)", title = "") +
-  theme_bw()
-diam_tcf
-
-diam_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
-  geom_line() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter")) +
-  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
-  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_diam)) +
-#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "Significant wave height (m)", title = "") +
-  theme_bw()
-diam_hs
-
-# mean stipe length over time series
-stipe_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
-  geom_line() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length")) +
-  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), na.rm = TRUE) +
-  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_st_length)) +
-#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "Peak period (s)", title = "") +
-  theme_bw()
-stipe_tp
-
-stipe_tcf <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
-  geom_line() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length")) +
-  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), na.rm = TRUE) +
-  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_st_length)) +
-#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "TCF (s)", title = "") +
-  theme_bw()
-stipe_tcf
-
-stipe_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
-  geom_line() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length")) +
-  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), na.rm = TRUE) +
-  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_st_length)) +
-#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "Significant wave height (m)", title = "") +
-  theme_bw()
-stipe_hs
-
-# mean frond length over time series
-frond_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
-  geom_line() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length")) +
-  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), na.rm = TRUE) +
-  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_fr_length)) +
-#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "Peak period (s)", title = "") +
-  theme_bw()
-frond_tp
-
-frond_tcf <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
-  geom_line() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length")) +
-  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), na.rm = TRUE) +
-  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_fr_length)) +
-#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "TCF (s)", title = "") +
-  theme_bw()
-frond_tcf
-
-frond_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
-  geom_line() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length")) +
-  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), na.rm = TRUE) +
-  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_fr_length)) +
-#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "Significant wave height (m)", title = "") +
-  theme_bw()
-frond_hs
 
 ncasts_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
   geom_line() +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
-  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
-  labs(x = "Date", y = "Peak period (s)", title = "") +
-  theme_classic()
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = n_casts)) +
+#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "TP (s)", title = "") +
+  theme_bw()
 ncasts_tp
+
+ncasts_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = n_casts)) +
+#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "dp", title = "") +
+  theme_bw()
+ncasts_dp
+
+ncasts_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = n_casts)) +
+  #  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "u", title = "") +
+  theme_bw()
+ncasts_u
+
+ncasts_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = n_casts)) +
+  #  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "v", title = "") +
+  theme_bw()
+ncasts_v
+
+# mean diameter of holdfast over time series
+diam_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_diam), na.rm = TRUE) +
+#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "hs (m)", title = "") +
+  theme_bw()
+diam_hs
+
+diam_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_diam), na.rm = TRUE) +
+  labs(x = "Date", y = "Tp (s)", title = "") +
+  theme_bw()
+diam_tp
+
+diam_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_diam), na.rm = TRUE) +
+#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "dp (m)", title = "") +
+  theme_bw()
+diam_dp
+
+diam_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_diam), na.rm = TRUE) +
+  #  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "u", title = "") +
+  theme_bw()
+diam_u
+
+diam_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_diam), na.rm = TRUE) +
+  #  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "v", title = "") +
+  theme_bw()
+diam_v
+
+# mean stipe length over time series
+stipe_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_st_length), na.rm = TRUE) +
+#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "hs", title = "") +
+  theme_bw()
+stipe_hs
+
+stipe_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_st_length), na.rm = TRUE) +
+#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "Tp (s)", title = "") +
+  theme_bw()
+stipe_tp
+
+stipe_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_st_length), na.rm = TRUE) +
+#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "dp", title = "") +
+  theme_bw()
+stipe_dp
+
+stipe_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_st_length), na.rm = TRUE) +
+  #  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "u", title = "") +
+  theme_bw()
+stipe_u
+
+stipe_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_st_length), na.rm = TRUE) +
+  #  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "v", title = "") +
+  theme_bw()
+stipe_v
+
+# mean frond length over time series
+frond_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_fr_length), na.rm = TRUE) +
+#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "hs", title = "") +
+  theme_bw()
+frond_hs
+
+frond_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_fr_length), na.rm = TRUE) +
+#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "Tp (s)", title = "") +
+  theme_bw()
+frond_tp
+
+frond_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_fr_length), na.rm = TRUE) +
+#  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "dp", title = "") +
+  theme_bw()
+frond_dp
+
+frond_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_fr_length), na.rm = TRUE) +
+  #  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "u", title = "") +
+  theme_bw()
+frond_u
+
+frond_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), y = 0, yend = mean_fr_length), na.rm = TRUE) +
+  #  geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+  labs(x = "Date", y = "v", title = "") +
+  theme_bw()
+frond_v
+
+# ncasts_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+#   geom_line() +
+#   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+#   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
+#   geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+#   geom_vline(xintercept = casts.summary$date, na.rm = TRUE, linetype = "dotted") +
+#   labs(x = "Date", y = "Peak period (s)", title = "") +
+#   theme_classic()
+# ncasts_tp
 
 # some extra stuff... -----------------------------------------------------
 
-wave_16_17_18 <- wave_all %>% 
-  filter(Date %in% c("2016", "2017", "2018")) %>% 
-  group_by(Time)
+sep_all <- wave_all %>% 
+  separate(date, c("year", "month", "day"), "-")
+
+wave_16_17_18 <- sep_all %>% 
+  filter(year %in% c("2016", "2017", "2018")) %>% 
+  group_by(month)
 wave_16_17_18
 
 daily_16_17_18 <- wave_16_17_18 %>% 
-  group_by(Date, Time, HMO) %>% 
-  summarise(tp_circ = mean.circular(circular(TP)),
-            tcf_circ = mean.circular(circular(TCF)),
-            hs_circ = mean.circular(circular(HS))) %>% 
-  mutate(year = "2018")
+  group_by(year, month, day) %>% 
+  summarise(hs_circ = mean.circular(circular(hs)),
+            tp_circ = mean.circular(circular(tp)),
+            dp_circ = mean.circular(circular(dp)),
+            u_circ = mean.circular(circular(u)),
+            v_circ = mean.circular(circular(v))) %>% 
+  mutate(year1 = "2018")
 daily_16_17_18
 
-rm_1 <- daily_16_17_18[, -1:-2]
-final_rm_1 <- rm_1[, -4]
+rm_1 <- daily_16_17_18[, -1:-3]
+final_rm_1 <- rm_1[, -6]
 
-try_1 <- as.tibble(paste(daily_16_17_18$Date, daily_16_17_18$Time, daily_16_17_18$HMO, sep = "-"))
+try_1 <- as.tibble(paste(daily_16_17_18$year, daily_16_17_18$month, daily_16_17_18$day, sep = "-"))
 try_1
 
 combined_16_17_18 <- cbind(final_rm_1, try_1)
@@ -679,23 +810,25 @@ hs_time
 
 # Looking at the past 2 years ---------------------------------------------
 
-wave_16 <- wave_all %>% 
-  filter(Date == "2016") %>% 
-  group_by(Time)
+wave_16 <- wave_16_17_18 %>% 
+  filter(year == "2016") %>% 
+  group_by(month)
 wave_16
 
 daily_16 <- wave_16 %>% 
-  group_by(Date, Time, HMO) %>% 
-  summarise(tp_circ = mean.circular(circular(TP)),
-            tcf_circ = mean.circular(circular(TCF)),
-            hs_circ = mean.circular(circular(HS))) %>% 
-  mutate(year = "2016")
+  group_by(year, month, day) %>% 
+  summarise(hs_circ = mean.circular(circular(hs)),
+            tp_circ = mean.circular(circular(tp)),
+            dp_circ = mean.circular(circular(dp)),
+            u_circ = mean.circular(circular(u)),
+            v_circ = mean.circular(circular(v))) %>% 
+  mutate(year1 = "2016")
 daily_16
 
 rm_2 <- daily_16[, -1:-3]
 # final_rm_2 <- rm_2[, -4]
 
-try_2 <- as.tibble(paste(daily_16$Date, daily_16$Time, daily_16$HMO, sep = "-"))
+try_2 <- as.tibble(paste(daily_16$year, daily_16$month, daily_16$day, sep = "-"))
 try_2
 
 combined_16 <- cbind(rm_2, try_2)
@@ -709,26 +842,28 @@ sep_16
 # time_16_1 <- time_16[-c(246:366),]
 # time_16_2 <- time_16_1[-c(246:328),]
 
-ttime_16 <- combined_16[-c(213:366),]
-ttime_16_1 <- ttime_16[-c(1:83),]
+ttime_16 <- combined_16[-c(275:366),]
+ttime_16_1 <- ttime_16[-c(1:76),]
 
-wave_17 <- wave_all %>% 
-  filter(Date == "2017") %>% 
-  group_by(Time)
+wave_17 <- wave_16_17_18 %>% 
+  filter(year == "2017") %>% 
+  group_by(month)
 wave_17
 
 daily_17 <- wave_17 %>% 
-  group_by(Date, Time, HMO) %>% 
-  summarise(tp_circ = mean.circular(circular(TP)),
-            tcf_circ = mean.circular(circular(TCF)),
-            hs_circ = mean.circular(circular(HS))) %>% 
-  mutate(year = "2017")
+  group_by(year, month, day) %>% 
+  summarise(hs_circ = mean.circular(circular(hs)),
+            tp_circ = mean.circular(circular(tp)),
+            dp_circ = mean.circular(circular(dp)),
+            u_circ = mean.circular(circular(u)),
+            v_circ = mean.circular(circular(v))) %>% 
+  mutate(year2 = "2017")
 daily_17
 
 rm_3 <- daily_17[, -1:-3]
 # final_rm_3 <- rm_3[, -4]
 
-try_3 <- as.tibble(paste(daily_17$Date, daily_17$Time, daily_17$HMO, sep = "-"))
+try_3 <- as.tibble(paste(daily_17$year, daily_17$month, daily_17$day, sep = "-"))
 try_3
 
 combined_17 <- cbind(rm_3, try_3)
@@ -738,27 +873,30 @@ sep_17 <- combined_17 %>%
   separate(value, c("year", "month", "day"), "-")
 sep_17
 
-time_17 <- combined_17[-c(212:365),]
-time_17_1 <- time_17[-c(1:82),]
+time_17 <- combined_17[-c(274:365),]
+time_17_1 <- time_17[-c(1:75),]
 
 daily_18 <- wave_2018_1 %>% 
-  group_by(Time, HMO) %>% 
-  summarise(tp_circ = mean.circular(circular(TP)),
-            tcf_circ = mean.circular(circular(TCF)),
-            hs_circ = mean.circular(circular(HS))) %>% 
-  mutate(year = "2018")
+  group_by(month, day) %>% 
+  summarise(hs_circ = mean.circular(circular(hs)),
+            tp_circ = mean.circular(circular(tp)),
+            dp_circ = mean.circular(circular(dp)),
+            u_circ = mean.circular(circular(u)),
+            v_circ = mean.circular(circular(v))) %>% 
+  mutate(year3 = "2018")
 daily_18
 
 rm_4 <- daily_18[, -1:-2]
 # final_rm <- rm[, -4]
 
-try_4 <- as.tibble(paste(daily_18$year, daily_18$Time, daily_18$HMO, sep = "-"))
+try_4 <- as.tibble(paste(daily_18$year3, daily_18$month, daily_18$day, sep = "-"))
 try_4
 
 combined_18 <- cbind(rm_4, try_4)
 combined_18
 
-time_18 <- combined_18[-c(1:82),]
+time_18_1 <- combined_18[-c(274),]
+time_18 <- time_18_1[-c(1:75),]
 
 merge_try <- rbind(combined_16, combined_17, combined_18)
 
@@ -909,16 +1047,24 @@ seasons_16 <- sep_16 %>%
                                 ifelse(month %in% c("06", "07", "08"), "Winter",
                                        ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
 
-season_16_rm <- as.data.frame(seasons_16[, -1:-6])
+season_16_rm <- as.data.frame(seasons_16[, -1:-9])
 
 sea_16_rm <- season_16_rm %>% 
-  select(season = `seasons_16[, -1:-6]`)
+  select(season = `seasons_16[, -1:-9]`)
 
-sea_16 <- as.data.frame(sea_16_rm[-c(213:366),])
-sea_16_1 <- sea_16[-c(1:83),]
+sea_16 <- as.data.frame(sea_16_rm[-c(275:366),])
+sea_16_1 <- sea_16[-c(1:76),]
 
 season_16_1 <- cbind(ttime_16_1, sea_16_1)
 season_16_1
+
+mean_16 <- season_16_1 %>% 
+  group_by(sea_16_1) %>% 
+  summarise(mean_tp_16 = mean(tp_circ),
+            mean_hs_16 = mean(hs_circ),
+            mean_dp_16 = mean(dp_circ),
+            mean_u_16 = mean(u_circ),
+            mean_v_16 = mean(v_circ))
 
 seasons_17 <- sep_17 %>%
   mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
@@ -926,16 +1072,24 @@ seasons_17 <- sep_17 %>%
                                 ifelse(month %in% c("06", "07", "08"), "Winter",
                                        ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
 
-season_17_rm <- as.data.frame(seasons_17[, -1:-6])
+season_17_rm <- as.data.frame(seasons_17[, -1:-9])
 
 sea_17_rm <- season_17_rm %>% 
-  select(season = `seasons_17[, -1:-6]`)
+  select(season = `seasons_17[, -1:-9]`)
 
-sea_17 <- as.data.frame(sea_17_rm[-c(212:365),])
-sea_17_1 <- sea_17[-c(1:82),]
+sea_17 <- as.data.frame(sea_17_rm[-c(274:365),])
+sea_17_1 <- sea_17[-c(1:75),]
 
 season_17_1 <- cbind(time_17_1, sea_17_1)
 season_17_1
+
+mean_17 <- season_17_1 %>% 
+  group_by(sea_17_1) %>% 
+  summarise(mean_tp_17 = mean(tp_circ),
+            mean_hs_17 = mean(hs_circ),
+            mean_dp_17 = mean(dp_circ),
+            mean_u_17 = mean(u_circ),
+            mean_v_17 = mean(v_circ))
 
 seasons_18 <- sep_2018 %>% 
   mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
@@ -943,25 +1097,58 @@ seasons_18 <- sep_2018 %>%
                                 ifelse(month %in% c("06", "07", "08"), "Winter",
                                        ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
 
-season_18_rm <- as.data.frame(seasons_18[, -1:-6])
+# season_18_rm <- as.data.frame(seasons_18[, -1:-8])
+# 
+# sea_18_rm <- season_18_rm %>% 
+#   select(season = `seasons_18[, -1:-8]`)
+# 
+# sea_18 <- as.data.frame(sea_18_rm[-c(199),]) 
+# 
+# season_18 <- cbind(time_18, sea_18)
+# season_18
+# 
+# mean_18 <- season_18 %>% 
+#   group_by(sea_18_rm[-c(199), ]) %>% 
+#   summarise(mean_tp_18 = mean(tp_circ),
+#             mean_hs_18 = mean(hs_circ),
+#             mean_dp_18 = mean(dp_circ),
+#             mean_u_18 = mean(u_circ),
+#             mean_v_18 = mean(v_circ))
+
+season_18_rm <- as.data.frame(seasons_18[, -1:-8])
 
 sea_18_rm <- season_18_rm %>% 
-  select(season = `seasons_18[, -1:-6]`)
+  select(season = `seasons_18[, -1:-8]`)
 
-sea_18 <- sea_18_rm[-c(1:82),]
+sea_18 <- as.data.frame(sea_18_rm[-c(199),]) 
 
-season_18 <- cbind(time_18, sea_18)
-season_18
+sea_18_1 <- sea_18 %>% 
+  select(season = `sea_18_rm[-c(199), ]`)
 
+season_18 <- cbind(time_18, sea_18_1)
+
+mean_18 <- season_18 %>% 
+  group_by(season) %>% 
+  summarise(mean_tp_18 = mean(tp_circ),
+            mean_hs_18 = mean(hs_circ),
+            mean_dp_18 = mean(dp_circ),
+            mean_u_18 = mean(u_circ),
+            mean_v_18 = mean(v_circ))
 # Plots by season ---------------------------------------------------------
+
+# neworder <- c("autumn", "winter", "spring")
+# library(plyr)  ## or dplyr (transform -> mutate)
+# season_order <- arrange(transform(season_16_1,
+#                            season = factor(sea_16_1, levels = neworder)), sea_16_1)
 
 hs_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = hs_circ, group = 1)) +
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "Date", y = "HS (s)", title = "") +
+  geom_hline(data = mean_16, aes(yintercept = mean_hs_16), colour = "red") +
+  labs(x = "", y = "HS (m)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  facet_wrap(~sea_16_1) +
+  facet_wrap(~ sea_16_1) +
   #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 hs_season_2016
@@ -970,7 +1157,8 @@ hs_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = hs_circ, group
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "Date", y = "HS (s)", title = "") +
+  geom_hline(data = mean_17, aes(yintercept = mean_hs_17), colour = "red") +
+  labs(x = "", y = "HS (m)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   facet_wrap(~ sea_17_1) +
   #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
@@ -981,9 +1169,10 @@ hs_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = hs_circ, group =
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "Date", y = "HS (s)", title = "") +
+  geom_hline(data = mean_18, aes(yintercept = mean_hs_18), colour = "red") +
+  labs(x = "", y = "HS (m)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  facet_wrap(~ sea_18) +
+  facet_wrap(~ season) +
   #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 hs_season_2018
@@ -1025,40 +1214,110 @@ tp_season_2018
 
 ggarrange(tp_season_2016, tp_season_2017, tp_season_2018, nrow = 3, ncol = 1)
 
-tcf_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+dp_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = dp_circ, group = 1)) +
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "Date", y = "TCF (s)", title = "") +
+  labs(x = "Date", y = "DP (s)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   facet_wrap(~ sea_16_1) +
   #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
-tcf_season_2016
+dp_season_2016
 
-tcf_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+dp_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = dp_circ, group = 1)) +
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "Date", y = "TCF (s)", title = "") +
+  labs(x = "Date", y = "dp (s)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   facet_wrap(~ sea_17_1) +
   #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
-tcf_season_2017
+dp_season_2017
 
-tcf_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+dp_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = dp_circ, group = 1)) +
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "Date", y = "TCF (s)", title = "") +
+  labs(x = "Date", y = "dp (s)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   facet_wrap(~ sea_18) +
   #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
-tcf_season_2018
+dp_season_2018
 
-ggarrange(tcf_season_2016, tcf_season_2017, tcf_season_2018, nrow = 3, ncol = 1)
+ggarrange(dp_season_2016, dp_season_2017, dp_season_2018, nrow = 3, ncol = 1)
+
+u_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = u_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "", y = "u (m)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ sea_16_1) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
+u_season_2016
+
+u_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = u_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "", y = "u (m)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ sea_17_1) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
+u_season_2017
+
+u_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = u_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "Date", y = "u (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ sea_18) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
+u_season_2018
+
+ggarrange(u_season_2016, u_season_2017, u_season_2018, nrow = 3, ncol = 1)
+
+v_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = v_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "", y = "v (m)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ sea_16_1) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
+v_season_2016
+
+v_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = v_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "", y = "v (m)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ sea_17_1) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
+v_season_2017
+
+v_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = v_circ, group = 1)) +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "Date", y = "v (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ sea_18) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
+v_season_2018
+
+ggarrange(v_season_2016, v_season_2017, v_season_2018, nrow = 3, ncol = 1)
 
 # Stats by season ---------------------------------------------------------
 
