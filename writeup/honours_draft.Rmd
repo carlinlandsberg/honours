@@ -3,13 +3,13 @@ title: "Describing beach-cast kelp as a function of wave parameters in Muizenber
 author: "Carlin Landsberg"
 date: "19 November 2018"
 output:
+  word_document: default
+  html_document:
+    df_print: paged
   pdf_document:
     fig_cap: yes
     keep_tex: yes
     latex_engine: xelatex
-  html_document:
-    df_print: paged
-  word_document: default
 mainfont: Arial
 monofont: PT Mono
 header-includes:
