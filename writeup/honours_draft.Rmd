@@ -1,7 +1,7 @@
 ---
-title: "Beach casts - Honours"
+title: "Describing beach-cast kelp as a function of wave parameters in Muizenberg"
 author: "Carlin Landsberg"
-date: "7/3/2018"
+date: "19 November 2018"
 output:
   pdf_document:
     fig_cap: yes
@@ -81,7 +81,7 @@ final_map <- muiz_map +
   theme_bw()
 ```
 
-```{r echo=FALSE, fig.cap="Site map showing the location of the study site, Muizenberg beach.", message=FALSE, warning=FALSE, fig.width=6, fig.height=7}
+```{r echo=FALSE, fig.cap="Site map showing the location of the study site, Muizenberg beach. **_find high res map_**", message=FALSE, warning=FALSE, fig.width=6, fig.height=7}
 
 final_map
 
@@ -108,17 +108,17 @@ Since wave climate may have varied seasonally, this method was repeated weekly o
 
 ## Wave climate
 
-Wave data at a latitude 34.50000°S and a longitude of 18.50000°E were obtained from Dr. Christo Rautenbach of the South African Weather Service (SAWS). These ocean wave hindcasts were derived from the National Centers for Environmental Prediction (NCEP) wind/wave data (Kalnay et al. 1996) feeding into the WaveWatch III wave model (Tolman 1991). We obtained data from 2005-02-01 to 2018-08-01. Over this time, data were present daily at a three-hourly resolution. Specific wave parameters were measured, namely, peak period in seconds, mean direction, significant wave height, including derivations of these. However, data were missing for several of the aforementioned parameters and thus further analyses were run on only peak period (s) and a derivation thereof (henceforth referred to as period 2) and significant wave height (m).
+Wave data at a latitude 34.50000°S and a longitude of 18.50000°E were obtained from Dr. Christo Rautenbach of the South African Weather Service (SAWS). These ocean wave hindcasts were derived from the National Centers for Environmental Prediction (NCEP) wind/wave data (Kalnay et al. 1996) feeding into the WaveWatch III wave model (Tolman 1991). We obtained data from 2012-01-01 to 2018-08-01. Over this time, data were present daily at a three-hourly resolution. Specific wave parameters were measured, namely, primary wave mean period (s), significant height of combined wind, waves, and swell (m), primary wave direction (TNorth) and accompanying wind components, namely, wave direction () and wind speed (). Subsequent analyses were performed on the aforementioned parameters.
 
 ## Statistical analysis
 
 ### _Time series_
 All exploratory and statistical analyses were performed in R 3.5.1 (R Core Team 2018). The data and comprehensive script used for setting up the data correctly, data analyses, and production of figures are to be found at https://github.com/carlinlandsberg/honours.
 
-Due to the nature of the resolution of the wave data, the data had to be converted to circular data in order to have one data reading per day instead of in three hour intervals. We plotted wave peak period, period 2, and significant wave height for each day across the time series of our study period of 2018-03-24 to 2018-09-30, including a week prior to the beginning of this period. Following this, we overlayed the beach-cast data that were collected, namely, the total number of casts, mean holdfast diameter, and mean stipe and frond length were plotted on days of data collection (_i.e._ weekly) over the total time series.
+Due to the nature of the resolution of the wave data, the data had to be converted to circular data in order to have one data reading per day instead of in three hour intervals. We plotted wave period, significant wave height, wave direction, wind direction, and wind speed for each day across the time series of our study period of 2018-03-24 to 2018-09-30, including a week prior to the beginning of this period. Following this, we overlayed the beach-cast data that were collected, namely, the total number of casts, mean holdfast diameter, and mean stipe and frond length were plotted on days of data collection (_i.e._ weekly) over the total time series.
 
 ### _Yearly seasonal comparison_
-In addition to the time series, we explored the previous two years, namely, 2016 and 2017 in an attempt to determine if any significant seasonal changes in wave climate exists in 2018 in comparison to 2016 and 2017. Over these three years, dates corresponding with that of the study period in 2018 were separated into their respective seasons as previously discussed. A single factor ANOVA was then performed to statistically determine if significant differences exist among seasons each year. Hereafter, a Tukey HSD _post-hoc_ test was performed to determine where these significant differences exist. 
+In addition to the time series, we explored the previous two years, namely, 2016 and 2017 in an attempt to determine if any significant seasonal changes in wave climate exists in 2018 in comparison to 2016 and 2017. Over these three years, dates corresponding with that of the study period in 2018 were separated into their respective seasons as previously discussed. A two-way ANOVA was then performed to statistically determine if significant differences exist among seasons each year. Hereafter, a TukeyHSD _post-hoc_ test was performed to determine where these significant differences exist. 
 
 \newpage 
 # Results
@@ -152,122 +152,66 @@ casts.summary <- casts %>%
 ```
 
 ```{r include=FALSE}
-wave_all_1 <- read_table2("../NCEP/FB3_all_wav.txt", 
-                           skip = 7) 
+wave_all_1 <- read_csv("../NCEP/NCEP_dat.csv")
+wave_all <- separate(wave_all_1, time, into = c("date", "time"), sep = " ")
 
-wave_all <- wave_all_1[-c(1, 2),]
+sep_wave_all <- wave_all %>% 
+  separate(date, c("year", "month", "day"), "-")
 
-wave_2018_1 <- wave_all %>% 
-  filter(Date == "2018") %>% 
-  group_by(Time)
+wave_2018_1 <- sep_wave_all %>% 
+  filter(year == "2018") %>% 
+  group_by(month)
 
-wave_2018 <- wave_all %>% 
-  filter(Date == "2018") %>% 
-  group_by(Time) %>% 
-  summarise(mean_h1f = mean(as.numeric(H1F, na.rm = TRUE)),
-            sd_h1f = sd(as.numeric(H1F, na.rm = TRUE)),
-            mean_tp = mean(as.numeric(TP, na.rm = TRUE)),
-            sd_tp = sd(as.numeric(TP, na.rm = TRUE)),
-            mean_tz = mean(as.numeric(TZ, na.rm = TRUE)),
-            sd_tz = sd(as.numeric(TZ, na.rm = TRUE)),
-            mean_tcf = mean(as.numeric(TCF, na.rm = TRUE)),
-            sd_tcf = sd(as.numeric(TCF, na.rm = TRUE)),
-            mean_tbf = mean(as.numeric(TBF, na.rm = TRUE)),
-            sd_tbf = sd(as.numeric(TBF, na.rm = TRUE)),
-            mean_dir = mean(as.numeric(DIR, na.rm = TRUE)),
-            sd_dir = sd(as.numeric(DIR, na.rm = TRUE)),
-            mean_spr = mean(as.numeric(SPR, na.rm = TRUE)),
-            sd_spr = sd(as.numeric(SPR, na.rm = TRUE)),
-            mean_hs = mean(as.numeric(HS, na.rm = TRUE)),
-            sd_hs = sd(as.numeric(HS, na.rm = TRUE)),
-            mean_hmax = mean(as.numeric(HMAX, na.rm = TRUE)),
-            sd_hmax = sd(as.numeric(HMAX, na.rm = TRUE)))
+wave_2018 <- sep_wave_all %>%
+  filter(year == "2018") %>% 
+  group_by(month) %>% 
+  summarise(mean_hs = mean(as.numeric(hs, na.rm = TRUE)),
+            sd_hs = sd(as.numeric(hs, na.rm = TRUE)),
+            mean_tp = mean(as.numeric(tp, na.rm = TRUE)),
+            sd_tp = sd(as.numeric(tp, na.rm = TRUE)),
+            mean_dp = mean(as.numeric(dp, na.rm = TRUE)),
+            sd_dp = sd(as.numeric(dp, na.rm = TRUE)),
+            mean_u = mean(as.numeric(u, na.rm = TRUE)),
+            sd_u = sd(as.numeric(u, na.rm = TRUE)),
+            mean_v = mean(as.numeric(v, na.rm = TRUE)),
+            sd_v = sd(as.numeric(v, na.rm = TRUE)))
 ```
 
 ```{r include=FALSE}
 daily_2018 <- wave_2018_1 %>% 
-  group_by(Time, HMO) %>% 
-  summarise(tp_circ = mean.circular(circular(TP)),
-            tcf_circ = mean.circular(circular(TCF)),
-            hs_circ = mean.circular(circular(HS))) %>% 
+  group_by(month, day) %>% 
+  summarise(hs_circ = mean.circular(circular(hs)),
+            tp_circ = mean.circular(circular(tp)),
+            dp_circ = mean.circular(circular(dp)),
+            u_circ = mean.circular(circular(u)),
+            v_circ = mean.circular(circular(v))) %>% 
   mutate(year = "2018")
 
 rm <- daily_2018[, -1:-2]
-final_rm <- rm[, -4]
+final_rm <- rm[, -6]
 
-try <- as.tibble(paste(daily_2018$year, daily_2018$Time, daily_2018$HMO, sep = "-"))
+try <- as.tibble(paste(daily_2018$year, daily_2018$month, daily_2018$day, sep = "-"))
 
-combined_2018 <- cbind(final_rm, try)
+time_2018_1 <- cbind(try, final_rm)
+time_2018 <- time_2018_1[-c(1:75),]
 
-sep_2018 <- combined_2018 %>% 
+sep_2018 <- time_2018 %>% 
   separate(value, c("year", "month", "day"), "-")
-
-time_2018 <- combined_2018[-c(1:82),]
 
 # circular function: smaller gap between degrees (wave data is in degrees) large gap in numerical gap.
 # eg large numerical gap between 365 and 2, but the gap is small between 365 degrees and 2 degrees
 
 # total number of casts over time series
 
-# tests
-ncasts_tp_1 <- ggplot(casts.summary, aes(x = as.Date(date), y = n_casts, group = 1)) +
-  geom_point(colour = "red") +
-  geom_segment(aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = n_casts), colour = "red") +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *0.1, name = "TP")) +
-  geom_line(data = time_2018, aes(x = as.Date(value), y = tp_circ/0.1, group = 1)) +
-  labs(x = "Date", y = "Peak period (s)", title = "") +
-  theme_bw()
-
-diam_tp_1 <- ggplot(casts.summary, aes(x = as.Date(date), y = mean_diam, group = 1)) +
-  geom_point(colour = "red") +
-  geom_segment(aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = n_casts), colour = "red") +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *0.1, name = "TCF")) +
-  geom_line(data = time_2018, aes(x = as.Date(value), y = tp_circ/0.05, group = 1)) +
-  labs(x = "Date", y = "Peak period (s)", title = "") +
-  theme_bw()
-
-ncasts_hs_1 <- ggplot(casts.summary, aes(x = as.Date(date), y = n_casts, group = 1)) +
-  geom_point(colour = "red") +
-  geom_segment(aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = n_casts), colour = "red") +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *0.1, name = "TP")) +
-  geom_line(data = time_2018, aes(x = as.Date(value), y = hs_circ/0.05, group = 1)) +
-  labs(x = "Date", y = "Peak period (s)", title = "") +
-  theme_bw()
-
-ncasts_tp_1 <- ggplot(casts.summary, aes(x = as.Date(date), y = n_casts, group = 1)) +
-  geom_point(colour = "red") +
-  geom_segment(aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = n_casts), colour = "red") +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *0.1, name = "TP")) +
-  geom_line(data = time_2018, aes(x = as.Date(value), y = tp_circ/0.05, group = 1)) +
-  labs(x = "Date", y = "Peak period (s)", title = "") +
-  theme_bw()
-
-ncasts_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+ncasts_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ*5, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
                                          y = 0, yend = n_casts), colour = "salmon") +
-  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts), shape = 1, colour = "salmon") +
-  labs(x = "Date", y = "Peak period (s)", title = "") +
-  theme_bw()
-
-ncasts_tcf <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
-  geom_line() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts), colour = "salmon") +
-  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = n_casts), colour = "salmon") +
-  labs(x = "Date", y = "Period 2 (s)", title = "") +
+  labs(x = "Date", y = "Wave period (s)", title = "") +
   theme_bw()
 
 ncasts_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
@@ -277,28 +221,49 @@ ncasts_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) 
   geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts), colour = "salmon") +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
                                          y = 0, yend = n_casts), colour = "salmon") +
-  labs(x = "Date", y = "Significant wave height (m)", title = "") +
+  labs(x = "Date", y = "Wave height (m)", title = "") +
+  theme_bw()
+
+ncasts_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts), colour = "salmon") +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = n_casts), colour = "salmon") +
+  labs(x = "Date", y = "Wave direction (TNorth)", title = "") +
+  theme_bw()
+
+ncasts_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts), colour = "salmon") +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = n_casts), colour = "salmon") +
+  labs(x = "Date", y = "Wind direction ()", title = "") +
+  theme_bw()
+
+ncasts_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts), colour = "salmon") +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = n_casts), colour = "salmon") +
+  labs(x = "Date", y = "Wind speed ()", title = "") +
   theme_bw()
 
 # mean diameter of holdfast over time series
-diam_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+diam_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ*5, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter (cm)")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date),
                                          y = 0, yend = mean_diam), colour = "salmon", na.rm = TRUE) +
-  labs(x = "Date", y = "Peak period (s)", title = "") +
-  theme_bw()
-
-diam_tcf <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
-  geom_line() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter (cm)")) +
-  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), colour = "salmon", na.rm = TRUE) +
-  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = mean_diam), colour = "salmon") +
-  labs(x = "Date", y = "Period 2 (s)", title = "") +
+  labs(x = "Date", y = "Wave period (s)", title = "") +
   theme_bw()
 
 diam_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
@@ -308,28 +273,49 @@ diam_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
                                          y = 0, yend = mean_diam), colour = "salmon") +
-  labs(x = "Date", y = "Significant wave height (m)", title = "") +
+  labs(x = "Date", y = "Wave height (m)", title = "") +
+  theme_bw()
+
+diam_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = mean_diam), colour = "salmon") +
+  labs(x = "Date", y = "Wave direction (TNorth)", title = "") +
+  theme_bw()
+
+diam_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = mean_diam), colour = "salmon") +
+  labs(x = "Date", y = "Wind direction (TNorth)", title = "") +
+  theme_bw()
+
+diam_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = mean_diam), colour = "salmon") +
+  labs(x = "Date", y = "Wind speed", title = "") +
   theme_bw()
 
 # mean stipe length over time series
-stipe_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+stipe_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ*20, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-15, 350)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length (cm)")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
                                          y = 0, yend = mean_st_length), colour = "salmon") +
-  labs(x = "Date", y = "Peak period (s)", title = "") +
-  theme_bw()
-
-stipe_tcf <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
-  geom_line() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length (cm)")) +
-  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), colour = "salmon", na.rm = TRUE) +
-  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = mean_st_length), colour = "salmon") +
-  labs(x = "Date", y = "Period 2 (s)", title = "") +
+  labs(x = "Date", y = "Wave period (s)", title = "") +
   theme_bw()
 
 stipe_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
@@ -339,7 +325,37 @@ stipe_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
                                          y = 0, yend = mean_st_length), colour = "salmon") +
-  labs(x = "Date", y = "Significant wave height (m)", title = "") +
+  labs(x = "Date", y = "Wave height (m)", title = "") +
+  theme_bw()
+
+stipe_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = mean_st_length), colour = "salmon") +
+  labs(x = "Date", y = "Wave direction (TNorth)", title = "") +
+  theme_bw()
+
+stipe_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = mean_st_length), colour = "salmon") +
+  labs(x = "Date", y = "Wind direction (TNorth)", title = "") +
+  theme_bw()
+
+stipe_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = mean_st_length), colour = "salmon") +
+  labs(x = "Date", y = "wind speed", title = "") +
   theme_bw()
 
 # mean frond length over time series
@@ -350,17 +366,7 @@ frond_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
                                          y = 0, yend = mean_fr_length), colour = "salmon") +
-  labs(x = "Date", y = "Peak period (s)", title = "") +
-  theme_bw()
-
-frond_tcf <- ggplot(time_2018, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
-  geom_line() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length (cm)")) +
-  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), colour = "salmon", na.rm = TRUE) +
-  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = mean_fr_length), colour = "salmon") +
-  labs(x = "Date", y = "Period 2 (s)", title = "") +
+  labs(x = "Date", y = "Wave period (s)", title = "") +
   theme_bw()
 
 frond_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
@@ -370,118 +376,195 @@ frond_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
                                          y = 0, yend = mean_fr_length), colour = "salmon") +
-  labs(x = "Date", y = "Significant wave height (m)", title = "") +
+  labs(x = "Date", y = "Wave height (m)", title = "") +
+  theme_bw()
+
+frond_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = mean_fr_length), colour = "salmon") +
+  labs(x = "Date", y = "Wave direction (TNorth)", title = "") +
+  theme_bw()
+
+frond_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = mean_fr_length), colour = "salmon") +
+  labs(x = "Date", y = "Wind direction (TNorth)", title = "") +
+  theme_bw()
+
+frond_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ, group = 1)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length (cm)")) +
+  geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = mean_fr_length), colour = "salmon") +
+  labs(x = "Date", y = "Wind speed", title = "") +
   theme_bw()
 ```
 
-```{r echo=FALSE, fig.cap="Time series of peak period (s) over the study period with corresponding weekly beach-cast recordings. **A** shows the total number of casts, **B** is the mean holdfast diameter, **C** is mean stipe length, and **D** is mean frond length.", message=FALSE, warning=FALSE, fig.width=12, fig.height=8}
+```{r echo=FALSE, fig.cap="Time series of primary wave mean period (s) over the study period with corresponding weekly beach-cast recordings. **A** shows the total number of casts, **B** is the mean holdfast diameter, **C** is mean stipe length, and **D** is mean frond length. **_fix y axis scale_**", message=FALSE, warning=FALSE, fig.width=8, fig.height=4}
 ggarrange(ncasts_tp, diam_tp, stipe_tp, frond_tp,
           labels = c("A", "B", "C", "D"))
 ```
 
-No clear pattern exists between peaks and dips in peak wave period (Figure 4). Beach-cast observations and the accompanying morphometric measurments appear to fluctuate in random fashion over the study period.
+No clear pattern exists between peaks and dips in peak wave period (Figure 3). Beach-cast observations and the accompanying morphometric measurments appear to fluctuate in random fashion over the study period.
 
-```{r echo=FALSE, fig.cap="Time series of period 2 (s) over the study period with corresponding weekly beach-cast recordings. **A** shows the total number of casts, **B** is the mean holdfast diameter, **C** is mean stipe length, and **D** is mean frond length.", message=FALSE, warning=FALSE, fig.width=8, fig.height=4}
-ggarrange(ncasts_tcf, diam_tcf, stipe_tcf, frond_tcf,
-          labels = c("A", "B", "C", "D"))
-```
-
-A similar seemingly random pattern is observed in Figure 5 when looking at period 2 over the study period.
-
-```{r echo=FALSE, fig.cap="Time series of significant wave height (m) over the study period with corresponding weekly beach-cast recordings. **A** shows the total number of casts, **B** is the mean holdfast diameter, **C** is mean stipe length, and **D** is mean frond length.", message=FALSE, warning=FALSE, fig.width=8, fig.height=4}
+```{r echo=FALSE, fig.cap="Time series of significant height of combined wind, waves, and swell (m) over the study period with corresponding weekly beach-cast recordings. **A** shows the total number of casts, **B** is the mean holdfast diameter, **C** is mean stipe length, and **D** is mean frond length. **_fix y axis scale_**", message=FALSE, warning=FALSE, fig.width=8, fig.height=4}
 ggarrange(ncasts_hs, diam_hs, stipe_hs, frond_hs,
           labels = c("A", "B", "C", "D"))
 ```
 
-Lastly, in figure 5, no clear pattern is observed as also suggested in figure 3 and figure 4. 
+A similar seemingly random pattern is observed in Figure 4 when looking at period 2 over the study period.
 
-Our hypotheses suggest that, simply put, where peaks in wave parameters occur we would expect a surplus of casts and larger morphological properties. However, figures 3, 4, and 5 do not supoort this notion and therefore, it can be suggested that overall, the number of casts and morphological properties of casts seem as if they are not dictated by the various wave parameters included in this analysis. 
+```{r echo=FALSE, fig.cap="Time series of primary wave direction () over the study period with corresponding weekly beach-cast recordings. **A** shows the total number of casts, **B** is the mean holdfast diameter, **C** is mean stipe length, and **D** is mean frond length. **_fix y axis scale_**", message=FALSE, warning=FALSE, fig.width=8, fig.height=4}
+ggarrange(ncasts_dp, diam_dp, stipe_dp, frond_dp,
+          labels = c("A", "B", "C", "D"))
+```
+
+Lastly, in Figure 5, no clear pattern is observed as also suggested in Figure 3 and Figure 4. 
+
+```{r echo=FALSE, fig.cap="Time series of wind direction () over the study period with corresponding weekly beach-cast recordings. **A** shows the total number of casts, **B** is the mean holdfast diameter, **C** is mean stipe length, and **D** is mean frond length. **_fix y axis scale_**", message=FALSE, warning=FALSE, fig.width=8, fig.height=4}
+ggarrange(ncasts_u, diam_u, stipe_u, frond_u,
+          labels = c("A", "B", "C", "D"))
+```
+
+
+```{r echo=FALSE, fig.cap="Time series of wind speed () over the study period with corresponding weekly beach-cast recordings. **A** shows the total number of casts, **B** is the mean holdfast diameter, **C** is mean stipe length, and **D** is mean frond length. **_fix y axis scale_**", message=FALSE, warning=FALSE, fig.width=8, fig.height=4}
+ggarrange(ncasts_v, diam_v, stipe_v, frond_v,
+          labels = c("A", "B", "C", "D"))
+
+```
+
+For the wind components, direction (Figure 6) and speed (Figure 7), seemingly similar patterns are suggested as observed in the wave parameters.
+
+Our hypotheses suggest that, simply put, where peaks in wave parameters occur we would expect a surplus of casts and larger morphological properties. However, figures 3, 4, 5, 6, and 7 do not supoort this notion and therefore, it can be suggested that overall, the number of casts and morphological properties of casts seem as if they are not dictated by the various wave parameters included in this analysis. 
 
 \newpage
 ```{r include=FALSE}
-wave_16_17_18 <- wave_all %>% 
-  filter(Date %in% c("2016", "2017", "2018")) %>% 
-  group_by(Time)
+sep_all <- wave_all %>% 
+  separate(date, c("year", "month", "day"), "-")
+
+wave_16_17_18 <- sep_all %>% 
+  filter(year %in% c("2016", "2017", "2018")) %>% 
+  group_by(month)
 
 daily_16_17_18 <- wave_16_17_18 %>% 
-  group_by(Date, Time, HMO) %>% 
-  summarise(tp_circ = mean.circular(circular(TP)),
-            tcf_circ = mean.circular(circular(TCF)),
-            hs_circ = mean.circular(circular(HS))) %>% 
-  mutate(year = "2018")
+  group_by(year, month, day) %>% 
+  summarise(hs_circ = mean.circular(circular(hs)),
+            tp_circ = mean.circular(circular(tp)),
+            dp_circ = mean.circular(circular(dp)),
+            u_circ = mean.circular(circular(u)),
+            v_circ = mean.circular(circular(v))) %>% 
+  mutate(year1 = "2018")
 
-rm_1 <- daily_16_17_18[, -1:-2]
-final_rm_1 <- rm_1[, -4]
+rm_1 <- daily_16_17_18[, -1:-3]
+final_rm_1 <- rm_1[, -6]
 
-try_1 <- as.tibble(paste(daily_16_17_18$Date, daily_16_17_18$Time, daily_16_17_18$HMO, sep = "-"))
+try_1 <- as.tibble(paste(daily_16_17_18$year, daily_16_17_18$month, daily_16_17_18$day, sep = "-"))
 
 combined_16_17_18 <- cbind(final_rm_1, try_1)
 
 sep_16_17_18 <- combined_16_17_18 %>% 
   separate(value, c("year", "month", "day"), "-")
 
-wave_16 <- wave_all %>% 
-  filter(Date == "2016") %>% 
-  group_by(Time)
+
+wave_16 <- wave_16_17_18 %>% 
+  filter(year == "2016") %>% 
+  group_by(month)
+wave_16
 
 daily_16 <- wave_16 %>% 
-  group_by(Date, Time, HMO) %>% 
-  summarise(tp_circ = mean.circular(circular(TP)),
-            tcf_circ = mean.circular(circular(TCF)),
-            hs_circ = mean.circular(circular(HS))) %>% 
-  mutate(year = "2016")
+  group_by(year, month, day) %>% 
+  summarise(hs_circ = mean.circular(circular(hs)),
+            tp_circ = mean.circular(circular(tp)),
+            dp_circ = mean.circular(circular(dp)),
+            u_circ = mean.circular(circular(u)),
+            v_circ = mean.circular(circular(v))) %>% 
+  mutate(year1 = "2016")
+daily_16
 
 rm_2 <- daily_16[, -1:-3]
+# final_rm_2 <- rm_2[, -4]
 
-try_2 <- as.tibble(paste(daily_16$Date, daily_16$Time, daily_16$HMO, sep = "-"))
+try_2 <- as.tibble(paste(daily_16$year, daily_16$month, daily_16$day, sep = "-"))
+try_2
 
 combined_16 <- cbind(rm_2, try_2)
+combined_16
 
 sep_16 <- combined_16 %>% 
   separate(value, c("year", "month", "day"), "-")
+sep_16
 
-ttime_16 <- combined_16[-c(213:366),]
-ttime_16_1 <- ttime_16[-c(1:83),]
+# time_16 <- combined_16[-c(1:83),]
+# time_16_1 <- time_16[-c(246:366),]
+# time_16_2 <- time_16_1[-c(246:328),]
 
-wave_17 <- wave_all %>% 
-  filter(Date == "2017") %>% 
-  group_by(Time)
+ttime_16 <- combined_16[-c(275:366),]
+ttime_16_1 <- ttime_16[-c(1:76),]
+
+wave_17 <- wave_16_17_18 %>% 
+  filter(year == "2017") %>% 
+  group_by(month)
+wave_17
 
 daily_17 <- wave_17 %>% 
-  group_by(Date, Time, HMO) %>% 
-  summarise(tp_circ = mean.circular(circular(TP)),
-            tcf_circ = mean.circular(circular(TCF)),
-            hs_circ = mean.circular(circular(HS))) %>% 
-  mutate(year = "2017")
+  group_by(year, month, day) %>% 
+  summarise(hs_circ = mean.circular(circular(hs)),
+            tp_circ = mean.circular(circular(tp)),
+            dp_circ = mean.circular(circular(dp)),
+            u_circ = mean.circular(circular(u)),
+            v_circ = mean.circular(circular(v))) %>% 
+  mutate(year2 = "2017")
+daily_17
 
 rm_3 <- daily_17[, -1:-3]
+# final_rm_3 <- rm_3[, -4]
 
-try_3 <- as.tibble(paste(daily_17$Date, daily_17$Time, daily_17$HMO, sep = "-"))
+try_3 <- as.tibble(paste(daily_17$year, daily_17$month, daily_17$day, sep = "-"))
+try_3
 
 combined_17 <- cbind(rm_3, try_3)
+combined_17
 
 sep_17 <- combined_17 %>% 
   separate(value, c("year", "month", "day"), "-")
+sep_17
 
-time_17 <- combined_17[-c(212:365),]
-time_17_1 <- time_17[-c(1:82),]
+time_17 <- combined_17[-c(274:365),]
+time_17_1 <- time_17[-c(1:75),]
 
 daily_18 <- wave_2018_1 %>% 
-  group_by(Time, HMO) %>% 
-  summarise(tp_circ = mean.circular(circular(TP)),
-            tcf_circ = mean.circular(circular(TCF)),
-            hs_circ = mean.circular(circular(HS))) %>% 
-  mutate(year = "2018")
+  group_by(month, day) %>% 
+  summarise(hs_circ = mean.circular(circular(hs)),
+            tp_circ = mean.circular(circular(tp)),
+            dp_circ = mean.circular(circular(dp)),
+            u_circ = mean.circular(circular(u)),
+            v_circ = mean.circular(circular(v))) %>% 
+  mutate(year3 = "2018")
+daily_18
 
 rm_4 <- daily_18[, -1:-2]
+# final_rm <- rm[, -4]
 
-try_4 <- as.tibble(paste(daily_18$year, daily_18$Time, daily_18$HMO, sep = "-"))
+try_4 <- as.tibble(paste(daily_18$year3, daily_18$month, daily_18$day, sep = "-"))
+try_4
 
 combined_18 <- cbind(rm_4, try_4)
+combined_18
 
-time_18 <- combined_18[-c(1:82),]
+time_18_1 <- combined_18[-c(274),]
+time_18 <- time_18_1[-c(1:75),]
 
-merge_try <- rbind(combined_16, combined_17, combined_18)
+# merge_try <- rbind(combined_16, combined_17, combined_18)
 ```
 
 ```{r include=FALSE}
@@ -497,15 +580,23 @@ seasons_16 <- sep_16 %>%
                                 ifelse(month %in% c("06", "07", "08"), "Winter",
                                        ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
 
-season_16_rm <- as.data.frame(seasons_16[, -1:-6])
+season_16_rm <- as.data.frame(seasons_16[, -1:-9])
 
 sea_16_rm <- season_16_rm %>% 
-  select(season = `seasons_16[, -1:-6]`)
+  select(season = `seasons_16[, -1:-9]`)
 
-sea_16 <- as.data.frame(sea_16_rm[-c(213:366),])
-sea_16_1 <- sea_16[-c(1:83),]
+sea_16 <- as.data.frame(sea_16_rm[-c(275:366),])
+sea_16_1 <- sea_16[-c(1:76),]
 
 season_16_1 <- cbind(ttime_16_1, sea_16_1)
+
+mean_16 <- season_16_1 %>% 
+  group_by(sea_16_1) %>% 
+  summarise(mean_tp_16 = mean(tp_circ),
+            mean_hs_16 = mean(hs_circ),
+            mean_dp_16 = mean(dp_circ),
+            mean_u_16 = mean(u_circ),
+            mean_v_16 = mean(v_circ))
 
 seasons_17 <- sep_17 %>%
   mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
@@ -513,15 +604,23 @@ seasons_17 <- sep_17 %>%
                                 ifelse(month %in% c("06", "07", "08"), "Winter",
                                        ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
 
-season_17_rm <- as.data.frame(seasons_17[, -1:-6])
+season_17_rm <- as.data.frame(seasons_17[, -1:-9])
 
 sea_17_rm <- season_17_rm %>% 
-  select(season = `seasons_17[, -1:-6]`)
+  select(season = `seasons_17[, -1:-9]`)
 
-sea_17 <- as.data.frame(sea_17_rm[-c(212:365),])
-sea_17_1 <- sea_17[-c(1:82),]
+sea_17 <- as.data.frame(sea_17_rm[-c(274:365),])
+sea_17_1 <- sea_17[-c(1:75),]
 
 season_17_1 <- cbind(time_17_1, sea_17_1)
+
+mean_17 <- season_17_1 %>% 
+  group_by(sea_17_1) %>% 
+  summarise(mean_tp_17 = mean(tp_circ),
+            mean_hs_17 = mean(hs_circ),
+            mean_dp_17 = mean(dp_circ),
+            mean_u_17 = mean(u_circ),
+            mean_v_17 = mean(v_circ))
 
 seasons_18 <- sep_2018 %>% 
   mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
@@ -529,117 +628,297 @@ seasons_18 <- sep_2018 %>%
                                 ifelse(month %in% c("06", "07", "08"), "Winter",
                                        ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
 
-season_18_rm <- as.data.frame(seasons_18[, -1:-6])
+season_18_rm <- as.data.frame(seasons_18[, -1:-8])
 
 sea_18_rm <- season_18_rm %>% 
-  select(season = `seasons_18[, -1:-6]`)
+  select(season = `seasons_18[, -1:-8]`)
 
-sea_18 <- sea_18_rm[-c(1:82),]
+sea_18 <- as.data.frame(sea_18_rm[-c(199),]) 
 
-season_18 <- cbind(time_18, sea_18)
+sea_18_1 <- sea_18 %>% 
+  select(season = `sea_18_rm[-c(199), ]`)
+
+season_18 <- cbind(time_18, sea_18_1)
+
+mean_18 <- season_18 %>% 
+  group_by(season) %>% 
+  summarise(mean_tp_18 = mean(tp_circ),
+            mean_hs_18 = mean(hs_circ),
+            mean_dp_18 = mean(dp_circ),
+            mean_u_18 = mean(u_circ),
+            mean_v_18 = mean(v_circ))
 ```
 
 ```{r include=FALSE}
 hs_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_hline(data = mean_16, aes(yintercept = mean_hs_16), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "Date", y = "HS (s)", title = "") +
+  labs(x = "", y = "HS (m)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  facet_wrap(~sea_16_1) +
+  facet_wrap(~ sea_16_1) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
 hs_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_hline(data = mean_17, aes(yintercept = mean_hs_17), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "Date", y = "HS (s)", title = "") +
+  labs(x = "", y = "HS (m)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   facet_wrap(~ sea_17_1) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
 hs_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_hline(data = mean_18, aes(yintercept = mean_hs_18), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
   labs(x = "Date", y = "HS (s)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  facet_wrap(~ sea_18) +
+  facet_wrap(~ season) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
-# ggarrange(hs_season_2016, hs_season_2017, hs_season_2018, nrow = 3, ncol = 1)
-
 tp_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_hline(data = mean_16, aes(yintercept = mean_tp_16), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
   labs(x = "Date", y = "TP (s)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   facet_wrap(~ sea_16_1) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
 tp_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_hline(data = mean_17, aes(yintercept = mean_tp_17), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
   labs(x = "Date", y = "TP (s)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   facet_wrap(~ sea_17_1) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
 tp_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_hline(data = mean_18, aes(yintercept = mean_tp_18), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
   labs(x = "Date", y = "TP (s)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) + 
-  facet_wrap(~ sea_18) +
+  facet_wrap(~ season) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
-# ggarrange(tp_season_2016, tp_season_2017, tp_season_2018, nrow = 3, ncol = 1)
-
-tcf_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = tcf_circ, 
-                                           group = 1)) +
+dp_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = dp_circ, group = 1)) +
+  geom_hline(data = mean_16, aes(yintercept = mean_dp_16), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "Date", y = "Period 2 (s)", title = "") +
+  labs(x = "Date", y = "DP (s)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   facet_wrap(~ sea_16_1) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
-tcf_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = tcf_circ, 
-                                           group = 1)) +
+dp_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = dp_circ, group = 1)) +
+  geom_hline(data = mean_17, aes(yintercept = mean_dp_17), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "Date", y = "Period 2 (s)", title = "") +
+  labs(x = "Date", y = "dp (s)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   facet_wrap(~ sea_17_1) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
-tcf_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = tcf_circ, group = 1)) +
+dp_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = dp_circ, group = 1)) +
+  geom_hline(data = mean_18, aes(yintercept = mean_dp_18), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "Date", y = "Period 2 (s)", title = "") +
+  labs(x = "Date", y = "dp (s)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  facet_wrap(~ sea_18) +
+  facet_wrap(~ season) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
-# ggarrange(tcf_season_2016, tcf_season_2017, tcf_season_2018, nrow = 3, ncol = 1)
+u_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = u_circ, group = 1)) +
+  geom_hline(data = mean_16, aes(yintercept = mean_u_16), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "", y = "u (m)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ sea_16_1) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
+
+u_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = u_circ, group = 1)) +
+  geom_hline(data = mean_17, aes(yintercept = mean_u_17), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "", y = "u (m)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ sea_17_1) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
+
+u_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = u_circ, group = 1)) +
+  geom_hline(data = mean_18, aes(yintercept = mean_u_18), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "Date", y = "u (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ season) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
+
+v_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = v_circ, group = 1)) +
+  geom_hline(data = mean_16, aes(yintercept = mean_v_16), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "", y = "v (m)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ sea_16_1) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
+
+v_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = v_circ, group = 1)) +
+  geom_hline(data = mean_17, aes(yintercept = mean_v_17), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "", y = "v (m)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ sea_17_1) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
+
+v_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = v_circ, group = 1)) +
+  geom_hline(data = mean_18, aes(yintercept = mean_v_18), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "Date", y = "v (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ season) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of peak period (s) across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**).", fig.width=5, fig.height=3.5}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of peak period (s) across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean peak period per season.", fig.width=8, fig.height=4}
 ggarrange(tp_season_2016, tp_season_2017, tp_season_2018, 
           nrow = 3, ncol = 1,
-          labels = c("A", "B", "C", "D"))
+          labels = c("A", "B", "C"))
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of period 2 across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**).", fig.width=5, fig.height=3.5}
-ggarrange(tcf_season_2016, tcf_season_2017, tcf_season_2018, 
-          nrow = 3, ncol = 1,
-          labels = c("A", "B", "C", "D"))
-```
+A two-way ANOVA and TukeyHSD _post-hoc_ test indicates no significant difference in primary wave mean period between seasons and between years (_P_ = 0.310 and 0.795, respectively.). These statistical tests support what is observed on Figure 8 as the red mean line does not differ much per season and per year.
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of significnat wave height (m) across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**).", fig.width=5, fig.height=3.5}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of significant wave height (m) across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean significant wave height per season.", fig.width=8, fig.height=4}
 ggarrange(hs_season_2016, hs_season_2017, hs_season_2018, 
           nrow = 3, ncol = 1,
-          labels = c("A", "B", "C", "D"))
+          labels = c("A", "B", "C"))
 ```
 
-ANOVA and Tukey HSD post-hoc still to be done once I have received all the wave data. The results from these statistical tests will be used to explain figure 6, 7, and 8.
+A similar observation is made in Figure 9 where the two-way ANOVA and TukeyHSD _post-hoc_ test indicates no significant difference in significant height of combined wind, waves, and swell between seasons and between years (_P_ = 0.527 and 0.480, respectively.). In the winter panel in  **B**, the mean red line is a lot lower than autumn and spring in 2017 and lower than winter 2016 and winter 2018. However, the aforementioned statistical tests confirm that this observed difference is negligible.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of primary wave direction () across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean primary wave direction per season.", fig.width=8, fig.height=4}
+ggarrange(dp_season_2016, dp_season_2017, dp_season_2018, 
+          nrow = 3, ncol = 1,
+          labels = c("A", "B", "C"))
+```
+
+In Figure 10, primary wave direction shows variability in means across seasons and years. The two-way ANOVA and TukeyHSD _post-hoc_ test, however, indicated no significant differences between seasons and between years (_P_ = 0.747 and 0.643, respectively). Therefore, observed variability can be ignored.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of wind direction () across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean wind direction per season.", fig.width=8, fig.height=4}
+ggarrange(u_season_2016, u_season_2017, u_season_2018, 
+          nrow = 3, ncol = 1,
+          labels = c("A", "B", "C"))
+
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of wind speed () across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean wind speed per season.", fig.width=8, fig.height=4}
+ggarrange(v_season_2016, v_season_2017, v_season_2018, 
+          nrow = 3, ncol = 1,
+          labels = c("A", "B", "C"))
+
+```
+
+Similarily for wind components, variability is observed at mean wind direction (Figure 11) and mean wind speed (Figure 12), but the ANOVA and TukeyHSD _post-hoc_ test have shown that all differences observed between seasons (_P_ = 0.985 (wave direction) and 0.6022 (wave speed)) and between years (_P_ = 0.648 (wave direction) and 0.0632 (wave speed)) are not significant and, therefore, negligible.
+
+```{r include=FALSE}
+names_mean_16 <- mean_16 %>% 
+  select(season = sea_16_1,
+         mean_tp = mean_tp_16,
+         mean_hs = mean_hs_16,
+         mean_dp = mean_dp_16,
+         mean_u = mean_u_16,
+         mean_v = mean_v_16) %>% 
+  mutate(year = "2016")
+
+names_mean_17 <- mean_17 %>% 
+  select(season = sea_17_1,
+         mean_tp = mean_tp_17,
+         mean_hs = mean_hs_17,
+         mean_dp = mean_dp_17,
+         mean_u = mean_u_17,
+         mean_v = mean_v_17) %>% 
+  mutate(year = "2017")
+
+names_mean_18 <- mean_18 %>% 
+  select(season = season,
+         mean_tp = mean_tp_18,
+         mean_hs = mean_hs_18,
+         mean_dp = mean_dp_18,
+         mean_u = mean_u_18,
+         mean_v = mean_v_18) %>% 
+  mutate(year = "2018")
+
+combined_means <- rbind(names_mean_16, names_mean_17, names_mean_18)
+
+shapiro.test(combined_means$mean_tp)
+  # normal
+shapiro.test(combined_means$mean_hs)
+  # not normal
+shapiro.test(combined_means$mean_dp)
+  # normal
+shapiro.test(combined_means$mean_u)
+  # normal
+shapiro.test(combined_means$mean_v)
+  # normal
+
+tp.aov <- aov(mean_tp ~ year + season, data = combined_means)
+summary(tp.aov)
+TukeyHSD(tp.aov)
+
+hs.aov <- aov(mean_hs ~ year + season, data = combined_means)
+summary(hs.aov)
+TukeyHSD(hs.aov)
+
+dp.aov <- aov(mean_dp ~ year + season, data = combined_means)
+summary(dp.aov)
+TukeyHSD(dp.aov)
+
+u.aov <- aov(mean_u ~ year + season, data = combined_means)
+summary(u.aov)
+TukeyHSD(u.aov)
+
+v.aov <- aov(mean_v ~ year + season, data = combined_means)
+summary(v.aov)
+TukeyHSD(v.aov)
+
+```
 
 # Discussion
 
@@ -662,10 +941,10 @@ Holdfasts play a major role in kelp mechanics as this is the only point where th
 Over the smapling period, we came across a number of aggregations, all varying in the number of stipes emerging from one holdfast. These aggregations and close proximities are known to be beneficial as it protects kelp from grazing (Velimirov and Griffiths 1979), and harsh hyrdodynamic environments which could cause mortality by dislodgement (Johnson 2001). Due to the closeness of thalli in aggregates, this morphology may reduce hydrodynamic drag and in turn, allow kelp to withstand strong wave activity and prevent breakage or dislodgment (Wernberg 2005). It has been found that as wave exposure increases, frequency of aggregates increase. This could be due to either higher recruitment and formation rates or decreased mortality. Although it wa snot looked at in this study, Wernberg (2005) has found that individuals in aggregations are more slender than solitary individuals and this morphological property is associated with reduced drag and hence, lower chance of wave-driven morpholgy. Furthermore, attachment force was found to be higher in aggregates than in solitary individuals. Therefore, we suggest that we did not come across very many aggregates deposited on the beach due to their resilience against harsh wave activity and at points where we observed a larger number of aggregates, it may have followed a period of peak wave activity such as a storm event.    
 
 ## Yearly seasonal variation
-**_how wave climate differs over past two years and how this may have influenced what we have observed this year_**
+Our results have shown no statistically significant differences in wind or wave parameters between seasons or between the years 2016-2018. We can thus infer that no drastic changes in wave and wind factors have ocurred over the past three years which in turn should suggest to us that the composition of beach cast kelp quantified this year should not be very different to the previous years observed. Additionally, no significance in wind and wave parameters between seasons was established and our hypotheses may therefore be discounted. This is because no differences in wave or wind parameters were observed between seasons, hence factors driving kelp dislodgement and transport were not more pronounced in winter months in comparion to others. Therefore, our constant low, and somewhat stochastic, observations of kelp deposition is supported by this result. 
 
 ## Implications and suggestions for further research
-Beach-cast kelp has been known to be of high importance to sandy beach ecosystems which relies on allochthonus subsidies of matter to sustain organisms living in this otherwise harsh environment (Barreriro et al. 2011). Additionally, beach casts are also harvested and used as a primary products and therefore have socioeconomic importance (Kirkman and Kendrick 1997). Therefore, monitoring of these beach casts should be of value as any changes in the wrack deposition could have a range of knock-on effects. Additionally, the environmental factors that play a role in dislodgement and transport of kelp should also be monitored especially in the wake of global climate change (_e.g_ sea-level rise, increased storms) to determine how this will affect ecosystems that are reliant on wrack subsidies. 
+Beach-cast kelp has been known to be of high importance to sandy beach ecosystems which relies on allochthonus subsidies of matter to sustain organisms living in this otherwise harsh environment (Barreriro et al. 2011). Additionally, beach casts are also harvested and used as a primary products and therefore have socioeconomic importance (Kirkman and Kendrick 1997). Therefore, monitoring of these beach casts should be of value as any changes in the wrack deposition could have a range of knock-on effects. Additionally, the environmental factors that play a role in dislodgement and transport of kelp should also be monitored especially in the wake of global climate change (_e.g_ sea-level rise, increased storms) to determine how this will affect ecosystems that are reliant on wrack subsidies. We suggest that yearly seasonal comparisons be carried out over a large number of years to ensure statistical strength and to take into account changes in these abiotic factors that may have occurred over long periods of time.
 
 In conclusion, this study has provided a glimpse into what can be expected from kelp wracks regarding seasonality. However, as mentioned previously, a myriad of factors and their interactions should be considered when observing patterns of dislodgement and deposition of kelp. Therefore, it is suggested that a similar study should be carried out at a spatiotemporal scale. This should be done at a number of sites of varying wave exposures and over a longer period of time, possibly over several years, to compare seasonal data. A number of additional morphometrics should be looked at such as biomass, blade type, and presence of wounds.  
 
