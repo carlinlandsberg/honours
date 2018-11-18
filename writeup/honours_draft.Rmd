@@ -1,27 +1,31 @@
 ---
-title: "Describing beach-cast kelp as a function of wave parameters in Muizenberg"
-author: "Carlin Landsberg"
-date: "19 November 2018"
+title: "Going with the flow from water to land: Describing beach-cast kelp as a function of wave parameters in Muizenberg"
 output:
-  word_document: default
-  html_document:
-    df_print: paged
   pdf_document:
     fig_cap: yes
     keep_tex: yes
     latex_engine: xelatex
-mainfont: Arial
+  html_document:
+    df_print: paged
+  word_document: default
+mainfont: PT Serif
 monofont: PT Mono
 header-includes:
 - \usepackage{float}
 - \floatplacement{figure}{H}
+- \usepackage{gensymb}
 fontsize: 12pt
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.pos = "h")
 ```
+# Abstract
+Kelp populations are specifically adapted in response to the wave climate they expreience as a way to maximise growth while minimising mortality. However, when these wave conditions become harsh, kelp tend to be dislodged and are trasnported to adjacent rocky and sandy shores and are subsequently referred to as beach-casts or kelp wracks. This study aims to describe these beach-casts at Muizenberg beach over a seasonal scale by looking at their quantity and morphmetric properties. We hypothesised that a larger number of casts, aggregates, and holdfasts, as well as larger kelp morhphometrics will be observed in winter when wave metrics (_i.e._ wave period, wave height, wave direction, wind direction, and wind speed) reach their peak. Our results were shown to be insignificant as none of the wave metrics could confidently explain the observed beach-cast quantites and morphometrics. Further results also show no significant differences between seasonal beach-cast measurements and, in addition, no significant differences were found between seasonal and yearly wave metrics. This study provides insights into wrack dynamics, which has not been well-studied, despite apparent limitations. Therefore, we suggest that future studies be carried out over longer periods of time, larger spatial scales, with additional morphological measurements in order to account for the large number of factors playing a role in the process of kelp mortality and dislodgement.  
 
+_Keywords_: Beach-cast kelp, Hydrodynamics, Seasonality, Dislodgement, Wave climate  
+
+\newpage 
 # Introduction
 
 Kelp beds dominate a significant amount of the world's rocky shore ecosystems (Steneck et al. 2002). In South Africa, kelp beds occur extensively along the Western Cape, from De Hoop to Port Nolloth (Bolton et al. 2012, Field et al. 1977, Velimirov et al. 1977). These kelp beds play a large role in the functioning of their immediate ecosystems and the ecosystems adjacent to them. It is well known that kelp beds play a role in trophic structuring of habitats as they are a source of energy to the aforementioned systems (Field et al. 1977, Koop et al. 1982, Koop and Griffiths 1982, Robertson and Hanson 1982).
@@ -32,20 +36,19 @@ Due to their extensive occurrence around the coast, kelp populations are also ex
 
 Additionally, a number of studies have looked at blade morphology where blades or fronds have shown speciifc adaptations in response to the specific wave exposure they are found in (_i.e_ wave-exposed or wave-sheltered) (Cheshire and Hallam 1988, Jackelman and Bolton 1990, Koehl et al. 2008, Koehl and Alberte 1988, Roberson and Coyer 2004). Further studies have found that holdfasts also tend to adapt according to degree of exposure, with wave-exposed kelp possessing larger holdfasts with stronger attachment abilities (Bekkby et al. 2014, Fowler-Walker et al. 2006, Koehl et al. 2008, Wernberg and Vanderklift 2010). The aforementioned studies suggest wave exposure is a signifcant factor in the observed variation of kelp morphology. Wave climate metrics reach a peak during storm events, with these events typically ocurring in winter (Lemm et al. 1999). Consequently, kelp cannot withstand this and are broken or dislodged leading to portions of these kelp being deposited onto adjacent shores (Colombini and Chelazzi 2003, Filbee-Dexter and Scheibling 2012, Graham et al. 1997, Jones et al. 2004, Seymour et al. 1989).
 
-The end result of the aforementioned mortality events is the transport of the broken and dislodged plants to adjacent ecosystems (on-shore and off-shore). Some of the material is broken up and decomposed to particulate organic matter and is available as a food or energy source to intertidal organisms and zooplankton (Bustamante and Branch 1996, Dyer 2018, Soares et al. 1997). Another fraction of the detrital kelp is transported to the deep sea as masses known as kelp rafts (Smith 2002), and the balance washes up on sandy and rocky intertidal shores. The kelp that washes up onto sandy shores, usually permanently deposited by tidal action, is known commonly as beach-cast kelp or kelp wracks (Dugan et al. 2011, Jones et al. 2004, Orr et al. 2005). It is this beach cast kelp that is the subject of this paper.
+The end result of the aforementioned mortality events is the transport of the broken and dislodged plants to adjacent ecosystems (on-shore and off-shore). Some of the material is broken up and decomposed to particulate organic matter and is available as a food or energy source to intertidal organisms and zooplankton (Bustamante and Branch 1996, Soares et al. 1997). Another fraction of the detrital kelp is transported to the deep sea as masses known as kelp rafts (Smith 2002), and the balance washes up on sandy and rocky intertidal shores. The kelp that washes up onto sandy shores, usually permanently deposited by tidal action, is known commonly as beach-cast kelp or kelp wracks (Dugan et al. 2011, Jones et al. 2004, Orr et al. 2005). It is this beach cast kelp that is the subject of this paper.
 
 Wrack dynamics are highly variable and distribution is generally stochastic in nature (Barreiro et al. 2011, Dugan et al. 2003, Orr et al. 2005). The amount of kelp washing up over time also tends to fluctuate and previous studies have reported contrasting results on seasons with the highest number of kelp (Koop and Field 1980, Kotwicki et al. 2005, Mateo 2010, Ochieng and Erftemeijer 1999, Piriz et al. 2003, Stenton-Dozey and Griffiths 1983) . Thus, this variability in wrack input on sandy beaches may be as a result of interactions between factors such as life cycle of kelp, buoyancy properties of kelp, wave exposure, and spatial and temporal (seasonality) variations in wave climate (Barreiro et al. 2011).
 
 Beach-cast kelp is of high importance in sandy beach ecosystems where they provide a source of nutrients and refuge for organisms living in these ecosystems (Dugan et al. 2011, Bustamante et al. 1995, Jones et al. 2004). Some of this material is also collected in for use in a number of economic-driven endeavours, such as in the production of alginate, or as feeds/fertilisers in the agricultural and aquacultural sectors. Therefore, beach-cast kelp have socioeconomic importance (Kirkman and Kendrick 1997) and as a result, monitoring of ecosystems that receive input of kelp wrack is important.
 
-The amount of wrack washing up on beaches depends on how productive areas adjacent or close to these beaches are. It can thus be assumed that beaches near areas with high production of macroalgae, such as kelps forests, will receive large amounts of wrack inputs (Barreiro et al. 2011). In this project, we propose that the amounts of kelp washing up on the shores also highlight the intensity and characteristics of the hydrodynamic forces that are responsible for causing the breakage and dislodgement of kelp from the habitats where they are produced. Since wrack input on beaches is a result of interactions among physical factors (of the hydrodynamic regime) and the morphometric properties of kelp (_e.g._ stipe and frond length, stipe thickness, size of the holdfast), measuring the morphometic properties of beach-cast kelp and interpreting these data within a framework of knowledge of the wave environment derived from climatologies and time series of hindcast modelled wave parameters, will provide us with an insight into how the nearshore hydrodynamics shape kelp population dynamics. This information will contribute towards quantify the variability in the deposition of wrack on beaches, which is generally still unknown (Klosinski 2015).
+The amount of wrack washing up on beaches depends on how productive areas adjacent or close to these beaches are. It can thus be assumed that beaches near areas with high production of macroalgae, such as kelps forests, will receive large amounts of wrack inputs (Barreiro et al. 2011). In this project, we propose that the amounts of kelp washing up on the shores also highlight the intensity and characteristics of the hydrodynamic forces that are responsible for causing the breakage and dislodgement of kelp from the habitats where they are produced. Since wrack input on beaches is a result of interactions among physical factors (of the hydrodynamic regime) and the morphometric properties of kelp (_e.g._ stipe and frond length, stipe thickness, size of the holdfast), measuring the morphometic properties of beach-cast kelp and interpreting these data within a framework of knowledge of the wave environment derived from climatologies and time series of hindcast modelled wave parameters, will provide us with an insight into how the nearshore hydrodynamics shape kelp population dynamics. This information will contribute towards quantifyong the variability in the deposition of wrack on beaches, which is generally still unknown (Klosinski 2015).
 
 The intention of this study is to quantify the deposition of kelp on beaches over a seasonal scale spanning from Austral late summer until the onset of spring. Over this period, the changing nature of the wave climate as it progresses to higher levels of wave and swell energy in winter will be recorded. These data will then be related to weekly measurments of beach cast kelp, together with the kelps' morphometric properties. From these observations we will infer how morphometric properties of the kelps such as size (length), holdfast size, and presence of aggregates sharing a holdfast may play a role in overcoming stressors in their environment such as wave-driven breakage and dislodgement.
 
 We hypothesize that, over the sampling period, _i)_ a higher number of kelp will be washing up on the beach, possibly due to stronger wave action in winter months dislodging more individuals, _ii)_ larger kelp washing up on the beach due to strong waves dislodging even larger individuals, and _iii)_ an increased number of holdfasts washing up inferring that individuals are completely dislodged (_i.e._ "uprooted") due to stronger wave action in winter months instead of breaking off above the holdfast as a result of weaker wave action during summer.
 
-<!--(However, something to consider is that smaller kelp may withstand wave stress, so could much smaller kelp indicate stronger wave action? See de Bettignies et al. (2015)).-->
-
+\newpage
 # Method and materials
 
 ## Study site
@@ -58,6 +61,7 @@ library(ggmap)
 library(ggpubr)
 library(scales)
 library(ggsn)
+library(maps)
 
 sa_map <- ggplot() +
   borders(fill = "grey70", colour = "black") +
@@ -65,30 +69,31 @@ sa_map <- ggplot() +
   geom_point(aes(x = 18.5, y = -34), shape = 1, size = 5, colour = "red") +
   theme(axis.text.x = element_blank(), axis.text.y = element_blank(),
        axis.ticks = element_blank(), axis.title.x = element_blank(),
-        axis.title.y = element_blank(), panel.background = element_blank())
+       axis.title.y = element_blank(), panel.background = element_blank())
 
-muiz_map <- ggplot() +
-  borders(fill = "grey70", colour = "black") +
-  coord_equal(xlim = c(18, 19.5), ylim = c(-34.5, -33.5), expand = 0) +
-  geom_point(aes(x = 18.508, y = -34.1), colour = "red", size = 3) +
-  annotate("text", label = "Muizenberg beach", 
-           x = 18.652, y = -34.12, size = 3)
+load("../data/cape_point.Rdata")
+
+muiz_map <- ggmap(cape_point) +
+  coord_cartesian(xlim = c(18.29, 18.79), ylim = c(-34.4, -33.9)) +
+  geom_point(aes(x = 18.46, y = -34.12), colour = "red", size = 3) +
+  annotate("text", label = "Muizenberg beach", x = 18.514, y = -34.125, size = 3, colour = "white") 
 
 final_map <- muiz_map +
   annotation_custom(grob = ggplotGrob(sa_map),
-                    xmin = 19, xmax = 19.45,
-                    ymin = -34, ymax = -33.5) +
-  theme_bw()
+                     xmin = 18.6, xmax = 18.75,
+                    ymin = -33.9, ymax = -34.1) +
+  labs(x = "Latitude (°E)", y = "Longitude (°S)")
+
 ```
 
-```{r echo=FALSE, fig.cap="Site map showing the location of the study site, Muizenberg beach. **_find high res map_**", message=FALSE, warning=FALSE, fig.width=6, fig.height=7}
+```{r echo=FALSE, fig.cap="Site map showing the location of the study site, Muizenberg beach.", message=FALSE, warning=FALSE}
 final_map
 ```
 
 
-The study was conducted at Muizenberg Beach (34.0899°S, 18.4959°E) in an area where kelp wrack is not cleared by the City of Cape Town (CoCT) beach cleaning teams (Figure 2). This site has no adjacent kelps beds to the beach but the area has been known to experience large amounts of beach-cast kelp on a regular basis.
+The study was conducted at Muizenberg Beach (34.0899°S, 18.4959°E) in an area where kelp wrack is not cleared by the City of Cape Town (CoCT) beach cleaning teams (Figure 1). This site has no adjacent kelps beds to the beach but the area has been known to experience large amounts of beach-cast kelp on a regular basis.
 
-A 10m wide section along the beach was measured using a 10m long rope held perpendicular to the edge of the low tide line. Two people, each holding one end of the rope, then proceeded to walk along the strip for a distance of 250m along the beach parallel to the low tide line (Figure 3).
+A 10m wide section along the beach was measured using a 10m long rope held perpendicular to the edge of the low tide line. Two people, each holding one end of the rope, then proceeded to walk along the strip for a distance of 250m along the beach parallel to the low tide line (Figure 2).
 
 ```{r echo=FALSE, fig.cap="Set-up of area sampled at Muizenberg Beach.", fig.height=40, fig.width=5}
 library(png)
@@ -102,11 +107,11 @@ img2 <- readPNG("set-up.png")
 
 Every kelp that was found within this 250m long x 10m wide strip was counted and various morphological charateristics were measured and recorded. These morphological characteristics included holdfast presence or absence, diameter of holdfast, stipe length, and longest frond length. Additionally, each kelp was numbered and if more than one individual was present on the same holdfast (_i.e._ aggregates) and recorded with an associated number. For example, if three individuals share a holdfast, it was recorded as 1.1, 1.2, and 1.3. Stipe and frond length were measured and recorded for each kelp individual in the aggregate, provided the stipe length was at least 10cm long.
 
-Since wave climate may have varied seasonally, this method was repeated weekly over the period from 2018-03-24 to 2018-09-30. We separated seasons as summer (December-February), autumn (March-May), winter (June-August), and spring (September-November). Thus, our study period took place from autumn until the begining of spring. Consequently, no samples were collected in summer months. This study period extending across several seasons allowed for temporal comparison of  morphological characteristics amongst beach-cast kelp over a varying wave climate.
+Since wave climate may have varied seasonally, this method was repeated weekly over the period from 2018-03-24 to 2018-09-30. We separated seasons as summer (December-February), autumn (March-May), winter (June-August), and spring (September-November). Thus, our study period took place from autumn until the begining of spring. Consequently, no samples were collected in summer months. Beach-cast data was subsequenly split into the aforementioned seasonal categories for further analysis. This study period extending across several seasons allowed for temporal comparison of morphological characteristics amongst beach-cast kelp over a varying wave climate. Additionally, we performed a one-way ANOVA and subsequent Tukey HSD _post hoc_ test on the seasonally categorised beach-cast data to determine if significant differences exist between seasonal wrack quantities and morphometrics amongst seasons.
 
 ## Wave climate
 
-Wave data at a latitude 34.50000°S and a longitude of 18.50000°E were obtained from Dr. Christo Rautenbach of the South African Weather Service (SAWS). These ocean wave hindcasts were derived from the National Centers for Environmental Prediction (NCEP) wind/wave data (Kalnay et al. 1996) feeding into the WaveWatch III wave model (Tolman 1991). We obtained data from 2012-01-01 to 2018-08-01. Over this time, data were present daily at a three-hourly resolution. Specific wave parameters were measured, namely, primary wave mean period (s), significant height of combined wind, waves, and swell (m), primary wave direction (TNorth) and accompanying wind components, namely, wave direction () and wind speed (). Subsequent analyses were performed on the aforementioned parameters.
+Wave data at a latitude 34.50000°S and a longitude of 18.50000°E were obtained from Dr. Christo Rautenbach of the South African Weather Service (SAWS). These ocean wave hindcasts were derived from the National Centers for Environmental Prediction (NCEP) wind/wave data (Kalnay et al. 1996) feeding into the WaveWatch III wave model (Tolman 1991). We obtained data from 2012-01-01 to 2018-08-01. Over this time, data were present daily at a three-hourly resolution. Specific wave parameters were measured, namely, primary wave mean period (s), significant height of combined wind, waves, and swell (m), primary wave direction (°N) and accompanying wind components, namely, wind direction (°) and wind speed (m/s). Subsequent analyses were performed on the aforementioned parameters.
 
 ## Statistical analysis
 
@@ -121,6 +126,8 @@ In addition to the time series, we explored the previous two years, namely, 2016
 \newpage 
 # Results
 
+A one-way ANOVA performed on the seasonal beach-cast data has shown no significance in total number of casts (_P_ = 0.0874, _F_ = 2.691, SS = 753, _df_ = 2), total number of aggregates (_P_ = 0.863, _F_ = 0.149, SS = 16.2, _df_ = 2), total number of holdfasts (_P_ = 0.158, _F_ = 2.09, SS = 56.9, _df_ = 2), mean holdfast diameter (_P_ = 0.643, _F_ = 0.471, SS = 18.84, _df_ = 2), mean stipe length (_P_ = 0.169, _F_ = 2.006, SS = 18233, _df_ = 2), and mean frond length (_P_ = 0.145, _F_ = 2.202, SS = 4254, _df_ = 2) across a seasonal scale.
+
 ```{r include=FALSE}
 library(tidyverse)
 library(ggpubr)
@@ -128,7 +135,8 @@ library(pgirmess)
 library(circular)
 library(zoo)
 
-casts.in <- read.csv2("../data/project_data_working_copy.csv") ## use relative file paths, which is what RStudio projects allows! Else I cannot run the script on my comnputer!!!
+casts.in <- read.csv2("../data/project_data_working_copy.csv") 
+casts_extra <- read.csv2("../data/beach_casts_manual.csv") # data showing total number of holdfasts, total casts, and total aggregates per date, calculated manually from raw data.
 
 casts <- casts.in %>%
   mutate(date = as.Date(date, "%d-%b-%y")) %>%
@@ -137,6 +145,9 @@ casts <- casts.in %>%
   mutate(stipe_length = as.character(stipe_length)) %>% 
   mutate(stipe_length = as.numeric(replace(stipe_length, stipe_length %in% c("<10"), 5))) %>%
   as_tibble()
+
+casts_ex <- casts_extra %>%
+  mutate(date = as.Date(date, "%d-%b-%y"))
 
 casts.summary <- casts %>%
   group_by(date) %>%
@@ -147,6 +158,14 @@ casts.summary <- casts %>%
             sd_st_length = sd(stipe_length, na.rm = TRUE),
             mean_fr_length = mean(frond_length, na.rm = TRUE),
             sd_fr_length = sd(frond_length, na.rm = TRUE))
+
+hf_pa <- casts %>% 
+  group_by(date, holdfast) %>% 
+  tally()
+
+casts_sep <- casts.summary %>% 
+  separate(date, c("year", "month", "day"), "-")
+
 ```
 
 ```{r include=FALSE}
@@ -156,24 +175,94 @@ wave_all <- separate(wave_all_1, time, into = c("date", "time"), sep = " ")
 sep_wave_all <- wave_all %>% 
   separate(date, c("year", "month", "day"), "-")
 
+# 2018 mean by month and season
+cut_wave_2018_1 <- sep_wave_all[-c(1:18209),]
+cut_wave_2018 <- cut_wave_2018_1[-c(1591),]
+
 wave_2018_1 <- sep_wave_all %>% 
   filter(year == "2018") %>% 
   group_by(month)
 
-# AJS: Why don't you use circular stats here for the directional measurements?
-wave_2018 <- sep_wave_all %>%
-  filter(year == "2018") %>% 
-  group_by(month) %>% 
-  summarise(mean_hs = mean(as.numeric(hs, na.rm = TRUE)),
-            sd_hs = sd(as.numeric(hs, na.rm = TRUE)),
-            mean_tp = mean(as.numeric(tp, na.rm = TRUE)),
-            sd_tp = sd(as.numeric(tp, na.rm = TRUE)),
-            mean_dp = mean(as.numeric(dp, na.rm = TRUE)),
-            sd_dp = sd(as.numeric(dp, na.rm = TRUE)),
-            mean_u = mean(as.numeric(u, na.rm = TRUE)),
-            sd_u = sd(as.numeric(u, na.rm = TRUE)),
-            mean_v = mean(as.numeric(v, na.rm = TRUE)),
-            sd_v = sd(as.numeric(v, na.rm = TRUE)))
+# wave_2018 <- cut_wave_2018 %>%
+# #  filter(year == "2018") %>%
+#   group_by(month) %>%
+#   summarise(mean_hs = mean(as.numeric(hs, na.rm = TRUE)),
+#             sd_hs = sd(as.numeric(hs, na.rm = TRUE)),
+#             mean_tp = mean(as.numeric(tp, na.rm = TRUE)),
+#             sd_tp = sd(as.numeric(tp, na.rm = TRUE)),
+#             mean_dp = mean(as.numeric(dp, na.rm = TRUE)),
+#             sd_dp = sd(as.numeric(dp, na.rm = TRUE)),
+#             mean_u = mean(as.numeric(u, na.rm = TRUE)),
+#             sd_u = sd(as.numeric(u, na.rm = TRUE)),
+#             mean_v = mean(as.numeric(v, na.rm = TRUE)),
+#             sd_v = sd(as.numeric(v, na.rm = TRUE)))
+
+mean_seasons_2018 <- cut_wave_2018 %>% 
+  mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
+                       ifelse(month %in% c("03", "04", "05"), "Autumn",
+                              ifelse(month %in% c("06", "07", "08"), "Winter",
+                                     ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
+
+# 2016 mean by month and season
+filter_2016_1 <- sep_wave_all %>% 
+  filter(year == "2016") %>% 
+  group_by(month)
+
+sort_2016 <- filter_2016_1[order(filter_2016_1$month),]
+
+cut_2016_1 <- sort_2016[-c(2202:2940),]
+cut_2016 <- cut_2016_1[-c(1:610),] 
+
+# wave_2016 <- cut_2016 %>%
+# #  filter(year == "2018") %>%
+#   group_by(month) %>%
+#   summarise(mean_hs = mean(as.numeric(hs, na.rm = TRUE)),
+#             sd_hs = sd(as.numeric(hs, na.rm = TRUE)),
+#             mean_tp = mean(as.numeric(tp, na.rm = TRUE)),
+#             sd_tp = sd(as.numeric(tp, na.rm = TRUE)),
+#             mean_dp = mean(as.numeric(dp, na.rm = TRUE)),
+#             sd_dp = sd(as.numeric(dp, na.rm = TRUE)),
+#             mean_u = mean(as.numeric(u, na.rm = TRUE)),
+#             sd_u = sd(as.numeric(u, na.rm = TRUE)),
+#             mean_v = mean(as.numeric(v, na.rm = TRUE)),
+#             sd_v = sd(as.numeric(v, na.rm = TRUE)))
+
+mean_seasons_2016 <- cut_2016 %>% 
+  mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
+                       ifelse(month %in% c("03", "04", "05"), "Autumn",
+                              ifelse(month %in% c("06", "07", "08"), "Winter",
+                                     ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
+
+# 2017 mean by month and season
+filter_2017_1 <- sep_wave_all %>% 
+  filter(year == "2017") %>% 
+  group_by(month)
+
+cut_2017_1 <- filter_2017_1[-c(2194:2931),]
+cut_2017 <- cut_2017_1[-c(1:603),] 
+
+# wave_2017 <- cut_2017 %>%
+# #  filter(year == "2018") %>%
+#   group_by(month) %>%
+#   summarise(mean_hs = mean(as.numeric(hs, na.rm = TRUE)),
+#             sd_hs = sd(as.numeric(hs, na.rm = TRUE)),
+#             mean_tp = mean(as.numeric(tp, na.rm = TRUE)),
+#             sd_tp = sd(as.numeric(tp, na.rm = TRUE)),
+#             mean_dp = mean(as.numeric(dp, na.rm = TRUE)),
+#             sd_dp = sd(as.numeric(dp, na.rm = TRUE)),
+#             mean_u = mean(as.numeric(u, na.rm = TRUE)),
+#             sd_u = sd(as.numeric(u, na.rm = TRUE)),
+#             mean_v = mean(as.numeric(v, na.rm = TRUE)),
+#             sd_v = sd(as.numeric(v, na.rm = TRUE)))
+
+mean_seasons_2017 <- cut_2017 %>% 
+  mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
+                       ifelse(month %in% c("03", "04", "05"), "Autumn",
+                              ifelse(month %in% c("06", "07", "08"), "Winter",
+                                     ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
+
+comb_means <- rbind(mean_seasons_2016, mean_seasons_2017, mean_seasons_2018)
+
 ```
 
 ```{r include=FALSE}
@@ -215,8 +304,9 @@ ncasts_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ*5, group = 1)
   labs(x = "Date", y = "Wave period (s)", title = "") +
   theme_bw()
 
-ncasts_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+ncasts_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ*5, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts), colour = "salmon") +
@@ -225,34 +315,37 @@ ncasts_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) 
   labs(x = "Date", y = "Wave height (m)", title = "") +
   theme_bw()
 
-ncasts_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ, group = 1)) +
+ncasts_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ*5, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts), colour = "salmon") +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
                                          y = 0, yend = n_casts), colour = "salmon") +
-  labs(x = "Date", y = "Wave direction (TNorth)", title = "") +
+  labs(x = "Date", y = "Wave direction (°N)", title = "") +
   theme_bw()
 
-ncasts_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ, group = 1)) +
+ncasts_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ*5, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts), colour = "salmon") +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
                                          y = 0, yend = n_casts), colour = "salmon") +
-  labs(x = "Date", y = "Wind direction ()", title = "") +
+  labs(x = "Date", y = "Wind direction (°)", title = "") +
   theme_bw()
 
-ncasts_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ, group = 1)) +
+ncasts_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ*5, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total number of casts")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts), colour = "salmon") +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
                                          y = 0, yend = n_casts), colour = "salmon") +
-  labs(x = "Date", y = "Wind speed ()", title = "") +
+  labs(x = "Date", y = "Wind speed (m/s)", title = "") +
   theme_bw()
 
 # mean diameter of holdfast over time series
@@ -267,184 +360,361 @@ diam_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ*5, group = 1)) 
   labs(x = "Date", y = "Wave period (s)", title = "") +
   theme_bw()
 
-diam_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+diam_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ*5, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter (cm)")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = mean_diam), colour = "salmon") +
+                                         y = 0, yend = mean_diam), colour = "salmon", na.rm = TRUE) +
   labs(x = "Date", y = "Wave height (m)", title = "") +
   theme_bw()
 
-diam_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ, group = 1)) +
+diam_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ*5, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter (cm)")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = mean_diam), colour = "salmon") +
-  labs(x = "Date", y = "Wave direction (TNorth)", title = "") +
+                                         y = 0, yend = mean_diam), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wave direction (°N)", title = "") +
   theme_bw()
 
-diam_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ, group = 1)) +
+diam_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ*5, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter (cm)")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = mean_diam), colour = "salmon") +
-  labs(x = "Date", y = "Wind direction (TNorth)", title = "") +
+                                         y = 0, yend = mean_diam), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wind direction (°)", title = "") +
   theme_bw()
 
-diam_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ, group = 1)) +
+diam_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ*5, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Holdfast diameter (cm)")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_diam), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = mean_diam), colour = "salmon") +
-  labs(x = "Date", y = "Wind speed", title = "") +
+                                         y = 0, yend = mean_diam), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wind speed (m/s)", title = "") +
   theme_bw()
 
 # mean stipe length over time series
 stipe_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ*20, group = 1)) +
   geom_line() +
-  coord_cartesian(ylim = c(-15, 350)) +
+  coord_cartesian(ylim = c(-50, 350)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length (cm)")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = mean_st_length), colour = "salmon") +
+                                         y = 0, yend = mean_st_length), colour = "salmon", na.rm = TRUE) +
   labs(x = "Date", y = "Wave period (s)", title = "") +
   theme_bw()
 
-stipe_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+stipe_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ*20, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-50, 350)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length (cm)")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = mean_st_length), colour = "salmon") +
+                                         y = 0, yend = mean_st_length), colour = "salmon", na.rm = TRUE) +
   labs(x = "Date", y = "Wave height (m)", title = "") +
   theme_bw()
 
-stipe_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ, group = 1)) +
+stipe_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ*20, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-50, 350)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length (cm)")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = mean_st_length), colour = "salmon") +
-  labs(x = "Date", y = "Wave direction (TNorth)", title = "") +
+                                         y = 0, yend = mean_st_length), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wave direction (°N)", title = "") +
   theme_bw()
 
-stipe_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ, group = 1)) +
+stipe_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ*20, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-50, 350)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length (cm)")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = mean_st_length), colour = "salmon") +
-  labs(x = "Date", y = "Wind direction (TNorth)", title = "") +
+                                         y = 0, yend = mean_st_length), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wind direction (°)", title = "") +
   theme_bw()
 
-stipe_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ, group = 1)) +
+stipe_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ*20, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-50, 350)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Stipe length (cm)")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_st_length), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = mean_st_length), colour = "salmon") +
-  labs(x = "Date", y = "wind speed", title = "") +
+                                         y = 0, yend = mean_st_length), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wind speed (m/s)", title = "") +
   theme_bw()
 
 # mean frond length over time series
-frond_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+frond_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ*20, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-50, 350)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length (cm)")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = mean_fr_length), colour = "salmon") +
+                                         y = 0, yend = mean_fr_length), colour = "salmon", na.rm = TRUE) +
   labs(x = "Date", y = "Wave period (s)", title = "") +
   theme_bw()
 
-frond_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+frond_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ*20, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-50, 350)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length (cm)")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = mean_fr_length), colour = "salmon") +
+                                         y = 0, yend = mean_fr_length), colour = "salmon", na.rm = TRUE) +
   labs(x = "Date", y = "Wave height (m)", title = "") +
   theme_bw()
 
-frond_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ, group = 1)) +
+frond_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ*20, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-50, 350)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length (cm)")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = mean_fr_length), colour = "salmon") +
-  labs(x = "Date", y = "Wave direction (TNorth)", title = "") +
+                                         y = 0, yend = mean_fr_length), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wave direction (°N)", title = "") +
   theme_bw()
 
-frond_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ, group = 1)) +
+frond_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ*20, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-50, 350)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length (cm)")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = mean_fr_length), colour = "salmon") +
-  labs(x = "Date", y = "Wind direction (TNorth)", title = "") +
+                                         y = 0, yend = mean_fr_length), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wind direction (°)", title = "") +
   theme_bw()
 
-frond_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ, group = 1)) +
+frond_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ*20, group = 1)) +
   geom_line() +
+  coord_cartesian(ylim = c(-50, 350)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Frond length (cm)")) +
   geom_point(data = casts.summary, aes(x = as.Date(date), y = mean_fr_length), colour = "salmon", na.rm = TRUE) +
   geom_segment(data = casts.summary, aes(x = as.Date(date), xend = as.Date(date), 
-                                         y = 0, yend = mean_fr_length), colour = "salmon") +
-  labs(x = "Date", y = "Wind speed", title = "") +
+                                         y = 0, yend = mean_fr_length), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wind speed (m/s)", title = "") +
   theme_bw()
+
+# total holdfasts over time series
+hf_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ*5, group = 1)) +
+  geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total holdfasts")) +
+  geom_point(data = casts_ex, aes(x = as.Date(date), y = total_hf), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts_ex, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = total_hf), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wave period (s)", title = "") +
+  theme_bw()
+
+hf_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ*5, group = 1)) +
+  geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total holdfasts")) +
+  geom_point(data = casts_ex, aes(x = as.Date(date), y = total_hf), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts_ex, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = total_hf), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wave height (m)", title = "") +
+  theme_bw()
+
+hf_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ*5, group = 1)) +
+  geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total holdfasts")) +
+  geom_point(data = casts_ex, aes(x = as.Date(date), y = total_hf), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts_ex, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = total_hf), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wave direction (°N)", title = "") +
+  theme_bw()
+
+hf_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ*5, group = 1)) +
+  geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total holdfasts")) +
+  geom_point(data = casts_ex, aes(x = as.Date(date), y = total_hf), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts_ex, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = total_hf), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wind direction (°)", title = "") +
+  theme_bw()
+
+hf_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ*5, group = 1)) +
+  geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total holdfasts")) +
+  geom_point(data = casts_ex, aes(x = as.Date(date), y = total_hf), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts_ex, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = total_hf), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wind speed (m)", title = "") +
+  theme_bw()
+
+# total aggregates over time series
+agg_tp <- ggplot(time_2018, aes(x = as.Date(value), y = tp_circ*5, group = 1)) +
+  geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total aggregates")) +
+  geom_point(data = casts_ex, aes(x = as.Date(date), y = total_agg), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts_ex, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = total_agg), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wave period (s)", title = "") +
+  theme_bw()
+
+agg_hs <- ggplot(time_2018, aes(x = as.Date(value), y = hs_circ*5, group = 1)) +
+  geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total aggregates")) +
+  geom_point(data = casts_ex, aes(x = as.Date(date), y = total_agg), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts_ex, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = total_agg), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wave height (m)", title = "") +
+  theme_bw()
+
+agg_dp <- ggplot(time_2018, aes(x = as.Date(value), y = dp_circ*5, group = 1)) +
+  geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total aggregates")) +
+  geom_point(data = casts_ex, aes(x = as.Date(date), y = total_agg), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts_ex, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = total_agg), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wave direction (°N)", title = "") +
+  theme_bw()
+
+agg_u <- ggplot(time_2018, aes(x = as.Date(value), y = u_circ*5, group = 1)) +
+  geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total aggregates")) +
+  geom_point(data = casts_ex, aes(x = as.Date(date), y = total_agg), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts_ex, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = total_agg), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = bquote('Wind direction (°)'), title = "") +
+  theme_bw()
+
+agg_v <- ggplot(time_2018, aes(x = as.Date(value), y = v_circ*5, group = 1)) +
+  geom_line() +
+  coord_cartesian(ylim = c(-15, 60)) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  scale_y_continuous(sec.axis = sec_axis(~. *1, name = "Total aggregates")) +
+  geom_point(data = casts_ex, aes(x = as.Date(date), y = total_agg), colour = "salmon", na.rm = TRUE) +
+  geom_segment(data = casts_ex, aes(x = as.Date(date), xend = as.Date(date), 
+                                         y = 0, yend = total_agg), colour = "salmon", na.rm = TRUE) +
+  labs(x = "Date", y = "Wind speed (m/s)", title = "") +
+  theme_bw()
+
 ```
 
-```{r echo=FALSE, fig.cap="Time series of primary wave mean period (s) over the study period with corresponding weekly beach-cast recordings. **(A)** total number of casts; **(B)** mean holdfast diameter; **(C)** mean stipe length; and **(D)** mean frond length. **_fix y axis scale_**", message=FALSE, warning=FALSE, fig.width=8, fig.height=4}
-ggarrange(ncasts_tp, diam_tp, stipe_tp, frond_tp,
-          labels = c("A", "B", "C", "D"))
+```{r echo=FALSE, fig.cap="Time series of primary wave mean period (s) over the study period with corresponding weekly beach-cast recordings. **(A)** total number of casts; **(B)** total number of aggregates; **(C)** total number of holdfasts; **(D)** mean holdfast diameter; **(E)** mean stipe length; and **(F)** mean frond length.", message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
+ggarrange(ncasts_tp, agg_tp, hf_tp, diam_tp, stipe_tp, frond_tp,
+          ncol = 2, nrow = 3,
+          labels = c("A", "B", "C", "D", "E", "F"))
 ```
 
 No clear pattern exists between peaks and dips in peak wave period (Figure 3). Beach-cast observations and the accompanying morphometric measurments appear to fluctuate in random fashion over the study period.
 
-```{r echo=FALSE, fig.cap="Time series of significant height of combined wind, waves, and swell (m) over the study period with corresponding weekly beach-cast recordings. **(A)** total number of casts; **(B)** mean holdfast diameter; **(C)** mean stipe length; and **(D)** mean frond length. **_fix y axis scale_**", message=FALSE, warning=FALSE, fig.width=8, fig.height=4}
-ggarrange(ncasts_hs, diam_hs, stipe_hs, frond_hs,
-          labels = c("A", "B", "C", "D"))
+```{r echo=FALSE, fig.cap="Time series of significant height of combined wind waves and swell (m) over the study period with corresponding weekly beach-cast recordings. **(A)** total number of casts; **(B)** total number of aggregates; **(C)** total number of holdfasts; **(D)** mean holdfast diameter; **(E)** mean stipe length; and **(F)** mean frond length.", message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
+ggarrange(ncasts_hs, agg_hs, hf_hs, diam_hs, stipe_hs, frond_hs,
+          ncol = 2, nrow = 3,
+          labels = c("A", "B", "C", "D", "E", "F"))
 ```
 
 A similar seemingly random pattern is observed in Figure 4 when looking at period 2 over the study period.
 
-```{r echo=FALSE, fig.cap="Time series of primary wave direction () over the study period with corresponding weekly beach-cast recordings. **(A)** total number of casts; **(B)** mean holdfast diameter; **(C)** mean stipe length; and **(D)** mean frond length. **_fix y axis scale_**", message=FALSE, warning=FALSE, fig.width=8, fig.height=4}
-ggarrange(ncasts_dp, diam_dp, stipe_dp, frond_dp,
-          labels = c("A", "B", "C", "D"))
+```{r echo=FALSE, fig.cap="Time series of  primary wave direction (°N)  over the study period with corresponding weekly beach-cast recordings. **(A)** total number of casts; **(B)** total number of aggregates; **(C)** total number of holdfasts; **(D)** mean holdfast diameter; **(E)** mean stipe length; and **(F)** mean frond length.", message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
+ggarrange(ncasts_dp, agg_dp, hf_dp, diam_dp, stipe_dp, frond_dp,
+          ncol = 2, nrow = 3,
+          labels = c("A", "B", "C", "D", "E", "F"))
 ```
 
 Lastly, in Figure 5, no clear pattern is observed as also suggested in Figure 3 and Figure 4. 
 
-```{r echo=FALSE, fig.cap="Time series of wind direction () over the study period with corresponding weekly beach-cast recordings. **(A)** total number of casts; **(B)** mean holdfast diameter; **(C)** mean stipe length; and **(D)** mean frond length. **_fix y axis scale_**", message=FALSE, warning=FALSE, fig.width=8, fig.height=4}
-ggarrange(ncasts_u, diam_u, stipe_u, frond_u,
-          labels = c("A", "B", "C", "D"))
+```{r echo=FALSE, fig.cap="Time series of  wind direction (°)  over the study period with corresponding weekly beach-cast recordings. **(A)** total number of casts; **(B)** total number of aggregates; **(C)** total number of holdfasts; **(D)** mean holdfast diameter; **(E)** mean stipe length; and **(F)** mean frond length.", message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
+ggarrange(ncasts_u, agg_u, hf_u, diam_u, stipe_u, frond_u,
+          ncol = 2, nrow = 3,
+          labels = c("A", "B", "C", "D", "E", "F"))
 ```
 
 
-```{r echo=FALSE, fig.cap="Time series of wind speed () over the study period with corresponding weekly beach-cast recordings. **(A)** total number of casts; **(B)** mean holdfast diameter; **(C)** mean stipe length; and **(D)** mean frond length. **_fix y axis scale_**", message=FALSE, warning=FALSE, fig.width=8, fig.height=4}
-ggarrange(ncasts_v, diam_v, stipe_v, frond_v,
-          labels = c("A", "B", "C", "D"))
+```{r echo=FALSE, fig.cap="Time series of  wind speed (m/s)  over the study period with corresponding weekly beach-cast recordings. **(A)** total number of casts; **(B)** total number of aggregates; **(C)** total number of holdfasts; **(D)** mean holdfast diameter; **(E)** mean stipe length; and **(F)** mean frond length.", message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
+ggarrange(ncasts_v, agg_v, hf_v, diam_v, stipe_v, frond_v,
+          ncol = 2, nrow = 3,
+          labels = c("A", "B", "C", "D", "E", "F"))
 
 ```
 
-For the wind components, direction (Figure 6) and speed (Figure 7), seemingly similar patterns are suggested as observed in the wave parameters.
+```{r include=FALSE}
+
+casts_2 <- cbind(casts_sep, casts_ex)
+
+seasons_casts <- casts_2 %>% 
+  mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
+                       ifelse(month %in% c("03", "04", "05"), "Autumn",
+                              ifelse(month %in% c("06", "07", "08"), "Winter",
+                                     ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
+
+shapiro.test(seasons_casts$n_casts)
+shapiro.test(seasons_casts$total_agg)
+shapiro.test(seasons_casts$total_hf)
+shapiro.test(seasons_casts$mean_diam)
+  # normal
+shapiro.test(seasons_casts$mean_st_length)
+shapiro.test(seasons_casts$mean_fr_length)
+  # normal
+
+
+ncasts.aov <- aov(n_casts ~ season, data = seasons_casts)
+summary(ncasts.aov)
+TukeyHSD(ncasts.aov)
+
+agg.aov <- aov(total_agg ~ season, data = seasons_casts)
+summary(agg.aov)
+TukeyHSD(agg.aov)
+
+hf.aov <- aov(total_hf ~ season, data = seasons_casts)
+summary(hf.aov)
+TukeyHSD(hf.aov)
+
+diam.aov <- aov(mean_diam ~ season, data = seasons_casts)
+summary(diam.aov)
+TukeyHSD(diam.aov)
+
+st.aov <- aov(mean_st_length ~ season, data = seasons_casts)
+summary(st.aov)
+TukeyHSD(st.aov)
+
+fr.aov <- aov(mean_fr_length ~ season, data = seasons_casts)
+summary(fr.aov)
+TukeyHSD(fr.aov) 
+
+```
+
+In addition to wave parameters, accompanying observations of wind components, direction (Figure 6) and speed (Figure 7), suggests seemingly similar patterns as observed in the wave parameters.
 
 Our hypotheses suggest that, simply put, where peaks in wave parameters occur we would expect a surplus of casts and larger morphological properties. However, Figures 3-7 do not support this notion and, therefore, it can be suggested that overall, the number of casts and morphological properties of casts seem as if they are not dictated by the various wave parameters included in this analysis. 
 
@@ -590,6 +860,16 @@ sea_16_1 <- sea_16[-c(1:76),]
 
 season_16_1 <- cbind(ttime_16_1, sea_16_1)
 
+season_16 <- season_16_1 %>% 
+  select(season = sea_16_1,
+         hs_circ = hs_circ,
+         tp_circ = tp_circ,
+         dp_circ = dp_circ,
+         u_circ = u_circ,
+         v_circ = v_circ,
+         year = year1,
+         value = value)
+
 mean_16 <- season_16_1 %>% 
   group_by(sea_16_1) %>% 
   summarise(mean_tp_16 = mean(tp_circ),
@@ -613,6 +893,16 @@ sea_17 <- as.data.frame(sea_17_rm[-c(274:365),])
 sea_17_1 <- sea_17[-c(1:75),]
 
 season_17_1 <- cbind(time_17_1, sea_17_1)
+
+season_17 <- season_17_1 %>% 
+  select(season = sea_17_1,
+         hs_circ = hs_circ,
+         tp_circ = tp_circ,
+         dp_circ = dp_circ,
+         u_circ = u_circ,
+         v_circ = v_circ,
+         year = year2,
+         value = value)
 
 mean_17 <- season_17_1 %>% 
   group_by(sea_17_1) %>% 
@@ -640,6 +930,7 @@ sea_18_1 <- sea_18 %>%
 
 season_18 <- cbind(time_18, sea_18_1)
 
+# mean circular data... does not seem right on figs
 mean_18 <- season_18 %>% 
   group_by(season) %>% 
   summarise(mean_tp_18 = mean(tp_circ),
@@ -647,200 +938,238 @@ mean_18 <- season_18 %>%
             mean_dp_18 = mean(dp_circ),
             mean_u_18 = mean(u_circ),
             mean_v_18 = mean(v_circ))
+
+# mean raw data
+sea_mean_16 <- mean_seasons_2016 %>% 
+  group_by(season) %>% 
+  summarise(mean_tp_16 = mean(tp),
+            mean_hs_16 = mean(hs),
+            mean_dp_16 = mean(dp),
+            mean_u_16 = mean(u),
+            mean_v_16 = mean(v))
+
+sea_mean_17 <- mean_seasons_2017 %>% 
+  group_by(season) %>% 
+  summarise(mean_tp_17 = mean(tp),
+            mean_hs_17 = mean(hs),
+            mean_dp_17 = mean(dp),
+            mean_u_17 = mean(u),
+            mean_v_17 = mean(v))
+
+sea_mean_18 <- mean_seasons_2018 %>% 
+  group_by(season) %>% 
+  summarise(mean_tp_18 = mean(tp),
+            mean_hs_18 = mean(hs),
+            mean_dp_18 = mean(dp),
+            mean_u_18 = mean(u),
+            mean_v_18 = mean(v))
 ```
 
 ```{r include=FALSE}
-hs_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = hs_circ, group = 1)) +
-  geom_hline(data = mean_16, aes(yintercept = mean_hs_16), colour = "red") +
+hs_season_2016 <- ggplot(season_16, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_hline(data = sea_mean_16, aes(yintercept = mean_hs_16), colour = "red") +
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "", y = "HS (m)", title = "") +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  facet_wrap(~ sea_16_1) +
-  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
-  theme_bw()
-
-hs_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = hs_circ, group = 1)) +
-  geom_hline(data = mean_17, aes(yintercept = mean_hs_17), colour = "red") +
-  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
-  geom_line() +
-  geom_smooth() +
-  labs(x = "", y = "HS (m)", title = "") +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  facet_wrap(~ sea_17_1) +
-  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
-  theme_bw()
-
-hs_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = hs_circ, group = 1)) +
-  geom_hline(data = mean_18, aes(yintercept = mean_hs_18), colour = "red") +
-  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
-  geom_line() +
-  geom_smooth() +
-  labs(x = "Date", y = "HS (s)", title = "") +
+  labs(x = "", y = "Wave height (m)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   facet_wrap(~ season) +
   #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
-tp_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = tp_circ, group = 1)) +
-  geom_hline(data = mean_16, aes(yintercept = mean_tp_16), colour = "red") +
+hs_season_2017 <- ggplot(season_17, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_hline(data = sea_mean_17, aes(yintercept = mean_hs_17), colour = "red") +
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "Date", y = "TP (s)", title = "") +
+  labs(x = "", y = "Wave height (m)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  facet_wrap(~ sea_16_1) +
+  facet_wrap(~ season) +
   #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
-tp_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = tp_circ, group = 1)) +
-  geom_hline(data = mean_17, aes(yintercept = mean_tp_17), colour = "red") +
+hs_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_hline(data = sea_mean_18, aes(yintercept = mean_hs_18), colour = "red") +
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "Date", y = "TP (s)", title = "") +
+  labs(x = "Date", y = "Wave height (s)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  facet_wrap(~ sea_17_1) +
+  facet_wrap(~ season) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
+
+tp_season_2016 <- ggplot(season_16, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_hline(data = sea_mean_16, aes(yintercept = mean_tp_16), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "Date", y = "Wave period (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ season) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
+
+tp_season_2017 <- ggplot(season_17, aes(x = as.Date(value), y = tp_circ, group = 1)) +
+  geom_hline(data = sea_mean_17, aes(yintercept = mean_tp_17), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "Date", y = "Wave period (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ season) +
   #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
 tp_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = tp_circ, group = 1)) +
-  geom_hline(data = mean_18, aes(yintercept = mean_tp_18), colour = "red") +
+  geom_hline(data = sea_mean_18, aes(yintercept = mean_tp_18), colour = "red") +
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "Date", y = "TP (s)", title = "") +
+  labs(x = "Date", y = "Wave period (s)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) + 
   facet_wrap(~ season) +
   #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
-dp_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = dp_circ, group = 1)) +
-  geom_hline(data = mean_16, aes(yintercept = mean_dp_16), colour = "red") +
+dp_season_2016 <- ggplot(season_16, aes(x = as.Date(value), y = dp_circ*10, group = 1)) +
+  geom_hline(data = sea_mean_16, aes(yintercept = mean_dp_16), colour = "red") +
+#  coord_cartesian(ylim = c(-5, 5)) +
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "Date", y = "DP (s)", title = "") +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  facet_wrap(~ sea_16_1) +
-  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
-  theme_bw()
-
-dp_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = dp_circ, group = 1)) +
-  geom_hline(data = mean_17, aes(yintercept = mean_dp_17), colour = "red") +
-  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
-  geom_line() +
-  geom_smooth() +
-  labs(x = "Date", y = "dp (s)", title = "") +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  facet_wrap(~ sea_17_1) +
-  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
-  theme_bw()
-
-dp_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = dp_circ, group = 1)) +
-  geom_hline(data = mean_18, aes(yintercept = mean_dp_18), colour = "red") +
-  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
-  geom_line() +
-  geom_smooth() +
-  labs(x = "Date", y = "dp (s)", title = "") +
+  labs(x = "Date", y = "Wave direction (°N)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   facet_wrap(~ season) +
   #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
-u_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = u_circ, group = 1)) +
-  geom_hline(data = mean_16, aes(yintercept = mean_u_16), colour = "red") +
+dp_season_2017 <- ggplot(season_17, aes(x = as.Date(value), y = dp_circ*10, group = 1)) +
+  geom_hline(data = sea_mean_17, aes(yintercept = mean_dp_17), colour = "red") +
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "", y = "u (m)", title = "") +
+  labs(x = "Date", y = "Wave direction (°N)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  facet_wrap(~ sea_16_1) +
+  facet_wrap(~ season) +
   #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
-u_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = u_circ, group = 1)) +
-  geom_hline(data = mean_17, aes(yintercept = mean_u_17), colour = "red") +
+dp_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = dp_circ*10, group = 1)) +
+  geom_hline(data = sea_mean_18, aes(yintercept = mean_dp_18), colour = "red") +
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "", y = "u (m)", title = "") +
+  labs(x = "Date", y = "Wave direction (°N)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  facet_wrap(~ sea_17_1) +
+  facet_wrap(~ season) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
+
+u_season_2016 <- ggplot(season_16, aes(x = as.Date(value), y = u_circ, group = 1)) +
+  geom_hline(data = sea_mean_16, aes(yintercept = mean_u_16), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "", y = "Wind direction (°)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ season) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
+
+u_season_2017 <- ggplot(season_17, aes(x = as.Date(value), y = u_circ, group = 1)) +
+  geom_hline(data = sea_mean_17, aes(yintercept = mean_u_17), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "", y = "Wind direction (°)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ season) +
   #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
 u_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = u_circ, group = 1)) +
-  geom_hline(data = mean_18, aes(yintercept = mean_u_18), colour = "red") +
+  geom_hline(data = sea_mean_18, aes(yintercept = mean_u_18), colour = "red") +
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "Date", y = "u (s)", title = "") +
+  labs(x = "Date", y = "Wind direction (°)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   facet_wrap(~ season) +
   #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
-v_season_2016 <- ggplot(season_16_1, aes(x = as.Date(value), y = v_circ, group = 1)) +
-  geom_hline(data = mean_16, aes(yintercept = mean_v_16), colour = "red") +
+v_season_2016 <- ggplot(season_16, aes(x = as.Date(value), y = v_circ, group = 1)) +
+  geom_hline(data = sea_mean_16, aes(yintercept = mean_v_16), colour = "red") +
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "", y = "v (m)", title = "") +
+  labs(x = "", y = "Wind speed (m/s)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  facet_wrap(~ sea_16_1) +
+  facet_wrap(~ season) +
   #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
-v_season_2017 <- ggplot(season_17_1, aes(x = as.Date(value), y = v_circ, group = 1)) +
-  geom_hline(data = mean_17, aes(yintercept = mean_v_17), colour = "red") +
+v_season_2017 <- ggplot(season_17, aes(x = as.Date(value), y = v_circ, group = 1)) +
+  geom_hline(data = sea_mean_17, aes(yintercept = mean_v_17), colour = "red") +
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "", y = "v (m)", title = "") +
+  labs(x = "", y = "Wind speed (m/s)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  facet_wrap(~ sea_17_1) +
+  facet_wrap(~ season) +
   #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
 
 v_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = v_circ, group = 1)) +
-  geom_hline(data = mean_18, aes(yintercept = mean_v_18), colour = "red") +
+  geom_hline(data = sea_mean_18, aes(yintercept = mean_v_18), colour = "red") +
   #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
   geom_line() +
   geom_smooth() +
-  labs(x = "Date", y = "v (s)", title = "") +
+  labs(x = "Date", y = "Wind speed (m/s)", title = "") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   facet_wrap(~ season) +
   #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
   theme_bw()
+
+test_data <-
+  data.frame(
+    var0 = 100 + c(0, cumsum(runif(49, -20, 20))),
+    var1 = 150 + c(0, cumsum(runif(49, -10, 10))),
+    date = seq(as.Date("2002-01-01"), by="1 month", length.out=100)
+  )
+
+ggplot(test_data, aes(date)) + 
+  geom_line(aes(y = var0, colour = "var0")) + 
+  geom_line(aes(y = var1, colour = "var1"))
+
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of peak period (s) across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean peak period per season.", fig.width=8, fig.height=4}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of primary wave mean period (s) across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean peak period per season.", fig.width=8, fig.height=6}
 ggarrange(tp_season_2016, tp_season_2017, tp_season_2018, 
           nrow = 3, ncol = 1,
           labels = c("A", "B", "C"))
 ```
 
-A two-way ANOVA and TukeyHSD _post-hoc_ test indicates no significant difference in primary wave mean period between seasons and between years (_P_ = 0.310 and 0.795, respectively.). These statistical tests support what is observed on Figure 8 as the red mean line does not differ much per season and per year.
+In support of results observed in Figure 8, a two-way ANOVA indicates no significant difference in primary wave mean period between seasons (_P_ = 0.310, _F_ = 1.592, SS = 0.8060, _df_ = 2) and between years (_P_ = 0.795, _F_ = 0.243, SS = 0.1229, _df_ = 2).
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of significant wave height (m) across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean significant wave height per season.", fig.width=8, fig.height=4}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of significant height of combined wind waves and swell (m) across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean significant wave height per season.", fig.width=8, fig.height=6}
 ggarrange(hs_season_2016, hs_season_2017, hs_season_2018, 
           nrow = 3, ncol = 1,
           labels = c("A", "B", "C"))
 ```
 
-A similar observation is made in Figure 9 where the two-way ANOVA and TukeyHSD _post-hoc_ test indicates no significant difference in significant height of combined wind, waves, and swell between seasons and between years (_P_ = 0.527 and 0.480, respectively.). In the winter panel in  **B**, the mean red line is a lot lower than autumn and spring in 2017 and lower than winter 2016 and winter 2018. However, the aforementioned statistical tests confirm that this observed difference is negligible.
+A similar observation is made in Figure 9 where the two-way ANOVA indicates no significant difference in significant height of combined wind, waves, and swell between seasons (_P_ = 0.527, _F_ = 0.754, SS = 6.357, _df_ = 2) and between years (_P_ = 0.480, _F_ = 0.887, SS = 7.481, _df_ = 2).
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of primary wave direction () across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean primary wave direction per season.", fig.width=8, fig.height=4}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of primary wave direction (°N) across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean primary wave direction per season.", fig.width=8, fig.height=6}
 ggarrange(dp_season_2016, dp_season_2017, dp_season_2018, 
           nrow = 3, ncol = 1,
           labels = c("A", "B", "C"))
 ```
 
-In Figure 10, primary wave direction shows variability in means across seasons and years. The two-way ANOVA and TukeyHSD _post-hoc_ test, however, indicated no significant differences between seasons and between years (_P_ = 0.747 and 0.643, respectively). Therefore, observed variability can be ignored.
+In Figure 10, primary wave direction shows variability in means across seasons and years. The two-way ANOVA, however, indicated no significant differences between seasons (_P_ = 0.747, _F_ = 0.314, SS = 2.336, _df_ = 2) and between years (_P_ = 0.643, _F_ = 0.494, SS = 3.679, _df_ = 2). Therefore, observed variability can be ignored.
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of wind direction () across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean wind direction per season.", fig.width=8, fig.height=4}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of wind direction (°) across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean wind direction per season.", fig.width=8, fig.height=6}
 ggarrange(u_season_2016, u_season_2017, u_season_2018, 
           nrow = 3, ncol = 1,
           labels = c("A", "B", "C"))
@@ -848,14 +1177,14 @@ ggarrange(u_season_2016, u_season_2017, u_season_2018,
 ```
 
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of wind speed () across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean wind speed per season.", fig.width=8, fig.height=4}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of wind speed (m/s) across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean wind speed per season.", fig.width=8, fig.height=6}
 ggarrange(v_season_2016, v_season_2017, v_season_2018, 
           nrow = 3, ncol = 1,
           labels = c("A", "B", "C"))
 
 ```
 
-Similarily for wind components, variability is observed at mean wind direction (Figure 11) and mean wind speed (Figure 12), but the ANOVA and TukeyHSD _post-hoc_ test have shown that all differences observed between seasons (_P_ = 0.985 (wave direction) and 0.6022 (wave speed)) and between years (_P_ = 0.648 (wave direction) and 0.0632 (wave speed)) are not significant and, therefore, negligible.
+Similarily for wind components, variability is observed at mean wind direction (Figure 11) and mean wind speed (Figure 12), but the two-way ANOVA has shown that all differences observed between seasons (_P_ = 0.985, _F_ = 0.015, SS = 0.100, _df_ = 2 (wave direction) and _P_ = 0.6022, _F_ = 0.577, SS = 1.786, _df_ = 2 (wave speed)) and between years (_P_ = 0.648, _F_ = 0.485, SS = 3.272, _df_ = 2 (wave direction) and _P_ = 0.0632, _F_ = 5.957, SS = 18.435, _df_ = 2 (wave speed)) are not significant.
 
 ```{r include=FALSE}
 names_mean_16 <- mean_16 %>% 
@@ -919,10 +1248,10 @@ summary(v.aov)
 TukeyHSD(v.aov)
 
 ```
-
+\newpage
 # Discussion
 
-The aim of this study was to determine if, when, and how beach-cast kelp differs in composition over months spanning across seasons, and to determine whether the wave climate might affect the amount and properties of the kelps washing up onto beaches. Our results, however, do not concur with our expected ideas of the nature of the relationship between waves and kelp casts, and thus our hypothesis was rejected. Our results showed that weekly kelp depositions varied across the study period, and this is because initailly, a large number of kelp was deposited onto the beach and hereafter, much fewer kelp were observed on the beach. However, throughout this time, none of the measured wave parameters offered any explanatory ability as drivers of beach cast quantity and the associated morphometric measurements of the kelps involved. This result was the opposite of our expectation, as very few and in several cases, no kelp was observed even in the peak of winter (typically August), which is also generally known to experience the most intense wave climate. 
+The aim of this study was to determine if, when, and how beach-cast kelp differs in composition over months spanning across seasons, and to determine whether the wave climate might affect the amount and properties of the kelps washing up onto beaches. Our results, however, do not concur with our expected ideas of the nature of the relationship between waves and kelp casts, and thus our hypotheses were rejected. Our results showed that weekly kelp depositions varied across the study period, with an initial a large number of kelp deposited onto the beach and hereafter, much fewer kelp were observed on the beach. Although, this result appears significant (see also Figures 3-7), subsequent statistical analyses show that it is not. Additionally, throughout this time, none of the measured wave parameters offered any explanatory ability as drivers of beach cast quantity and the associated morphometric measurements of the kelps involved. This result was the opposite of our expectation, as very few and in several cases, no kelp was observed even in the peak of winter (typically August), which is also generally known to experience the most intense wave climate (Lemm et al. 1999). 
 
 ## Number of beach-cast kelp
 de Bettignies et al. (2015) have mapped out several hypotheses explaining scenarios of kelp dislodgement and deposition, with our results displaying elements from each of these possibilities. The first is referred to as "first-flush" scenario. This idea states that throughout autumn, kelp forests are under stress by the forces brought about waves acting on them. After being exposed to these forces for an extended period of time, the weakly attached kelp eventually breaks off or dislodge during an event when wave action may be more pronounced (_i.e._ the first major storm following mild summer conditions). As a result, a large number of kelp is then transported from their source population and is deposited onto beaches, or drift into the deep ocean leaving strongly attached individuals _in situ_ which are able to withstand subsequent storm events. The second possibility described by de Bettignies et al. (2015) is that of constant flushing, where kelp deposits onto beaches tend to be low in number and constant temporally. This would be as a result of the kelp holdfast-substrate attachment being strong enough to withstand harsh storm wave climates. This idea is supported by Figures 4A, 5A, and 6A, which show a constant low number of kelp throughout the study period, with the exception of a few points where pulses of kelp were deposited, which, in turn, is in accordance with the final suggestion by de Bettignies et al. (2015) that kelp deposits occur in pulses following storm events. The first (first-flush) and final (pulsed) scenarios have been hypothesised to occur in winter when storms are more frequent and often severe--which is what our initial hypothesis was built upon. 
@@ -932,26 +1261,26 @@ Our results displayed elements from each dislodgement possibility, and speaks to
 Following breakage or dislodgement, the kelp either drift offshore or are deposited onto beaches (Barreiro et al. 2011, Kirkman and Kendrick 1997). Therefore, kelp with buoyancy properties such as prevalent pneumatocysts are assisted in drifting, often across a large area from their _in situ_ population to their final deposition point (Barreiro et al. 2011, Orr et al. 2005). Additionally, wave exposure also plays a role in beach cast kelp variability. Previous studies have shown that kelp wrack quantities are higher at wave-sheltered sites in comparison to wave-exposed sites (Barreiro et al. 2011, Orr et al. 2005). Muizenberg beach is a sheltered beach and is known to receive a lot of kelp deposits. This phenomenon may be as a result of a reduction in the flow of water at bays or beaches (Barreiro et al. 2011, Witman et al. 2004). This low wave energy experienced at the beach front casues this reduction in waterflow which creates conditions which are more conducive to deposition of kelp (Whitman et al. 2004). Therefore, all aforementioned factors and their interactions may add to the complex variability in wrack quantities and should be taken into account in further studies and monitoring of beach casts.
 
 ## Morphometric properties
-The morphometric properties observed in this study do not support our hypotheses. There was no clear pattern of larger kelp being deposited in winter. Mean stipe sizes were generally quite similar in length with only three observed plants being over 200cm, one of which was over 300cm. A similar observation was made with mean frond length with points being generally variable but not drastically fluctuating throughout the study period, with only two points reaching over 150cm. _Ecklonia maxima_ stipes can typically grow to 15 meters in length (Stegenga et al. 1997), and studies have shown that kelp length tends to increase with increased wave exposure (Molloy and Bolton 1996, Wernberg and Thomsen 2005, Wernberg and Vanderklift 2010). The kelp we have observed had stipes that did not exceed a maximum length of 630cm, and from this fact we may infer that the kelp that has been deposited at the study site may come from a source population that is more wave-sheltered. However, this cannot be stated with certainty as longer kelps may still be _in situ_ where their increased length may aid in them being able to withstand wave stressors. This increased length and flexibility, an adaptation to wave exposure, allows the kelp to 'go with the flow' by reducing hydrodynamic forces (Denny et al. 1998, Friedland and Denny 1995, Koehl 1999). It can thus be argued that the large kelp we expected to see washing up in winter may have been well enough adapted to their environment so as to not be dislodged except in extreme events such as during storms, which did not occur during the time of our sampling.
+The morphometric properties observed in this study do not support our hypotheses pertaining to increased stipe and frond length and holdfast diameter, increased numbers of beach-cast kelp with holfasts still in tact, and increased number of aggregations. There was no clear pattern of larger kelp being deposited in winter. Mean stipe sizes were generally quite similar in length with only three observed plants being over 200cm, one of which was over 300cm. A similar observation was made with mean frond length with observed results being generally variable but not drastically fluctuating throughout the study period, with only two points reaching over 150cm. _Ecklonia maxima_ stipes can typically grow to 15 meters in length (Stegenga et al. 1997), and studies have shown that kelp length tends to increase with increased wave exposure (Molloy and Bolton 1996, Wernberg and Thomsen 2005, Wernberg and Vanderklift 2010). The kelp we have observed had stipes that did not exceed a maximum length of 630cm, and from this fact we may infer that the kelp that has been deposited at the study site may come from a source population that is more wave-sheltered. However, this cannot be stated with certainty as longer kelps may still be _in situ_ where their increased length may aid in them being able to withstand wave stressors. This increased length and flexibility, an adaptation to wave exposure, allows the kelp to 'go with the flow' by reducing hydrodynamic forces (Denny et al. 1998, Friedland and Denny 1995, Koehl 1999). It can thus be argued that the large kelp we expected to see washing up in winter may have been well enough adapted to their environment so as to not be dislodged except in extreme events such as during storms, which did not occur during the time of our sampling.
 
-A large proportion of the observed beach cast kelp had no holdfasts attatched and thus were broken anywhere along the stipe, or at the stipe-holdfast junction. A smaller proportion of the total observed kelp were dislodged completely with their holdfasts intact, suggesting stronger wave action leading to their dislodgement. **_fix holdfast figure and data_** Holdfast lengths increased as number of aggregates increased as to support multiple individuals sharing a single holdfast. These aggregations with their subsequent large holdfasts have been shown to withstand harsh wave conditions (Koehl et al. 2008, Wernberg and Vanderklift 2010), therefore, when we observed these aggregates being deposited onto the beach, we could infer that very harsh wave conditions may have dislodged them.
+A large proportion of the observed beach cast kelp had no holdfasts attatched and thus were broken anywhere along the stipe, or at the stipe-holdfast junction. A smaller proportion of the total observed kelp were dislodged completely with their holdfasts intact, suggesting stronger wave action leading to their dislodgement.Holdfast lengths increased as number of aggregates increased as to support multiple individuals sharing a single holdfast. These aggregations with their subsequent large holdfasts have been shown to withstand harsh wave conditions (Koehl et al. 2008, Wernberg and Vanderklift 2010), therefore, when we observed these aggregates being deposited onto the beach, we could infer that very harsh wave conditions may have dislodged them.
 
 Holdfasts play a major role in kelp hydro-mechanics, as this is the only point where the kelp is attached to a substratum. Holdfast properties therefor infer a level of adaptation to the degree of wave exposure (Bekkby et al. 2014). Kelp growing in wave-exposed areas tend to have larger holdfasts and are, hence, stronger and more likely to withstand harsh wave climates as suggested earlier. However, over time, holdfasts do tend to weaken with age or may be grazed upon (de Bettignies et al. 2012, 2015) and may, in accordance to the 'first flush' hypothesis, be dislodged at the first severe storm of the season (de Bettignies et al 2014). Consequently, the impact of grazers and age on deterioration of attachment strength as well as how the reef substartum becomes brittle over time should also be taken into account. Therefore, size of wrack holdfasts is not the only indicator of wave-driven dislodgement and _in situ_ properties of kelp also has to be investigated.
 
-Over the smapling period we came across a number of aggregations, all varying in the number of stipes emerging from one holdfast. These aggregations and close proximities are known to be beneficial as it protects kelp from grazing (Velimirov and Griffiths 1979), and harsh hyrdodynamic environments which could cause mortality by dislodgement (Johnson 2001). Due to the closeness of thalli in aggregates, this morphology may reduce hydrodynamic drag, and in turn, allow kelp to withstand strong wave activity and prevent breakage or dislodgment (Wernberg 2005). It has been found that as wave exposure increases, the frequency of aggregates increases. This could be due to either higher recruitment and formation rates or decreased mortality. Although it was not looked at in this study, Wernberg (2005) has found that individuals in aggregations are more slender than solitary individuals, and this morphological property is associated with reduced drag, and hence, lower chance of wave-driven morphology. Furthermore, attachment force was found to be higher in aggregates than in solitary individuals. Therefore, we suggest that we did not come across very many aggregates deposited on the beach due to their resilience against harsh wave activity and at times where we observed a larger number of aggregates, it may have followed a period of peak wave activity such as a storm event.    
+Over the smapling period we came across a number of aggregations, all varying in the number of stipes emerging from one holdfast. These aggregations and close proximities are known to be beneficial as it protects kelp from grazing (Velimirov and Griffiths 1979), and harsh hyrdodynamic environments which could cause mortality by dislodgement (Johnson 2001). Due to the closeness of thalli in aggregates, this morphology may reduce hydrodynamic drag, and in turn, allow kelp to withstand strong wave activity and prevent breakage or dislodgment (Wernberg 2005). It has been found that as wave exposure increases, the frequency of aggregates increases. This could be due to either higher recruitment and formation rates or decreased mortality. Although it was not looked at in this study, Wernberg (2005) has found that individuals in aggregations are more slender than solitary individuals, and this morphological property is associated with reduced drag, and hence, lower chance of wave-driven morphology. Furthermore, attachment force was found to be higher in aggregates than in solitary individuals. Therefore, we suggest that we did not come across very many aggregates deposited on the beach due to their resilience against harsh wave activity.    
 
 ## Yearly seasonal variation
-Our results showed no statistically significant differences in wind or wave parameters between seasons or between the years 2016-2018. We can thus infer that no drastic changes in wave and wind factors have ocurred over the past three years which in turn should suggest to us that the composition of beach cast kelp quantified this year should not be very different to the previous years observed. Additionally, no significance in wind and wave parameters between seasons was established, and our hypotheses may therefore be discounted. Factors driving kelp dislodgement and transport were not more pronounced in winter months in comparion to others. Therefore, our constant low, and somewhat stochastic, observations of kelp deposition is supported by this result. 
+Our results showed no statistically significant differences in wind or wave parameters between seasons or between the years 2016-2018. We can thus infer that no drastic changes in wave and wind factors have ocurred over the past three years which in turn should suggest to us that the composition of beach cast kelp quantified this year should not be very different to the previous years observed. Additionally, no significance in wind and wave parameters between seasons was established, and all our aforementioned hypotheses may therefore be discounted as they predict speciifc season-related changes in beach-cast dynamics, especially with regard to winter as this is a time where peak wave activity is expected. Factors driving kelp dislodgement and transport were not more pronounced in winter months in comparison to others (as suported by one-way ANOVA perfomed on seasonal beach-cast data). Therefore, our constant low, and somewhat stochastic, observations of kelp deposition is supported by this result. 
 
 ## Implications and suggestions for further research
 Beach-cast kelp is known to be of high importance to sandy beach ecosystems, which rely on allochthonus subsidies of matter to sustain organisms living in this otherwise harsh environment (Barreriro et al. 2011). Additionally, beach casts are also collected and used as a primary and derived products, and therefore have socioeconomic importance (Kirkman and Kendrick 1997). Monitoring of these beach casts should thus be of value as any changes in the wrack deposition could have a range of knock-on effects. The environmental factors that play a role in dislodgement and transport of kelp should be monitored, especially in the wake of global climate change (_e.g_ sea-level rise, increased storms, increased temperatures in and around kelp beds) to determine how this will affect ecosystems that are reliant on wrack subsidies. We suggest that yearly seasonal comparisons be carried out over a large number of years to ensure statistical strength and to take into account changes in these abiotic factors that may have occurred over long periods of time.
 
-In conclusion, this study has provided a glimpse into what can be expected from kelp wracks regarding seasonality. However, as mentioned previously, a myriad of factors and their interactions should be considered when observing patterns of dislodgement and deposition of kelp. Therefore, it is suggested that a similar study should be carried out at a spatiotemporal scale. This should be done at a number of sites of varying wave exposures and over a longer period of time, possibly over several years, to compare seasonal data. A number of additional morphometrics should be looked at such as biomass, blade type, and presence of wounds.  
+In conclusion, this study has provided a glimpse into what can be expected from kelp wracks regarding seasonality. However, as mentioned previously, a myriad of factors and their interactions should be considered when observing patterns of dislodgement and deposition of kelp. Therefore, it is suggested that a similar study should be carried out at a spatiotemporal scale. This should be done at a number of sites of varying wave exposures and over a longer period of time, possibly over several years, to compare seasonal data. A number of additional morphometrics should be looked at such as biomass, blade type, and presence of wounds. Despite apparent limitations, this study still proves to be of importance as beach-cast kelp can give us an indication of wave factors influencing speciifc kelp populations and can be used as a proxy for wave climate. Furthermore, our study aims to describe the dynamics of beach-cast kelp, which is widely uknown (Klosinski 2015) and difficult to study, given these studies should take place after extended periods of time to wait for and, hence, account for periods of severe winter storms in order to test questions around thresholds of wave parmeters and subsequent large, significant deposits of kelp onto adjacent shores.  
 
 \newpage
 # References 
 
-1. Barreiro F, G??mez M, Lastra M, L??pez J, De la Huz R. 2011. Annual cycle of wrack supply to sandy beaches: effect of the physical environment. _Marine Ecology Progress Series_ 433: 65--74.
+1. Barreiro F, Gómez M, Lastra M, López J, De la Huz R. 2011. Annual cycle of wrack supply to sandy beaches: effect of the physical environment. _Marine Ecology Progress Series_ 433: 65--74.
 
 2.	Bekkby T, Rinde E, Gundersen H, Norderhaug K, Gitmark J, Christie H. 2014. Length, strength and water flow: relative importance of wave and current exposure on morphology in kelp _Laminaria hyperborea_. _Marine Ecology Progress Series_ 506: 61--70.
 
@@ -988,7 +1317,7 @@ detritus. _Limnology and Oceanography_ 58: 1680--1688.
 
 18. Filbee-Dexter K, Scheibling RE. 2014. Sea urchin barrens as alternative stable states of collapsed kelp ecosystems. _Marine Ecology Progress Series_ 495: 1--25.
 
-19. Fowler-Walker MJ, Wernberg T, Connell SD. 2006. Differences in kelp morphology between wave sheltered and exposed localities: morphologically plastic or fixed traits?. _Marine Biology_ 148: 755--767.
+19. Fowler-Walker MJ, Wernberg T, Connell SD. 2006. Differences in kelp morphology between wave sheltered and exposed localities: morphologically plastic or fixed traits? _Marine Biology_ 148: 755--767.
 
 20. Friedland MT, Denny MW. 1995. Surviving hydrodynamic forces in a wave-swept environment: consequences of morphology in the feather boa kelp, _Egregia menziesii_ (Turner). _Journal of Experimental Marine Biology and Ecology_ 190: 109--133.
 
@@ -1068,9 +1397,9 @@ detritus. _Limnology and Oceanography_ 58: 1680--1688.
 
 58. Tolman HL. 1991. A third-generation model for wind waves on slowly varying, unsteady, and inhomogeneous depths and currents. _Journal of Physical Oceanography_ 21: 782--797.
 
-59. Vadas RL, Wright WA, Miller SL. 1990. Recruitment of _Ascophyllum nodosum_: wave action as a source of mortality. _Marine Ecology Progress Series_ 61: 263-???272
+59. Vadas RL, Wright WA, Miller SL. 1990. Recruitment of _Ascophyllum nodosum_: wave action as a source of mortality. _Marine Ecology Progress Series_ 61: 263--272
 
-60. Velimirov B, Field J, Griffiths C, Zoutendyk P. 1977. The ecology of kelp bed communities in the Benguela upwelling system. _Helgol??nder Wissenschaftliche Meeresuntersuchungen_ 30: 495--518.
+60. Velimirov B, Field J, Griffiths C, Zoutendyk P. 1977. The ecology of kelp bed communities in the Benguela upwelling system. _Helgoländer Wissenschaftliche Meeresuntersuchungen_ 30: 495--518.
 
 61. Velimirov B, Griffiths CL. 1979. Wave-induced kelp movement and its importance for community structure. _Botanica Marina_ 22: 169--172.
 
