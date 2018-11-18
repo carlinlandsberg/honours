@@ -1321,3 +1321,408 @@ ggarrange(v_season_2016, v_season_2017, v_season_2018, nrow = 3, ncol = 1)
 
 # Stats by season ---------------------------------------------------------
 
+
+wave_all_1 <- read_csv("NCEP/NCEP_dat.csv")
+wave_all <- separate(wave_all_1, time, into = c("date", "time"), sep = " ")
+
+sep_wave_all <- wave_all %>% 
+  separate(date, c("year", "month", "day"), "-")
+
+# 2018 mean by month and season
+cut_wave_2018_1 <- wave_all[-c(1:18209),]
+cut_wave_2018 <- cut_wave_2018_1[-c(1591),]
+
+wave_2018_1 <- sep_wave_all %>% 
+  filter(year == "2018") %>% 
+  group_by(month)
+
+wave_2018 <- cut_wave_2018 %>%
+#  filter(year == "2018") %>%
+  group_by(date) %>%
+  summarise(mean_hs = mean(as.numeric(hs, na.rm = TRUE)),
+            sd_hs = sd(as.numeric(hs, na.rm = TRUE)),
+            mean_tp = mean(as.numeric(tp, na.rm = TRUE)),
+            sd_tp = sd(as.numeric(tp, na.rm = TRUE)),
+            mean_dp = mean(as.numeric(dp, na.rm = TRUE)),
+            sd_dp = sd(as.numeric(dp, na.rm = TRUE)),
+            mean_u = mean(as.numeric(u, na.rm = TRUE)),
+            sd_u = sd(as.numeric(u, na.rm = TRUE)),
+            mean_v = mean(as.numeric(v, na.rm = TRUE)),
+            sd_v = sd(as.numeric(v, na.rm = TRUE)))
+
+
+mean_seasons_2018 <- cut_wave_2018 %>% 
+  mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
+                         ifelse(month %in% c("03", "04", "05"), "Autumn",
+                                ifelse(month %in% c("06", "07", "08"), "Winter",
+                                       ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
+
+test_seasons_2018 <- wave_2018 %>% 
+  mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
+                         ifelse(month %in% c("03", "04", "05"), "Autumn",
+                                ifelse(month %in% c("06", "07", "08"), "Winter",
+                                       ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
+
+testagain <- as.tibble(paste(wave_2018$year, wave_2018$month, wave_2018$day, sep = "-"))
+
+combined_test <- cbind(testagain, test_seasons_2018)
+
+# 2016 mean by month and season
+filter_2016_1 <- sep_wave_all %>% 
+  filter(year == "2016") %>% 
+  group_by(month)
+
+sort_2016 <- filter_2016_1[order(filter_2016_1$month),]
+
+cut_2016_1 <- sort_2016[-c(2202:2940),]
+cut_2016 <- cut_2016_1[-c(1:610),] 
+
+# wave_2016 <- cut_2016 %>%
+# #  filter(year == "2018") %>%
+#   group_by(month) %>%
+#   summarise(mean_hs = mean(as.numeric(hs, na.rm = TRUE)),
+#             sd_hs = sd(as.numeric(hs, na.rm = TRUE)),
+#             mean_tp = mean(as.numeric(tp, na.rm = TRUE)),
+#             sd_tp = sd(as.numeric(tp, na.rm = TRUE)),
+#             mean_dp = mean(as.numeric(dp, na.rm = TRUE)),
+#             sd_dp = sd(as.numeric(dp, na.rm = TRUE)),
+#             mean_u = mean(as.numeric(u, na.rm = TRUE)),
+#             sd_u = sd(as.numeric(u, na.rm = TRUE)),
+#             mean_v = mean(as.numeric(v, na.rm = TRUE)),
+#             sd_v = sd(as.numeric(v, na.rm = TRUE)))
+
+mean_seasons_2016 <- cut_2016 %>% 
+  mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
+                         ifelse(month %in% c("03", "04", "05"), "Autumn",
+                                ifelse(month %in% c("06", "07", "08"), "Winter",
+                                       ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
+
+# 2017 mean by month and season
+filter_2017_1 <- sep_wave_all %>% 
+  filter(year == "2017") %>% 
+  group_by(month)
+
+cut_2017_1 <- filter_2017_1[-c(2194:2931),]
+cut_2017 <- cut_2017_1[-c(1:603),] 
+
+# wave_2017 <- cut_2017 %>%
+# #  filter(year == "2018") %>%
+#   group_by(month) %>%
+#   summarise(mean_hs = mean(as.numeric(hs, na.rm = TRUE)),
+#             sd_hs = sd(as.numeric(hs, na.rm = TRUE)),
+#             mean_tp = mean(as.numeric(tp, na.rm = TRUE)),
+#             sd_tp = sd(as.numeric(tp, na.rm = TRUE)),
+#             mean_dp = mean(as.numeric(dp, na.rm = TRUE)),
+#             sd_dp = sd(as.numeric(dp, na.rm = TRUE)),
+#             mean_u = mean(as.numeric(u, na.rm = TRUE)),
+#             sd_u = sd(as.numeric(u, na.rm = TRUE)),
+#             mean_v = mean(as.numeric(v, na.rm = TRUE)),
+#             sd_v = sd(as.numeric(v, na.rm = TRUE)))
+
+mean_seasons_2017 <- cut_2017 %>% 
+  mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
+                         ifelse(month %in% c("03", "04", "05"), "Autumn",
+                                ifelse(month %in% c("06", "07", "08"), "Winter",
+                                       ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
+
+comb_means <- rbind(mean_seasons_2016, mean_seasons_2017, mean_seasons_2018)
+
+
+# AJS: Why do you use circular stats here for the non-directional measurements?
+daily_2018 <- wave_2018_1 %>% 
+  group_by(month, day) %>% 
+  summarise(hs_circ = mean.circular(circular(hs)),
+            tp_circ = mean.circular(circular(tp)),
+            dp_circ = mean.circular(circular(dp)),
+            u_circ = mean.circular(circular(u)),
+            v_circ = mean.circular(circular(v))) %>% 
+  mutate(year = "2018")
+
+rm <- daily_2018[, -1:-2]
+final_rm <- rm[, -6]
+
+try <- as.tibble(paste(daily_2018$year, daily_2018$month, daily_2018$day, sep = "-"))
+
+time_2018_1 <- cbind(try, final_rm)
+time_2018 <- time_2018_1[-c(1:75),]
+
+sep_2018 <- time_2018 %>% 
+  separate(value, c("year", "month", "day"), "-")
+
+# ojh ---------------------------------------------------------------------
+
+# sep_all <- wave_all %>% 
+#   separate(date, c("year", "month", "day"), "-")
+# 
+# wave_16_17_18 <- sep_all %>% 
+#   filter(year %in% c("2016", "2017", "2018")) %>% 
+#   group_by(month)
+# 
+# daily_16_17_18 <- wave_16_17_18 %>% 
+#   group_by(year, month, day) %>% 
+#   summarise(hs_circ = mean.circular(circular(hs)),
+#             tp_circ = mean.circular(circular(tp)),
+#             dp_circ = mean.circular(circular(dp)),
+#             u_circ = mean.circular(circular(u)),
+#             v_circ = mean.circular(circular(v))) %>% 
+#   mutate(year1 = "2018")
+# 
+# rm_1 <- daily_16_17_18[, -1:-3]
+# final_rm_1 <- rm_1[, -6]
+# 
+# try_1 <- as.tibble(paste(daily_16_17_18$year, daily_16_17_18$month, daily_16_17_18$day, sep = "-"))
+# 
+# combined_16_17_18 <- cbind(final_rm_1, try_1)
+# 
+# sep_16_17_18 <- combined_16_17_18 %>% 
+#   separate(value, c("year", "month", "day"), "-")
+# 
+# 
+# wave_16 <- wave_16_17_18 %>% 
+#   filter(year == "2016") %>% 
+#   group_by(month)
+# wave_16
+# 
+# daily_16 <- wave_16 %>% 
+#   group_by(year, month, day) %>% 
+#   summarise(hs_circ = mean.circular(circular(hs)),
+#             tp_circ = mean.circular(circular(tp)),
+#             dp_circ = mean.circular(circular(dp)),
+#             u_circ = mean.circular(circular(u)),
+#             v_circ = mean.circular(circular(v))) %>% 
+#   mutate(year1 = "2016")
+# daily_16
+# 
+# rm_2 <- daily_16[, -1:-3]
+# # final_rm_2 <- rm_2[, -4]
+# 
+# try_2 <- as.tibble(paste(daily_16$year, daily_16$month, daily_16$day, sep = "-"))
+# try_2
+# 
+# combined_16 <- cbind(rm_2, try_2)
+# combined_16
+# 
+# sep_16 <- combined_16 %>% 
+#   separate(value, c("year", "month", "day"), "-")
+# sep_16
+# 
+# # time_16 <- combined_16[-c(1:83),]
+# # time_16_1 <- time_16[-c(246:366),]
+# # time_16_2 <- time_16_1[-c(246:328),]
+# 
+# ttime_16 <- combined_16[-c(275:366),]
+# ttime_16_1 <- ttime_16[-c(1:76),]
+# 
+# wave_17 <- wave_16_17_18 %>% 
+#   filter(year == "2017") %>% 
+#   group_by(month)
+# wave_17
+# 
+# daily_17 <- wave_17 %>% 
+#   group_by(year, month, day) %>% 
+#   summarise(hs_circ = mean.circular(circular(hs)),
+#             tp_circ = mean.circular(circular(tp)),
+#             dp_circ = mean.circular(circular(dp)),
+#             u_circ = mean.circular(circular(u)),
+#             v_circ = mean.circular(circular(v))) %>% 
+#   mutate(year2 = "2017")
+# daily_17
+# 
+# rm_3 <- daily_17[, -1:-3]
+# # final_rm_3 <- rm_3[, -4]
+# 
+# try_3 <- as.tibble(paste(daily_17$year, daily_17$month, daily_17$day, sep = "-"))
+# try_3
+# 
+# combined_17 <- cbind(rm_3, try_3)
+# combined_17
+# 
+# sep_17 <- combined_17 %>% 
+#   separate(value, c("year", "month", "day"), "-")
+# sep_17
+# 
+# time_17 <- combined_17[-c(274:365),]
+# time_17_1 <- time_17[-c(1:75),]
+# 
+# daily_18 <- wave_2018_1 %>% 
+#   group_by(month, day) %>% 
+#   summarise(hs_circ = mean.circular(circular(hs)),
+#             tp_circ = mean.circular(circular(tp)),
+#             dp_circ = mean.circular(circular(dp)),
+#             u_circ = mean.circular(circular(u)),
+#             v_circ = mean.circular(circular(v))) %>% 
+#   mutate(year3 = "2018")
+# daily_18
+# 
+# rm_4 <- daily_18[, -1:-2]
+# # final_rm <- rm[, -4]
+# 
+# try_4 <- as.tibble(paste(daily_18$year3, daily_18$month, daily_18$day, sep = "-"))
+# try_4
+# 
+# combined_18 <- cbind(rm_4, try_4)
+# combined_18
+# 
+# time_18_1 <- combined_18[-c(274),]
+# time_18 <- time_18_1[-c(1:75),]
+# 
+# seasons_16_17_18 <- sep_16_17_18 %>% 
+#   mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
+#                          ifelse(month %in% c("03", "04", "05"), "Autumn",
+#                                 ifelse(month %in% c("06", "07", "08"), "Winter",
+#                                        ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
+# 
+# seasons_16 <- sep_16 %>% 
+#   mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
+#                          ifelse(month %in% c("03", "04", "05"), "Autumn",
+#                                 ifelse(month %in% c("06", "07", "08"), "Winter",
+#                                        ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
+# 
+# season_16_rm <- as.data.frame(seasons_16[, -1:-9])
+# 
+# sea_16_rm <- season_16_rm %>% 
+#   select(season = `seasons_16[, -1:-9]`)
+# 
+# sea_16 <- as.data.frame(sea_16_rm[-c(275:366),])
+# sea_16_1 <- sea_16[-c(1:76),]
+# 
+# season_16_1 <- cbind(ttime_16_1, sea_16_1)
+# 
+# season_16 <- season_16_1 %>% 
+#   select(season = sea_16_1,
+#          hs_circ = hs_circ,
+#          tp_circ = tp_circ,
+#          dp_circ = dp_circ,
+#          u_circ = u_circ,
+#          v_circ = v_circ,
+#          year = year1,
+#          value = value)
+# 
+# mean_16 <- season_16_1 %>% 
+#   group_by(sea_16_1) %>% 
+#   summarise(mean_tp_16 = mean(tp_circ),
+#             mean_hs_16 = mean(hs_circ),
+#             mean_dp_16 = mean(dp_circ),
+#             mean_u_16 = mean(u_circ),
+#             mean_v_16 = mean(v_circ))
+# 
+# seasons_17 <- sep_17 %>%
+#   mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
+#                          ifelse(month %in% c("03", "04", "05"), "Autumn",
+#                                 ifelse(month %in% c("06", "07", "08"), "Winter",
+#                                        ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
+# 
+# season_17_rm <- as.data.frame(seasons_17[, -1:-9])
+# 
+# sea_17_rm <- season_17_rm %>% 
+#   select(season = `seasons_17[, -1:-9]`)
+# 
+# sea_17 <- as.data.frame(sea_17_rm[-c(274:365),])
+# sea_17_1 <- sea_17[-c(1:75),]
+# 
+# season_17_1 <- cbind(time_17_1, sea_17_1)
+# 
+# season_17 <- season_17_1 %>% 
+#   select(season = sea_17_1,
+#          hs_circ = hs_circ,
+#          tp_circ = tp_circ,
+#          dp_circ = dp_circ,
+#          u_circ = u_circ,
+#          v_circ = v_circ,
+#          year = year2,
+#          value = value)
+# 
+# mean_17 <- season_17_1 %>% 
+#   group_by(sea_17_1) %>% 
+#   summarise(mean_tp_17 = mean(tp_circ),
+#             mean_hs_17 = mean(hs_circ),
+#             mean_dp_17 = mean(dp_circ),
+#             mean_u_17 = mean(u_circ),
+#             mean_v_17 = mean(v_circ))
+# 
+# seasons_18 <- sep_2018 %>% 
+#   mutate(season = ifelse(month %in% c("12", "01", "02"), "Summer",        
+#                          ifelse(month %in% c("03", "04", "05"), "Autumn",
+#                                 ifelse(month %in% c("06", "07", "08"), "Winter",
+#                                        ifelse(month %in% c("09", "10", "11"), "Spring","Error")))))
+# 
+# season_18_rm <- as.data.frame(seasons_18[, -1:-8])
+# 
+# sea_18_rm <- season_18_rm %>% 
+#   select(season = `seasons_18[, -1:-8]`)
+# 
+# sea_18 <- as.data.frame(sea_18_rm[-c(199),]) 
+# 
+# sea_18_1 <- sea_18 %>% 
+#   select(season = `sea_18_rm[-c(199), ]`)
+# 
+# season_18 <- cbind(time_18, sea_18_1)
+# 
+# # mean circular data... does not seem right on figs
+# mean_18 <- season_18 %>% 
+#   group_by(season) %>% 
+#   summarise(mean_tp_18 = mean(tp_circ),
+#             mean_hs_18 = mean(hs_circ),
+#             mean_dp_18 = mean(dp_circ),
+#             mean_u_18 = mean(u_circ),
+#             mean_v_18 = mean(v_circ))
+
+# mean raw data
+sea_mean_16 <- mean_seasons_2016 %>% 
+  group_by(season) %>% 
+  summarise(mean_tp_16 = mean(tp),
+            mean_hs_16 = mean(hs),
+            mean_dp_16 = mean(dp),
+            mean_u_16 = mean(u),
+            mean_v_16 = mean(v))
+
+sea_mean_17 <- mean_seasons_2017 %>% 
+  group_by(season) %>% 
+  summarise(mean_tp_17 = mean(tp),
+            mean_hs_17 = mean(hs),
+            mean_dp_17 = mean(dp),
+            mean_u_17 = mean(u),
+            mean_v_17 = mean(v))
+
+sea_mean_18 <- mean_seasons_2018 %>% 
+  group_by(season) %>% 
+  summarise(mean_tp_18 = mean(tp),
+            mean_hs_18 = mean(hs),
+            mean_dp_18 = mean(dp),
+            mean_u_18 = mean(u),
+            mean_v_18 = mean(v))
+
+# plots -------------------------------------------------------------------
+
+hs_season_2016 <- ggplot(season_16, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_hline(data = sea_mean_16, aes(yintercept = mean_hs_16), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "", y = "HS (m)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ season) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
+
+hs_season_2017 <- ggplot(season_17, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_hline(data = sea_mean_17, aes(yintercept = mean_hs_17), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "", y = "HS (m)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ season) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
+
+hs_season_2018 <- ggplot(season_18, aes(x = as.Date(value), y = hs_circ, group = 1)) +
+  geom_hline(data = sea_mean_18, aes(yintercept = mean_hs_18), colour = "red") +
+  #  geom_point(data = casts.summary, aes(x = as.Date(date), y = n_casts)) +
+  geom_line() +
+  geom_smooth() +
+  labs(x = "Date", y = "HS (s)", title = "") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  facet_wrap(~ season) +
+  #  scale_y_continuous(sec.axis = sec_axis(~. *50, name = "Total number of casts")) +
+  theme_bw()
