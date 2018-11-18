@@ -645,7 +645,7 @@ ggarrange(ncasts_hs, agg_hs, hf_hs, diam_hs, stipe_hs, frond_hs,
 
 A similar seemingly random pattern is observed in Figure 4 when looking at period 2 over the study period.
 
-```{r echo=FALSE, fig.cap="Time series of  primary wave direction ( N)  over the study period with corresponding weekly beach-cast recordings. **(A)** total number of casts; **(B)** total number of aggregates; **(C)** total number of holdfasts; **(D)** mean holdfast diameter; **(E)** mean stipe length; and **(F)** mean frond length.", message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
+```{r echo=FALSE, fig.cap="Time series of  primary wave direction (  N)  over the study period with corresponding weekly beach-cast recordings. **(A)** total number of casts; **(B)** total number of aggregates; **(C)** total number of holdfasts; **(D)** mean holdfast diameter; **(E)** mean stipe length; and **(F)** mean frond length.", message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
 ggarrange(ncasts_dp, agg_dp, hf_dp, diam_dp, stipe_dp, frond_dp,
           ncol = 2, nrow = 3,
           labels = c("A", "B", "C", "D", "E", "F"))
@@ -653,7 +653,7 @@ ggarrange(ncasts_dp, agg_dp, hf_dp, diam_dp, stipe_dp, frond_dp,
 
 Lastly, in Figure 5, no clear pattern is observed as also suggested in Figure 3 and Figure 4. 
 
-```{r echo=FALSE, fig.cap="Time series of  wind direction ( )  over the study period with corresponding weekly beach-cast recordings. **(A)** total number of casts; **(B)** total number of aggregates; **(C)** total number of holdfasts; **(D)** mean holdfast diameter; **(E)** mean stipe length; and **(F)** mean frond length.", message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
+```{r echo=FALSE, fig.cap="Time series of  wind direction (  )  over the study period with corresponding weekly beach-cast recordings. **(A)** total number of casts; **(B)** total number of aggregates; **(C)** total number of holdfasts; **(D)** mean holdfast diameter; **(E)** mean stipe length; and **(F)** mean frond length.", message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
 ggarrange(ncasts_u, agg_u, hf_u, diam_u, stipe_u, frond_u,
           ncol = 2, nrow = 3,
           labels = c("A", "B", "C", "D", "E", "F"))
@@ -1160,7 +1160,7 @@ ggarrange(hs_season_2016, hs_season_2017, hs_season_2018,
 
 A similar observation is made in Figure 9 where the two-way ANOVA indicates no significant difference in significant height of combined wind, waves, and swell between seasons (_P_ = 0.527, _F_ = 0.754, SS = 6.357, _df_ = 2) and between years (_P_ = 0.480, _F_ = 0.887, SS = 7.481, _df_ = 2).
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of primary wave direction ( N) across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean primary wave direction per season.", fig.width=8, fig.height=6}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of primary wave direction (  N) across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean primary wave direction per season.", fig.width=8, fig.height=6}
 ggarrange(dp_season_2016, dp_season_2017, dp_season_2018, 
           nrow = 3, ncol = 1,
           labels = c("A", "B", "C"))
@@ -1168,7 +1168,7 @@ ggarrange(dp_season_2016, dp_season_2017, dp_season_2018,
 
 In Figure 10, primary wave direction shows variability in means across seasons and years. The two-way ANOVA, however, indicated no significant differences between seasons (_P_ = 0.747, _F_ = 0.314, SS = 2.336, _df_ = 2) and between years (_P_ = 0.643, _F_ = 0.494, SS = 3.679, _df_ = 2). Therefore, observed variability can be ignored.
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of wind direction ( ) across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean wind direction per season.", fig.width=8, fig.height=6}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Comparison of wind direction (  ) across seasons in 2016 (**A**) and 2017 (**B**) corresponding to 2018 sampling period (**C**). The red line indicates the mean wind direction per season.", fig.width=8, fig.height=6}
 ggarrange(u_season_2016, u_season_2017, u_season_2018, 
           nrow = 3, ncol = 1,
           labels = c("A", "B", "C"))
@@ -1284,7 +1284,7 @@ Funding for this project was provided by the National Reseasrch Fund (NRF). A sp
 \newpage
 # References 
 
-1. Barreiro F, G??mez M, Lastra M, L??pez J, De la Huz R. 2011. Annual cycle of wrack supply to sandy beaches: effect of the physical environment. _Marine Ecology Progress Series_ 433: 65--74.
+1. Barreiro F, Gómez M, Lastra M, López J, De la Huz R. 2011. Annual cycle of wrack supply to sandy beaches: effect of the physical environment. _Marine Ecology Progress Series_ 433: 65--74.
 
 2.	Bekkby T, Rinde E, Gundersen H, Norderhaug K, Gitmark J, Christie H. 2014. Length, strength and water flow: relative importance of wave and current exposure on morphology in kelp _Laminaria hyperborea_. _Marine Ecology Progress Series_ 506: 61--70.
 
@@ -1379,7 +1379,7 @@ detritus. _Limnology and Oceanography_ 58: 1680--1688.
 
 47. R Core Team (2018). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
 
-48. Roberson LM, Coyer JA. 2004. Variation in blade morphology of the kelp _Eisenia arborea_: incipient speciation due to local water motion? _Marine Ecology Progress Series_ 282: 115???128.   
+48. Roberson LM, Coyer JA. 2004. Variation in blade morphology of the kelp _Eisenia arborea_: incipient speciation due to local water motion? _Marine Ecology Progress Series_ 282: 115--128.   
 
 49. Robertson AI, Hansen JA. 1982. Decomposing Seaweeds: A nuisance or a vital link in coastal food chains? CSIRO Marine Laboratories Research Report 75--83.
 
@@ -1403,7 +1403,7 @@ detritus. _Limnology and Oceanography_ 58: 1680--1688.
 
 59. Vadas RL, Wright WA, Miller SL. 1990. Recruitment of _Ascophyllum nodosum_: wave action as a source of mortality. _Marine Ecology Progress Series_ 61: 263--272
 
-60. Velimirov B, Field J, Griffiths C, Zoutendyk P. 1977. The ecology of kelp bed communities in the Benguela upwelling system. _Helgol??nder Wissenschaftliche Meeresuntersuchungen_ 30: 495--518.
+60. Velimirov B, Field J, Griffiths C, Zoutendyk P. 1977. The ecology of kelp bed communities in the Benguela upwelling system. _Helgoländer Wissenschaftliche Meeresuntersuchungen_ 30: 495--518.
 
 61. Velimirov B, Griffiths CL. 1979. Wave-induced kelp movement and its importance for community structure. _Botanica Marina_ 22: 169--172.
 
@@ -1411,7 +1411,7 @@ detritus. _Limnology and Oceanography_ 58: 1680--1688.
 
 63. Wernberg T, Thomsen MS. 2005. The effect of wave exposure on the morphology of _Ecklonia radiata_. _Aquatic Botany_ 83: 61--70.
 
-64. Wernberg T, Vanderklift MA. 2010. Contribution of temporal and spatial components to morphological variation in the kelp Ecklonia (Laminariales) 1. _Journal of Phycology_ 46: 153--161.
+64. Wernberg T, Vanderklift MA. 2010. Contribution of temporal and spatial components to morphological variation in the kelp _Ecklonia_ (Laminariales) 1. _Journal of Phycology_ 46: 153--161.
 
 65. Wheeler WN. 1988. Algal productivity and hydrodynamics -- a synthesis. _Progress in Phycological Research_ 6: 23--58.
 
